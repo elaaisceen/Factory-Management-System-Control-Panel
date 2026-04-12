@@ -1,41 +1,24 @@
 package com.fabrika.model;
 
-/**
- * SatinAlma sınıfı, Department sınıfından miras alır (Inheritance).
- * Aynı zamanda SurecYurutulebilir yeteneğine sahiptir (Interface Implementation).
- */
+public class It extends Department implements SurecYurutulebilir {
 
-public class SatinAlma extends Department implements SurecYurutulebilir {
-
-    // Constructor (Yapıcı Metot): Üst sınıfa departman adını ve sorumlu kişiyi gönderir.
-
-    public SatinAlma(String sorumluPersonel) {
-        super("Satin Alma", sorumluPersonel);
+    public It(String sorumluPersonel) {
+        super("IT", sorumluPersonel);
     }
 
-    // Satın alma departmanına özgü bir işlev: Yeni tedarikçi kaydı.
-
-    public void tedarikciEkle(String firmaAdi) {
+    public void sistemYonetimi() {
         islemAnimasyonu();
-        System.out.println(firmaAdi + " isimli tedarikci sisteme kaydedildi.");
+        System.out.println("Sunucular ve veritabani baglantilari kontrol edildi. Sistem aktif.");
     }
 
-    // Malzeme siparişi oluşturma işlevi.
-
-    public void malzemeAl(String malzemeAdi, int miktar) {
+    public void veriYedekle() {
         islemAnimasyonu();
-        System.out.println(miktar + " adet " + malzemeAdi + " siparisi olusturuldu.");
+        System.out.println("Fabrika verileri guvenli sekilde yedeklendi.");
     }
-
-    /**
-     * SurecYurutulebilir arayüzünden (interface) gelen zorunlu metot.
-     * Bu departman "çalıştırıldığında" yapılacak otomatik işlem sırasını belirler.
-     */
 
     @Override
     public void departmanSureciniYurut() {
-        // Simülasyon gereği otomatik bir akış tanımlanmıştır.
-        tedarikciEkle("Demirtas AS");
-        malzemeAl("Celik Vida", 5000);
+        sistemYonetimi();
+        veriYedekle();
     }
 }

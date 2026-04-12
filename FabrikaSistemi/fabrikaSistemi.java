@@ -1,18 +1,16 @@
-package com.fabrika.model;
+package com.fabrika.config;
 
-public class SatinAlma extends Department {
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
-    public SatinAlma(String sorumluPersonel) {
-        super("Satın Alma", sorumluPersonel);
-    }
+public class DatabaseConnection {
+    private static final String URL =
+            "jdbc:mysql://localhost:3306/fabrika_erp?useSSL=false&serverTimezone=Europe/Istanbul&allowPublicKeyRetrieval=true";
+    private static final String USER = "root";
+    private static final String PASS = "SENIN_SIFREN";
 
-    public void tedarikciEkle(String firmaAdi) {
-        islemAnimasyonu();
-        System.out.println(firmaAdi + " isimli tedarikçi sisteme kaydedildi.");
-    }
-
-    public void malzemeAl(String malzemeAdi, int miktar) {
-        islemAnimasyonu();
-        System.out.println(miktar + " adet " + malzemeAdi + " siparişi oluşturuldu.");
+    public static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(URL, USER, PASS);
     }
 }
