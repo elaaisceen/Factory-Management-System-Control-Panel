@@ -1,0 +1,717 @@
+<!--Powered by Elanur Tuana İŞCEN-->
+
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Industrial Pulse - Admin Dashboard</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-error": "#ffffff",
+              "surface": "#f7f9fc",
+              "secondary-fixed-dim": "#4ae183",
+              "surface-variant": "#e0e3e6",
+              "primary-fixed": "#dbe1ff",
+              "primary-container": "#496eda",
+              "surface-dim": "#d8dadd",
+              "on-tertiary-container": "#fffbff",
+              "on-background": "#191c1e",
+              "on-secondary-container": "#00743a",
+              "surface-container-highest": "#e0e3e6",
+              "tertiary-fixed": "#f8d8ff",
+              "surface-container-high": "#e6e8eb",
+              "secondary-fixed": "#6bfe9c",
+              "error-container": "#ffdad6",
+              "surface-container-lowest": "#ffffff",
+              "primary-fixed-dim": "#b5c4ff",
+              "surface-bright": "#f7f9fc",
+              "outline": "#747684",
+              "secondary": "#006d37",
+              "on-primary-container": "#fefcff",
+              "inverse-on-surface": "#eff1f4",
+              "secondary-container": "#6bfe9c",
+              "inverse-surface": "#2d3133",
+              "error": "#ba1a1a",
+              "tertiary-fixed-dim": "#ebb2ff",
+              "on-secondary-fixed": "#00210c",
+              "outline-variant": "#c4c6d5",
+              "background": "#f7f9fc",
+              "surface-container": "#eceef1",
+              "surface-container-low": "#f2f4f7",
+              "on-surface": "#191c1e",
+              "tertiary": "#80409b",
+              "inverse-primary": "#b5c4ff",
+              "on-tertiary": "#ffffff",
+              "on-surface-variant": "#434653",
+              "on-primary": "#ffffff",
+              "on-error-container": "#93000a",
+              "on-secondary": "#ffffff",
+              "tertiary-container": "#9b59b6",
+              "primary": "#2b54bf",
+              "surface-tint": "#2e57c2",
+              "on-tertiary-fixed": "#320047",
+              "on-secondary-fixed-variant": "#005228",
+              "on-tertiary-fixed-variant": "#692984",
+              "on-primary-fixed-variant": "#053da9",
+              "on-primary-fixed": "#00174d"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+      
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-sm h-20 flex justify-between items-center px-8 border-b-0">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-blue-600 dark:text-blue-400 p-2 hover:bg-slate-200/50 rounded-full transition-colors cursor-pointer">menu</span>
+<h1 class="font-headline font-black tracking-tighter text-blue-700 dark:text-blue-400 text-2xl">Kontrol Paneli</h1>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex gap-8">
+<a class="text-blue-700 dark:text-blue-400 font-bold font-label text-sm" href="../../login_register/admin_dashboard/adminDashboard.html">Anasayfa</a>
+<a class="text-red-500 dark:text-slate-400 hover:text-slate-900 transition-colors font-label text-sm" href="javascript:void(0)" onclick="handleLogout()">Çıkış Yap</a>
+
+</div>
+<div class="flex items-center gap-3 pl-6 border-l border-outline-variant/30">
+<div class="text-right hidden sm:block">
+<p class="text-sm font-bold leading-none">Alex Sterling</p>
+<p class="text-xs text-slate-500">Plant Manager</p>
+</div>
+<img alt="Alex Sterling profile" class="w-10 h-10 rounded-full object-cover ring-2 ring-primary/10" data-alt="professional headshot of a middle-aged male plant manager in a clean white shirt with soft office lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRqszeJGrS4QuDoVJUPoBv4t6NeXl7KtdZgPIJ3FWGyABkTSWebSA5QgVIdi8n9gNZIJdmO5fDEbgwnZwBtvm53kIqFjUK3IoXkeH_zamfuvs7USFL_DHqOUXr4Y88EXg18U0fy4JR97J0sE7XLBH_3KyfOlLxCFvCy6pGcPuzwOmUABEW4HUvzGuEUoXuzPHfGjbXoN0eotrH2Dk61rgQbwnqfQygWotgxYHguONgclplT2svaXu0B-YHRPRrd6161HMJVQy9plcL"/>
+</div>
+</div>
+</header>
+<!-- Side Navigation Drawer -->
+<aside class="h-full w-72 fixed left-0 top-0 z-40 bg-slate-50 dark:bg-slate-950 border-r border-slate-200/10 shadow-2xl shadow-slate-900/5 pt-24 px-6 flex flex-col space-y-2 hidden lg:flex">
+<div class="mb-8 px-4">
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-4">Departmanlar</p>
+<nav class="space-y-1">
+<a class="bg-white dark:bg-slate-900 text-blue-700 dark:text-blue-400 shadow-sm rounded-2xl flex items-center gap-3 p-4 transition-all active:scale-[0.98]" href="./adminDashboard.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label font-medium text-sm">Anasayfa</span>
+</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 hover:translate-x-1 flex items-center gap-3 p-4 transition-all active:scale-[0.98]" href="../../production_dashboard/production.html">
+<span class="material-symbols-outlined">precision_manufacturing</span>
+<span class="font-label font-medium text-sm">Üretim Takip / Operatör</span>
+</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 hover:translate-x-1 flex items-center gap-3 p-4 transition-all active:scale-[0.98]" href="../../purchasing_dashboard/purchasing.html">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-label font-medium text-sm">Satın Alma</span>
+</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 hover:translate-x-1 flex items-center gap-3 p-4 transition-all active:scale-[0.98]" href="../../stock_dashboard/stock.html">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label font-medium text-sm">Depo / Stok Kontrol</span>
+</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 hover:translate-x-1 flex items-center gap-3 p-4 transition-all active:scale-[0.98]" href="../../finance_dashboard/finance.html">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label font-medium text-sm">Finans / Muhasebe</span>
+</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 hover:translate-x-1 flex items-center gap-3 p-4 transition-all active:scale-[0.98]" href="../../hr_dashboard/hr.html">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label font-medium text-sm">İnsan Kaynakları</span>
+</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 hover:translate-x-1 flex items-center gap-3 p-4 transition-all active:scale-[0.98]" href="../../it_dashboard/it.html">
+<span class="material-symbols-outlined">developer_mode</span>
+<span class="font-label font-medium text-sm">IT</span>
+</a>
+</nav>
+</div>
+<div class="mt-auto mb-6 px-4 py-4 rounded-xl bg-primary/5">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-sm">bolt</span>
+<span class="text-xs font-bold uppercase tracking-tight">System Status</span>
+</div>
+<p class="text-xs text-slate-600 mt-1">Sector 7G: <span class="text-secondary font-bold">Optimal</span></p>
+<div class="w-full bg-slate-200 h-1 rounded-full mt-2 overflow-hidden">
+<div class="bg-secondary w-[92%] h-full"></div>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="lg:ml-72 pt-24 pb-12 px-8 min-h-screen">
+
+<!-- Header Section -->
+<div class="mb-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+  <div>
+    <h2 class="font-headline text-4xl font-bold tracking-tight text-on-surface">Admin Dashboard</h2>
+    <p class="text-slate-500 mt-1">Genel Bakış: Tam Yetkili Yönetim Paneli</p>
+  </div>
+  
+  <div class="flex gap-3 items-center justify-end">
+    <!--Veriyi Dışarı Çıkart-->
+    <div class="relative inline-block text-right">
+      <button id="exportBtn" class="px-6 py-2.5 bg-white text-on-surface font-semibold rounded-full shadow-sm hover:shadow-md transition-all flex items-center gap-2 text-sm border border-slate-100">
+        <span class="material-symbols-outlined text-lg">file_download</span>
+        Veri Çıktısı Al
+      </button>
+      <!-- id eklendi ve başlangıçta gizlendi -->
+      <div id="exportMenu" class="hidden absolute right-0 mt-2 w-48 bg-white border border-slate-100 rounded-xl shadow-lg z-50">
+        <ul class="py-2 text-sm text-slate-700">
+          <li id="exportPDF" class="px-4 py-2 hover:bg-slate-50 cursor-pointer flex items-center gap-2">
+            <span class="material-symbols-outlined text-base">picture_as_pdf</span> PDF İndir
+          </li>
+          <li id="exportExcel" class="px-4 py-2 hover:bg-slate-50 cursor-pointer flex items-center gap-2">
+            <span class="material-symbols-outlined text-base">table_view</span> Excel Aktar
+          </li>
+          <li id="printReport" class="border-t border-slate-50 px-4 py-2 hover:bg-slate-50 cursor-pointer flex items-center gap-2">
+            <span class="material-symbols-outlined text-base">print</span> Yazdır
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+    <!--Yeni Veri Ekleme-->
+    <div class="relative inline-block text-left">
+      <!-- Ana Buton -->
+      <button id="newDataBtn" class="px-6 py-2.5 bg-primary text-white font-semibold rounded-full shadow-lg hover:scale-105 transition-all flex items-center gap-2 text-sm">
+        <span class="material-symbols-outlined text-lg">add</span>
+        Yeni Operasyon
+      </button>
+
+      <!-- Dropdown Menü (Başlangıçta Gizli) -->
+      <div id="newDataMenu" class="hidden absolute right-0 mt-2 w-64 bg-white border border-slate-100 rounded-2xl shadow-2xl z-[100] overflow-hidden">
+        <div class="p-2 space-y-1">
+          <button onclick="openOperationModal('uretim')" class="w-full flex items-center gap-3 p-3 hover:bg-blue-50 rounded-xl transition-colors group">
+            <span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">precision_manufacturing</span>
+            <div class="text-left">
+              <p class="text-sm font-bold text-slate-700">Üretim</p>
+              <p class="text-[10px] text-slate-400">Montaj, Paketleme, Kalite</p>
+            </div>
+          </button>
+          <button onclick="openOperationModal('finans')" class="w-full flex items-center gap-3 p-3 hover:bg-emerald-50 rounded-xl transition-colors group">
+            <span class="material-symbols-outlined text-emerald-600 bg-emerald-50 p-2 rounded-lg">payments</span>
+            <div class="text-left">
+              <p class="text-sm font-bold text-slate-700">Finans</p>
+              <p class="text-[10px] text-slate-400">Maaş, Bütçe, Muhasebe</p>
+            </div>
+          </button>
+          <button onclick="openOperationModal('hr')" class="w-full flex items-center gap-3 p-3 hover:bg-indigo-50 rounded-xl transition-colors group">
+            <span class="material-symbols-outlined text-indigo-600 bg-indigo-50 p-2 rounded-lg">groups</span>
+            <div class="text-left">
+              <p class="text-sm font-bold text-slate-700">İnsan Kaynakları</p>
+              <p class="text-[10px] text-slate-400">Personel Kaydı, Performans</p>
+            </div>
+          </button>
+          <button onclick="openOperationModal('depo')" class="w-full flex items-center gap-3 p-3 hover:bg-amber-50 rounded-xl transition-colors group">
+            <span class="material-symbols-outlined text-amber-600 bg-amber-50 p-2 rounded-lg">inventory_2</span>
+            <div class="text-left">
+              <p class="text-sm font-bold text-slate-700">Depo / Stok</p>
+              <p class="text-[10px] text-slate-400">Envanter, Stok Girişi</p>
+            </div>
+          </button>
+          <button onclick="openOperationModal('it')" class="w-full flex items-center gap-3 p-3 hover:bg-slate-50 rounded-xl transition-colors group">
+            <span class="material-symbols-outlined text-slate-700 bg-slate-100 p-2 rounded-lg">developer_mode</span>
+            <div class="text-left">
+              <p class="text-sm font-bold text-slate-700">IT</p>
+              <p class="text-[10px] text-slate-400">Destek, Sistem Kaydı</p>
+            </div>
+          </button>
+          <button onclick="openOperationModal('satin_alma')" class="w-full flex items-center gap-3 p-3 hover:bg-cyan-50 rounded-xl transition-colors group">
+            <span class="material-symbols-outlined text-cyan-600 bg-cyan-50 p-2 rounded-lg">shopping_cart</span>
+            <div class="text-left">
+              <p class="text-sm font-bold text-slate-700">Satın Alma</p>
+              <p class="text-[10px] text-slate-400">Sipariş, Tedarikçi</p>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Bento Grid: Top Stats -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<!-- Card 1: Production -->
+<div class="bg-white p-8 rounded-xl shadow-sm border-none relative overflow-hidden group hover:shadow-xl transition-all duration-300">
+<div class="absolute top-0 right-0 p-6 opacity-10 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-6xl text-primary">precision_manufacturing</span>
+</div>
+<p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Toplam Üretim</p>
+<h3 class="text-4xl font-headline font-extrabold text-primary">142.8k</h3>
+<div class="mt-4 flex items-center gap-2">
+<span class="text-secondary font-bold text-xs flex items-center">
+<span class="material-symbols-outlined text-sm">trending_up</span> +12%
+                    </span>
+<span class="text-slate-400 text-[10px]">Geçen Aya Göre</span>
+</div>
+<div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-primary-fixed opacity-50"></div>
+</div>
+<!-- Card 2: Revenue -->
+<div class="bg-white p-8 rounded-xl shadow-sm border-none relative overflow-hidden group hover:shadow-xl transition-all duration-300">
+<div class="absolute top-0 right-0 p-6 opacity-10 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-6xl text-tertiary">payments</span>
+</div>
+<p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Hasılat</p>
+<h3 class="text-4xl font-headline font-extrabold text-tertiary">$2.4M</h3>
+<div class="mt-4 flex items-center gap-2">
+<span class="text-secondary font-bold text-xs flex items-center">
+<span class="material-symbols-outlined text-sm">trending_up</span> +8.4%
+                    </span>
+<span class="text-slate-400 text-[10px]">Geçen Aya Göre</span>
+</div>
+<div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-tertiary to-tertiary-fixed opacity-50"></div>
+</div>
+<!-- Card 3: Employees -->
+<div class="bg-white p-8 rounded-xl shadow-sm border-none relative overflow-hidden group hover:shadow-xl transition-all duration-300">
+<div class="absolute top-0 right-0 p-6 opacity-10 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-6xl text-secondary">groups</span>
+</div>
+<p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Aktif Çalışanlar</p>
+<h3 class="text-4xl font-headline font-extrabold text-secondary">842</h3>
+<div class="mt-4 flex items-center gap-2">
+<span class="text-slate-400 text-xs font-medium">98% Vardiya Kapasitesi</span>
+</div>
+<div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-secondary to-secondary-fixed opacity-50"></div>
+</div>
+<!-- Card 4: Alerts -->
+<div class="bg-white p-8 rounded-xl shadow-sm border-none relative overflow-hidden group hover:shadow-xl transition-all duration-300">
+<div class="absolute top-0 right-0 p-6 opacity-10 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-6xl text-error">warning</span>
+</div>
+<p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Sistem Uyarıları</p>
+<h3 class="text-4xl font-headline font-extrabold text-error">04</h3>
+<div class="mt-4 flex items-center gap-2">
+<span class="bg-error-container text-on-error-container px-2 py-0.5 rounded text-[10px] font-bold">KRİTİK</span>
+<span class="text-slate-400 text-[10px]">Gerekli Eylemler</span>
+</div>
+<div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-error to-error-container opacity-50"></div>
+</div>
+</div>
+<!-- Middle Row: Charts -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+<!-- Line Chart Area -->
+<div class="lg:col-span-2 bg-white rounded-xl shadow-sm p-8 min-h-[400px]">
+<div class="flex justify-between items-start mb-8">
+<div>
+<h4 class="font-headline text-xl font-bold">Üretim Trendleri</h4>
+<p class="text-slate-400 text-xs mt-1">Tüm sektörlerde gerçek zamanlı çıktı</p>
+</div>
+<div id="timeFilters" class="flex bg-surface-container-low rounded-full p-1">
+<button class="time-filter-btn px-4 py-1.5 text-xs font-bold rounded-full transition-all bg-white shadow-sm text-primary">Hourly</button>
+<button class="time-filter-btn px-4 py-1.5 text-xs font-bold rounded-full transition-all text-slate-500 hover:text-slate-700">Daily</button>
+<button class="time-filter-btn px-4 py-1.5 text-xs font-bold rounded-full transition-all text-slate-500 hover:text-slate-700">Monthly</button>
+</div>
+</div>
+<!-- Mock Chart Visual -->
+<div class="relative h-[250px] w-full mt-12">
+<img alt="Production graph chart" class="w-full h-full object-cover rounded-lg opacity-40 mix-blend-multiply" data-alt="minimalist aesthetic line chart showing ascending production data with primary blue strokes and soft area fill on a clean white grid" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIfNgTrqGdfeyW3ShQWTANeIAPa6i6-uvFQHju-v9jccfT8jP6wgjMW1Y1lYCHHN3Fqy8qqigaHe7HGbDK47txJG48m9kU14rBo-ol1RXhQ6rDhQKi2SL5pUyjQjtWIoPL8b1D16dCrwVRLGSbrR9OKSwfk9w-SG6ZcsetYW3-oX0hKbfXkoT7ApirJeTo0V0l_i9qic3jwwtz9bHWIzxu2dv3KfW5NYP2umyBmLIsneOUtTfB3smF3ipTe4SLv2exOUGUzu_7nViB"/>
+<div class="absolute inset-0 flex items-end justify-around px-4">
+<div class="w-2 bg-primary rounded-t-full h-[60%] opacity-20"></div>
+<div class="w-2 bg-primary rounded-t-full h-[45%] opacity-20"></div>
+<div class="w-2 bg-primary rounded-t-full h-[80%] opacity-40"></div>
+<div class="w-2 bg-primary rounded-t-full h-[65%] opacity-20"></div>
+<div class="w-2 bg-primary rounded-t-full h-[90%] opacity-60"></div>
+<div class="w-2 bg-primary rounded-t-full h-[75%] opacity-20"></div>
+<div class="w-2 bg-primary rounded-t-full h-[85%] opacity-20"></div>
+</div>
+</div>
+</div>
+<!-- Map View -->
+<div class="bg-white rounded-xl shadow-sm p-8 flex flex-col">
+<div class="mb-6">
+<h4 class="font-headline text-xl font-bold">Uluslararası Lojistik</h4>
+<p class="text-slate-400 text-xs mt-1">Aktif transit dağıtımı</p>
+</div>
+<div class="flex-grow rounded-xl overflow-hidden relative border border-slate-100">
+<img alt="Global distribution map" class="w-full h-full object-cover grayscale opacity-30" data-alt="clean dark-themed global world map with glowing pinpoints in major industrial hubs and subtle connection lines" data-location="Germany" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSJOHXBHb_Ep1bTwJcYhFV2KHoqOGGRto2a7tuA7L5Eqqu0i9tEJvzoQa4mYah7MwKmXpcNl1fEsqG80n1nfv9_vPeRmL8AoTeTTewB4DzhE-uIK2xMqptYCbzk_SnaS8IBoTwltnXNbYKn1GNHhns9DbHL0kZxU0e2qCr02TFFWm5iA1kbfywW5GIsk5iRYw2jkrF7lLYasM8o57O_FT_PyA8l1q_SBnIcJnMQa_6jIGdcxH02fQjfoBdlnYzzt53bxHzrHBEuXr4"/>
+<!-- Map Overlays (Pulse points) -->
+<div class="absolute top-1/4 left-1/3 w-3 h-3 bg-primary rounded-full animate-ping"></div>
+<div class="absolute top-1/2 right-1/4 w-3 h-3 bg-secondary rounded-full animate-ping"></div>
+<div class="absolute bottom-1/3 left-1/2 w-3 h-3 bg-tertiary rounded-full animate-ping"></div>
+</div>
+<div class="mt-6 space-y-3">
+<div class="flex justify-between items-center">
+<span class="text-xs font-medium text-slate-600">Avrupa Merkezi</span>
+<span class="text-xs font-bold">42%</span>
+</div>
+<div class="w-full bg-slate-100 h-1.5 rounded-full">
+<div class="bg-primary w-[42%] h-full rounded-full"></div>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-xs font-medium text-slate-600">Asya Pasifik</span>
+<span class="text-xs font-bold">38%</span>
+</div>
+<div class="w-full bg-slate-100 h-1.5 rounded-full">
+<div class="bg-secondary w-[38%] h-full rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Row: Table -->
+<div class="bg-white rounded-xl shadow-sm overflow-hidden">
+<div class="p-8 flex justify-between items-center border-b border-slate-50">
+<h4 class="font-headline text-xl font-bold">Son Kullanıcı Etkinlikleri</h4>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"><search></search></span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full text-sm w-64 focus:ring-2 focus:ring-primary/20" placeholder="Search logs..." type="text"/>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-slate-50/50 text-slate-500 font-label text-[11px] uppercase tracking-wider">
+<th class="px-8 py-4">Kullanıcı</th>
+<th class="px-8 py-4">İşlem</th>
+<th class="px-8 py-4">Konum</th>
+<th class="px-8 py-4">Zaman</th>
+<th class="px-8 py-4 text-right">Durum</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-50">
+<tr class="hover:bg-slate-50 transition-colors group">
+<td class="px-8 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-primary font-bold text-xs">SK</div>
+<span class="text-sm font-semibold">Sarah Kovar</span>
+</div>
+</td>
+<td class="px-8 py-4 text-sm">Inventory adjustment - Sector 4</td>
+<td class="px-8 py-4 text-xs text-slate-500">192.168.1.104</td>
+<td class="px-8 py-4 text-xs text-slate-500">2 mins ago</td>
+<td class="px-8 py-4 text-right">
+<span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-[10px] font-bold">SUCCESS</span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors group">
+<td class="px-8 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 font-bold text-xs">BM</div>
+<span class="text-sm font-semibold">Ben Miller</span>
+</div>
+</td>
+<td class="px-8 py-4 text-sm">System Log Export</td>
+<td class="px-8 py-4 text-xs text-slate-500">192.168.1.105</td>
+<td class="px-8 py-4 text-xs text-slate-500">14 mins ago</td>
+<td class="px-8 py-4 text-right">
+<span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-[10px] font-bold">SUCCESS</span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors group">
+<td class="px-8 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center text-error font-bold text-xs">TR</div>
+<span class="text-sm font-semibold">Thomas Reed</span>
+</div>
+</td>
+<td class="px-8 py-4 text-sm">Security breach attempt - Login</td>
+<td class="px-8 py-4 text-xs text-slate-500">204.14.22.1</td>
+<td class="px-8 py-4 text-xs text-slate-500">45 mins ago</td>
+<td class="px-8 py-4 text-right">
+<span class="bg-error-container text-error px-3 py-1 rounded-full text-[10px] font-bold">BLOCKED</span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors group">
+<td class="px-8 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-purple-50 flex items-center justify-center text-tertiary font-bold text-xs">EW</div>
+<span class="text-sm font-semibold">Emily White</span>
+</div>
+</td>
+<td class="px-8 py-4 text-sm">New shift supervisor added</td>
+<td class="px-8 py-4 text-xs text-slate-500">192.168.1.22</td>
+<td class="px-8 py-4 text-xs text-slate-500">1 hour ago</td>
+<td class="px-8 py-4 text-right">
+<span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-[10px] font-bold">SUCCESS</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-6 bg-slate-50/30 flex justify-center">
+<button class="text-sm font-bold text-primary hover:underline">View All System Logs</button>
+</div>
+</div>
+</main>
+<!-- FAB for quick action -->
+<button class="fixed bottom-8 right-8 w-16 h-16 bg-primary text-on-primary rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50">
+<span class="material-symbols-outlined text-3xl">chat_bubble</span>
+</button>
+
+<script>
+  function handleLogout() {
+    // 1. Üstten onay kutusunu çıkar (confirm)
+    const onay = confirm("Oturumunuzu sonlandırmak istediğinize emin misiniz?\nTüm oturum verileri silinecektir.");
+
+    // 2. Eğer kullanıcı "Tamam" dediyse işlemleri yap
+    if (onay) {
+        try {
+            // LocalStorage ve SessionStorage temizliği
+            localStorage.clear();
+            sessionStorage.clear();
+
+            // Cookies temizliği
+            const cookies = document.cookie.split(';');
+            cookies.forEach(function(cookie) {
+                const eqPos = cookie.indexOf('=');
+                const name = eqPos > -1 ? cookie.substr(0, eqPos).trim() : cookie.trim();
+                if (name) {
+                    document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+                }
+            });
+
+            // Bilgi ver ve yönlendir
+            alert("Oturum başarıyla sonlandırıldı. Giriş sayfasına yönlendiriliyorsunuz...");
+            window.location.href = '../../index.html';
+
+        } catch (error) {
+            alert("Çıkış yapılırken bir hata oluştu!");
+            console.error(error);
+        }
+    } else {
+        // Kullanıcı iptal ettiyse bir şey yapma, sayfada kalsın
+        console.log("Çıkı�<!-- Dinamik Operasyon Modalı -->
+<div id="opModal" class="hidden fixed inset-0 z-[150] flex justify-center items-center">
+    <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" id="opModalOverlay"></div>
+    <div class="bg-white rounded-3xl p-8 shadow-2xl w-full max-w-lg relative z-10 scale-100 transition-all">
+        <div class="flex justify-between items-center mb-6">
+            <div class="flex items-center gap-3">
+                <span id="modalIcon" class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-xl">add_circle</span>
+                <h3 id="modalTitle" class="text-2xl font-bold font-headline text-on-surface">Yeni Kayıt</h3>
+            </div>
+            <button onclick="closeOpModal()" class="text-slate-400 hover:text-slate-800 transition-colors">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        
+        <form id="opForm" class="space-y-5">
+            <input type="hidden" id="opType">
+            
+            <!-- Departmana Göre Değişen Alanlar Buraya Gelecek -->
+            <div id="dynamicFields" class="space-y-5"></div>
+
+            <div class="flex justify-end gap-3 pt-6 border-t border-slate-50">
+                <button type="button" onclick="closeOpModal()" class="px-6 py-2.5 rounded-full font-bold text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors">İptal</button>
+                <button type="submit" class="px-8 py-2.5 bg-primary text-white font-bold rounded-full shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all">Kaydet</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Departman Veri Yapıları ve Form Alanları
+    const DEPARTMENTS = {
+        uretim: {
+            title: 'Üretim Veri Girişi',
+            icon: 'precision_manufacturing',
+            color: 'primary',
+            storage: 'productionDatabase',
+            fields: [
+                { id: 'dept_select', label: 'Bölüm', type: 'select', options: ['montaj', 'paketleme', 'kalite_kontrol', 'planlama_tasarim'], labels: ['Montaj', 'Paketleme', 'Kalite Kontrol', 'Planlama'] },
+                { id: 'name', label: 'İstasyon/Makine Adı', type: 'text', placeholder: 'Örn: Kaynak Ünitesi A1' },
+                { id: 'status', label: 'Çalışma Durumu', type: 'select', options: ['Aktif', 'Pasif', 'Bakımda'] },
+                { id: 'performance', label: 'Performans (%)', type: 'number', min: 0, max: 100 }
+            ]
+        },
+        finans: {
+            title: 'Finansal Kayıt',
+            icon: 'payments',
+            color: 'emerald-600',
+            storage: 'financeDatabase',
+            fields: [
+                { id: 'type', label: 'İşlem Türü', type: 'select', options: ['maas', 'butce', 'muhasebe'], labels: ['Maaş Ödemesi', 'Bütçe Talebi', 'Muhasebe Kaydı'] },
+                { id: 'name', label: 'Kalem/Açıklama', type: 'text', placeholder: 'Örn: Ekim Ayı Personel Ödemeleri' },
+                { id: 'amount', label: 'Tutar ($)', type: 'number', min: 0 },
+                { id: 'status', label: 'Ödeme Durumu', type: 'select', options: ['Ödendi', 'Bekliyor', 'Gecikmiş'] }
+            ]
+        },
+        hr: {
+            title: 'Personel Kaydı (İK)',
+            icon: 'groups',
+            color: 'indigo-600',
+            storage: 'hrDatabase',
+            fields: [
+                { id: 'name', label: 'Ad Soyad', type: 'text', placeholder: 'Örn: Jane Doe' },
+                { id: 'role', label: 'Pozisyon/Departman', type: 'text', placeholder: 'Örn: Site Supervisor' },
+                { id: 'status', label: 'Çalışma Durumu', type: 'select', options: ['On-Shift', 'Remote', 'On Leave'] },
+                { id: 'performance', label: 'Performans Skoru (1-5)', type: 'number', min: 1, max: 5 }
+            ]
+        },
+        depo: {
+            title: 'Depo & Stok Girişi',
+            icon: 'inventory_2',
+            color: 'amber-600',
+            storage: 'stockDatabase',
+            fields: [
+                { id: 'name', label: 'Malzeme Adı', type: 'text', placeholder: 'Örn: Alüminyum Bobin' },
+                { id: 'sku', label: 'Stok Kodu (SKU)', type: 'text', placeholder: 'Örn: ALU-7822-M' },
+                { id: 'qty', label: 'Miktar', type: 'number', min: 0 },
+                { id: 'unit', label: 'Birim', type: 'select', options: ['adet kaldı', 'kg kaldı', 'Litre kaldı'], labels: ['Adet', 'Kilogram (kg)', 'Litre (L)'] },
+                { id: 'status', label: 'Kritiklik Durumu', type: 'select', options: ['Sağlıklı', 'Sipariş Verilmeli', 'Kritik Düşük'] }
+            ]
+        },
+        it: {
+            title: 'IT Sistem Kaydı',
+            icon: 'developer_mode',
+            color: 'slate-700',
+            storage: 'itDatabase',
+            fields: [
+                { id: 'type', label: 'Kayıt Türü', type: 'select', options: ['Sistem Günlüğü', 'Destek Talebi', 'Donanım Arızası'] },
+                { id: 'system', label: 'İlgili Sistem/Cihaz', type: 'text', placeholder: 'Örn: Server-Primary-01' },
+                { id: 'description', label: 'Açıklama', type: 'text' },
+                { id: 'priority', label: 'Öncelik', type: 'select', options: ['Düşük', 'Orta', 'Yüksek', 'Kritik'] }
+            ]
+        },
+        satin_alma: {
+            title: 'Satın Alma Talebi',
+            icon: 'shopping_cart',
+            color: 'cyan-600',
+            storage: 'purchasingDatabase',
+            fields: [
+                { id: 'supplier', label: 'Tedarikçi Firma', type: 'text', placeholder: 'Örn: Stark Industries' },
+                { id: 'item', label: 'Sipariş Edilen Ürün', type: 'text' },
+                { id: 'qty', label: 'Miktar', type: 'number', min: 1 },
+                { id: 'status', label: 'Sipariş Durumu', type: 'select', options: ['On Way', 'Pending', 'Delivered'] }
+            ]
+        }
+    };
+
+    function openOperationModal(deptKey) {
+        document.getElementById('newDataMenu').classList.add('hidden');
+        const dept = DEPARTMENTS[deptKey];
+        const modal = document.getElementById('opModal');
+        const dynamicFields = document.getElementById('dynamicFields');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalIcon = document.getElementById('modalIcon');
+        
+        document.getElementById('opType').value = deptKey;
+        modalTitle.innerText = dept.title;
+        modalIcon.innerText = dept.icon;
+        
+        // Form alanlarını oluştur
+        dynamicFields.innerHTML = '';
+        dept.fields.forEach(field => {
+            const div = document.createElement('div');
+            let content = `<label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1.5">${field.label}</label>`;
+            
+            if (field.type === 'select') {
+                content += `<select id="field_${field.id}" required class="w-full rounded-xl border-slate-200 shadow-sm focus:border-primary focus:ring focus:ring-primary/20 text-sm p-3 font-bold text-slate-800 outline-none bg-white cursor-pointer transition-all">`;
+                field.options.forEach((opt, idx) => {
+                    const label = field.labels ? field.labels[idx] : opt;
+                    content += `<option value="${opt}">${label}</option>`;
+                });
+                content += `</select>`;
+            } else {
+                content += `<input type="${field.type}" id="field_${field.id}" required placeholder="${field.placeholder || ''}" ${field.min !== undefined ? `min="${field.min}"` : ''} ${field.max !== undefined ? `max="${field.max}"` : ''} class="w-full rounded-xl border-slate-200 shadow-sm focus:border-primary focus:ring focus:ring-primary/20 text-sm p-3 font-medium text-slate-800 outline-none transition-all">`;
+            }
+            div.innerHTML = content;
+            dynamicFields.appendChild(div);
+        });
+
+        modal.classList.remove('hidden');
+    }
+
+    function closeOpModal() {
+        document.getElementById('opModal').classList.add('hidden');
+        document.getElementById('opForm').reset();
+    }
+
+    document.getElementById('opModalOverlay').onclick = closeOpModal;
+
+    document.getElementById('opForm').onsubmit = function(e) {
+        e.preventDefault();
+        const deptKey = document.getElementById('opType').value;
+        const deptConfig = DEPARTMENTS[deptKey];
+        const data = { id: Date.now(), date: new Date().toISOString() };
+
+        deptConfig.fields.forEach(field => {
+            data[field.id] = document.getElementById(`field_${field.id}`).value;
+        });
+
+        // LocalStorage'a kaydet
+        if (deptKey === 'uretim') {
+            // Üretim özel yapısı (departmanlara ayrılmış)
+            let db = JSON.parse(localStorage.getItem(deptConfig.storage)) || { montaj: [], paketleme: [], kalite_kontrol: [], planlama_tasarim: [] };
+            if (Array.isArray(db)) db = { montaj: [], paketleme: [], kalite_kontrol: [], planlama_tasarim: [] }; // Eski yapı düzelitme
+            
+            const subDept = data.dept_select;
+            delete data.dept_select; // Orijinal sayfada bu alan kayıtta yok
+            db[subDept].push(data);
+            localStorage.setItem(deptConfig.storage, JSON.stringify(db));
+        } else {
+            // Standart Array yapısı
+            let db = JSON.parse(localStorage.getItem(deptConfig.storage)) || [];
+            db.push(data);
+            localStorage.setItem(deptConfig.storage, JSON.stringify(db));
+        }
+
+        alert(`${deptConfig.title} başarıyla kaydedildi!`);
+        closeOpModal();
+        
+        // İlgili dashboard'a yönlendirme onayı sorulabilir (opsiyonel)
+        if(confirm("Yeni veriyi görmek için ilgili sayfaya gitmek ister misiniz?")) {
+            const pages = {
+                uretim: '../../production_dashboard/production.html',
+                finans: '../../finance_dashboard/finance.html',
+                hr: '../../hr_dashboard/hr.html',
+                depo: '../../stock_dashboard/stock.html',
+                it: '../../it_dashboard/it.html',
+                satin_alma: '../../purchasing_dashboard/purchasing.html'
+            };
+            window.location.href = pages[deptKey];
+        }
+    };
+
+    // Dropdown Toggles
+    document.addEventListener('DOMContentLoaded', function() {
+        const newDataBtn = document.getElementById('newDataBtn');
+        const newDataMenu = document.getElementById('newDataMenu');
+
+        newDataBtn.onclick = function(e) {
+            e.stopPropagation();
+            newDataMenu.classList.toggle('hidden');
+        };
+
+        document.onclick = function(e) {
+            if (!newDataMenu.contains(e.target) && e.target !== newDataBtn) {
+                newDataMenu.classList.add('hidden');
+            }
+        };
+    });
+</script>
+</body>
+
+</html>
+ext-slate-700');
+            this.classList.add('bg-white', 'shadow-sm', 'text-primary');
+        });
+    });
+});
+</script>
+</body>
+
+</html>

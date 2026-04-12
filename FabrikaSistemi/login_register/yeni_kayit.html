@@ -1,0 +1,371 @@
+<!--Powered by Elanur Tuana İŞCEN-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <title>Giriş ve Yeni Kayıt</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-error": "#ffffff",
+              "surface": "#f7f9fc",
+              "secondary-fixed-dim": "#4ae183",
+              "surface-variant": "#e0e3e6",
+              "primary-fixed": "#dbe1ff",
+              "primary-container": "#496eda",
+              "surface-dim": "#d8dadd",
+              "on-tertiary-container": "#fffbff",
+              "on-background": "#191c1e",
+              "on-secondary-container": "#00743a",
+              "surface-container-highest": "#e0e3e6",
+              "tertiary-fixed": "#f8d8ff",
+              "surface-container-high": "#e6e8eb",
+              "secondary-fixed": "#6bfe9c",
+              "error-container": "#ffdad6",
+              "surface-container-lowest": "#ffffff",
+              "primary-fixed-dim": "#b5c4ff",
+              "surface-bright": "#f7f9fc",
+              "outline": "#747684",
+              "secondary": "#006d37",
+              "on-primary-container": "#fefcff",
+              "inverse-on-surface": "#eff1f4",
+              "secondary-container": "#6bfe9c",
+              "inverse-surface": "#2d3133",
+              "error": "#ba1a1a",
+              "tertiary-fixed-dim": "#ebb2ff",
+              "on-secondary-fixed": "#00210c",
+              "outline-variant": "#c4c6d5",
+              "background": "#f7f9fc",
+              "surface-container": "#eceef1",
+              "surface-container-low": "#f2f4f7",
+              "on-surface": "#191c1e",
+              "tertiary": "#80409b",
+              "inverse-primary": "#b5c4ff",
+              "on-tertiary": "#ffffff",
+              "on-surface-variant": "#434653",
+              "on-primary": "#ffffff",
+              "on-error-container": "#93000a",
+              "on-secondary": "#ffffff",
+              "tertiary-container": "#9b59b6",
+              "primary": "#2b54bf",
+              "surface-tint": "#2e57c2",
+              "on-tertiary-fixed": "#320047",
+              "on-secondary-fixed-variant": "#005228",
+              "on-tertiary-fixed-variant": "#692984",
+              "on-primary-fixed-variant": "#053da9",
+              "on-primary-fixed": "#00174d"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #f7f9fc;
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .soft-shadow {
+            box-shadow: 0 20px 50px rgba(43, 84, 191, 0.05);
+        }
+        .input-inset {
+            background: #f2f4f7;
+            transition: all 0.2s ease;
+        }
+        .input-inset:focus-within {
+            background: #ffffff;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+
+
+<body>
+    <section class="flex-1 p-8 md:p-12 lg:p-16 bg-white relative overflow-hidden">
+<!-- Decorative background for Register side -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-secondary/5 rounded-full -mr-32 -mt-32 blur-3xl"></div>
+<div class="relative z-10 flex flex-col h-full">
+<div class="mb-10">
+<button class="bg-on-surface-variant/10 text-on-surface-variant px-5 py-2 rounded-full text-sm font-bold flex items-center hover:bg-on-surface-variant/20 transition-all">
+<span class="material-symbols-outlined text-sm mr-2" data-icon="person_add">person_add</span>
+                        Yeni Üye Kaydı
+                    </button>
+<h2 class="font-headline font-bold text-3xl text-on-surface mt-6">Hesap Oluştur</h2>
+<p class="text-on-surface-variant text-sm mt-2">Endüstriyel ekosistemimize hemen katılın.</p>
+</div>
+
+<!--Kişisel Bilgiler-->
+<form class="space-y-5 flex-1 overflow-y-auto pr-2 custom-scrollbar">
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-1.5">
+<label class="text-[10px] font-bold uppercase tracking-widest text-outline px-1">Ad</label>
+<input class="w-full input-inset border-none rounded-lg py-3 px-4 focus:ring-2 focus:ring-secondary/20 transition-all font-medium text-sm" placeholder="Mehmet" type="text"/>
+</div>
+<div class="space-y-1.5">
+<label class="text-[10px] font-bold uppercase tracking-widest text-outline px-1">Soyad</label>
+<input class="w-full input-inset border-none rounded-lg py-3 px-4 focus:ring-2 focus:ring-secondary/20 transition-all font-medium text-sm" placeholder="Yılmaz" type="text"/>
+</div>
+</div>
+<div class="space-y-1.5">
+<label class="text-[10px] font-bold uppercase tracking-widest text-outline px-1">E-Posta</label>
+<input class="w-full input-inset border-none rounded-lg py-3 px-4 focus:ring-2 focus:ring-secondary/20 transition-all font-medium text-sm" placeholder="mehmet.yilmaz@fabrika.com" type="email"/>
+</div>
+<div class="space-y-1.5">
+<label class="text-[10px] font-bold uppercase tracking-widest text-outline px-1">Telefon Numarası</label>
+<input class="w-full input-inset border-none rounded-lg py-3 px-4 focus:ring-2 focus:ring-secondary/20 transition-all font-medium text-sm" placeholder="0555 123 45 67" type="tel"/>
+</div>
+
+<!--Cinsiyet-->
+<div class="space-y-1.5">
+<label class="text-[10px] font-bold uppercase tracking-widest text-outline px-1">Cinsiyet</label>
+<select class="w-full input-inset border-none rounded-lg py-3 px-4 focus:ring-2 focus:ring-secondary/20 transition-all font-medium text-sm text-on-surface appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23747684%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E')] bg-[length:12px] bg-[right_1rem_center] bg-no-repeat">
+<option disabled="" selected="" value="">Seçiniz</option>
+<option value="erkek">Erkek</option>
+<option value="kadın">Kadın</option>
+<option value="belirsiz">Belirtmek İstemiyorum</option>
+</select>
+</div>
+
+<!--Askerlik Durumu-->
+<div class="space-y-1.5">
+<label class="text-[10px] font-bold uppercase tracking-widest text-outline px-1">Askerlik Durumu (Erkek Adaylar İçin)</label>
+<select class="w-full input-inset border-none rounded-lg py-3 px-4 focus:ring-2 focus:ring-secondary/20 transition-all font-medium text-sm text-on-surface appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23747684%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E')] bg-[length:12px] bg-[right_1rem_center] bg-no-repeat">
+<option disabled="" selected="" value="">Seçiniz</option>
+<option value="erkek">Yapıldı</option>
+<option value="kadın">Yapılmadı</option>
+<option value="belirsiz">Muaf</option>
+</select>
+</div>
+ 
+<!--Mezuniyet Bilgisi-->
+</div>
+<div class="space-y-1.5">
+<label class="text-[10px] font-bold uppercase tracking-widest text-outline px-1">Mezuniyet Bilgisi</label>
+<select class="w-full input-inset border-none rounded-lg py-3 px-4 focus:ring-2 focus:ring-secondary/20 transition-all font-medium text-sm text-on-surface appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23747684%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E')] bg-[length:12px] bg-[right_1rem_center] bg-no-repeat">
+<option disabled="" selected="" value="">Seçiniz</option>
+<option value="lise">Lise</option>
+<option value="on_lisans">Ön Lisans</option>
+<option value="lisans">Lisans</option>
+<option value="yuksek_lisans">Yüksek Lisans</option>
+<option value="doktora">Doktora</option>
+</select>
+</div>
+
+<!--Rütbe-->
+<div class="space-y-1.5">
+<label class="text-[10px] font-bold uppercase tracking-widest text-outline px-1">Firmamızdaki Pozisyonunuz</label>
+<select class="w-full input-inset border-none rounded-lg py-3 px-4 focus:ring-2 focus:ring-secondary/20 transition-all font-medium text-sm text-on-surface appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23747684%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E')] bg-[length:12px] bg-[right_1rem_center] bg-no-repeat">
+<option disabled="" selected="" value="">Seçiniz</option>
+<option value="1">Bilgi Teknolojileri Birimi Personeli</option>
+<option value="2">Bilgi Teknolojileri Birimi Yöneticisi</option>
+<option value="3">İnsan Kaynakları Birimi Personeli</option>
+<option value="4">İnsan Kaynakları Birimi Yöneticisi</option>
+<option value="5">Depo & Stok Birimi Personeli</option>
+<option value="6">Depo & Stok Birimi Yöneticisi</option>
+<option value="7">Üretim Birimi Personeli</option>
+<option value="8">Üretim Birimi Yöneticisi</option>
+<option value="9">Finans Birimi Personeli</option>
+<option value="10">Finans Birimi Yöneticisi</option>
+<option value="11">Satın Alma Birimi Personeli</option>
+<option value="12">Satın Alma Birimi Yöneticisi</option>
+</select>
+</div>
+
+<div class="space-y-1.5">
+<label class="text-[10px] font-bold uppercase tracking-widest text-outline px-1">CV Yükle</label>
+<div class="relative">
+<input class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" accept=".pdf,.doc,.docx" type="file" id="cvFile"/>
+<div class="input-inset border-none rounded-lg py-3 px-4 focus-within:ring-2 focus-within:ring-secondary/20 transition-all font-medium text-sm flex items-center justify-between">
+<div class="flex items-center">
+<span class="material-symbols-outlined text-outline mr-3 text-lg" data-icon="upload_file">upload_file</span>
+<span id="fileName" class="text-outline-variant">CV dosyanızı seçin (PDF, DOC, DOCX)</span>
+</div>
+<span class="material-symbols-outlined text-outline text-sm" data-icon="attach_file">attach_file</span>
+</div>
+</div>
+<div class="text-xs text-outline-variant mt-1 px-1">Maksimum dosya boyutu: 5MB</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-1.5">
+<label class="text-[10px] font-bold uppercase tracking-widest text-outline px-1">Şifre</label>
+<input class="w-full input-inset border-none rounded-lg py-3 px-4 focus:ring-2 focus:ring-secondary/20 transition-all font-medium text-sm" placeholder="••••••••" type="password"/>
+</div>
+<div class="space-y-1.5">
+<label class="text-[10px] font-bold uppercase tracking-widest text-outline px-1">Şifre Onay</label>
+<input class="w-full input-inset border-none rounded-lg py-3 px-4 focus:ring-2 focus:ring-secondary/20 transition-all font-medium text-sm" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<div class="pt-4 flex flex-col gap-4">
+<button class="w-full bg-secondary text-white py-4 rounded-lg font-headline font-bold text-lg shadow-lg shadow-secondary/20 hover:shadow-secondary/30 active:scale-95 transition-all" type="submit">
+                            Kayıt Ol
+                        </button>
+<div class="flex items-center gap-2 px-2">
+<input class="rounded text-secondary focus:ring-secondary/20 w-4 h-4 border-outline-variant" type="checkbox"/>
+<span class="text-xs text-outline leading-tight font-medium">Kullanım koşullarını ve gizlilik politikasını kabul ediyorum.</span>
+</div>
+</div>
+</form>
+<div class="mt-8 pt-6 border-t border-surface-container text-center">
+<p class="text-sm text-on-surface-variant">Zaten bir hesabınız var mı? <a class="text-primary font-bold hover:underline" href="loginRegister.html">Giriş Yapın</a></p>
+</div>
+</div>
+</section>
+</body>
+<script>
+    // CV dosya seçildiğinde dosya adını göster
+    document.getElementById('cvFile').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        const fileNameElement = document.getElementById('fileName');
+        
+        if (file) {
+            // Dosya boyutu kontrolü (5MB = 5 * 1024 * 1024 bytes)
+            const maxSize = 5 * 1024 * 1024;
+            if (file.size > maxSize) {
+                alert('Dosya boyutu 5MB\'dan büyük olamaz!');
+                e.target.value = '';
+                fileNameElement.textContent = 'CV dosyanızı seçin (PDF, DOC, DOCX)';
+                fileNameElement.className = 'text-outline-variant';
+                return;
+            }
+            
+            fileNameElement.textContent = file.name;
+            fileNameElement.className = 'text-on-surface font-medium';
+        } else {
+            fileNameElement.textContent = 'CV dosyanızı seçin (PDF, DOC, DOCX)';
+            fileNameElement.className = 'text-outline-variant';
+        }
+    });
+
+    // Form validasyon fonksiyonu
+    function validatePhoneNumber(phone) {
+        // Türkiye telefon formatı: 05XX XXX XX XX veya 05XXXXXXXXX
+        const phoneRegex = /^(\+90|0)?[5][0-9]{2}[0-9]{3}[0-9]{4}$/;
+        return phoneRegex.test(phone.replace(/\s/g, ''));
+    }
+
+    // Form submit olayını yakala
+    document.querySelector('form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        let isValid = true;
+        let errorMessage = '';
+
+        // Ad kontrolü
+        if (!formData.get('firstName')?.trim()) {
+            isValid = false;
+            errorMessage = 'Ad alanı zorunludur.';
+        }
+
+        // Soyad kontrolü
+        if (!formData.get('lastName')?.trim()) {
+            isValid = false;
+            errorMessage = 'Soyad alanı zorunludur.';
+        }
+
+        // E-posta kontrolü
+        const email = formData.get('email')?.trim();
+        if (!email) {
+            isValid = false;
+            errorMessage = 'E-posta alanı zorunludur.';
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            isValid = false;
+            errorMessage = 'Geçerli bir e-posta adresi giriniz.';
+        }
+
+        // Telefon kontrolü
+        const phone = formData.get('phone')?.trim();
+        if (!phone) {
+            isValid = false;
+            errorMessage = 'Telefon numarası zorunludur.';
+        } else if (!validatePhoneNumber(phone)) {
+            isValid = false;
+            errorMessage = 'Geçerli bir telefon numarası giriniz (05XX XXX XX XX).';
+        }
+
+        // Mezuniyet kontrolü
+        if (!formData.get('education')) {
+            isValid = false;
+            errorMessage = 'Mezuniyet bilgisi seçiniz.';
+        }
+
+        // CV kontrolü
+        const cvFile = document.getElementById('cvFile').files[0];
+        if (!cvFile) {
+            isValid = false;
+            errorMessage = 'CV dosyası zorunludur.';
+        }
+
+        // Şifre kontrolü
+        const password = formData.get('password');
+        const confirmPassword = formData.get('confirmPassword');
+        if (!password || password.length < 6) {
+            isValid = false;
+            errorMessage = 'Şifre en az 6 karakter olmalıdır.';
+        } else if (password !== confirmPassword) {
+            isValid = false;
+            errorMessage = 'Şifreler eşleşmiyor.';
+        }
+
+        // Sözleşme kontrolü
+        if (!document.querySelector('input[type="checkbox"]').checked) {
+            isValid = false;
+            errorMessage = 'Kullanım koşullarını kabul etmeniz gerekir.';
+        }
+
+        if (!isValid) {
+            alert(errorMessage);
+            return;
+        }
+
+        // Başarılı kayıt simülasyonu
+        const submitButton = document.querySelector('button[type="submit"]');
+        const originalText = submitButton.textContent;
+        submitButton.textContent = 'Kayıt yapılıyor...';
+        submitButton.disabled = true;
+
+        // Gerçek uygulamada burada AJAX çağrısı yapılır
+        setTimeout(() => {
+            alert('Kayıt başarılı! Giriş sayfasına yönlendiriliyorsunuz.');
+            window.location.href = 'loginRegister.php';
+        }, 2000);
+    });
+
+    // Input name'lerini ekle (form validasyonu için gerekli)
+    document.querySelector('input[placeholder="Mehmet"]').name = 'firstName';
+    document.querySelector('input[placeholder="Yılmaz"]').name = 'lastName';
+    document.querySelector('input[placeholder="mehmet.yilmaz@fabrika.com"]').name = 'email';
+    document.querySelector('input[placeholder="0555 123 45 67"]').name = 'phone';
+    document.querySelector('select').name = 'education';
+    document.querySelector('input[placeholder="••••••••"]:nth-of-type(1)').name = 'password';
+    document.querySelector('input[placeholder="••••••••"]:nth-of-type(2)').name = 'confirmPassword';
+</script>
+</html>

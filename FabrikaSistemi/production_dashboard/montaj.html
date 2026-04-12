@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Montaj Paneli - Kontrol Paneli</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+    darkMode: "class",
+    theme: {
+        extend: {
+        colors: {
+            "on-error": "#ffffff", "surface": "#f7f9fc", "surface-variant": "#e0e3e6", "primary-container": "#496eda", "on-background": "#191c1e", "on-secondary-container": "#00743a",
+            "surface-container-highest": "#e0e3e6", "surface-container-high": "#e6e8eb", "error-container": "#ffdad6", "surface-container-lowest": "#ffffff",
+            "outline": "#747684", "secondary": "#006d37", "on-primary-container": "#fefcff", "secondary-container": "#6bfe9c",
+            "error": "#ba1a1a", "background": "#f7f9fc", "surface-container": "#eceef1", "surface-container-low": "#f2f4f7",
+            "on-surface": "#191c1e", "on-surface-variant": "#434653", "on-primary": "#ffffff", "on-error-container": "#93000a",
+            "on-secondary": "#ffffff", "primary": "#2b54bf"
+        },
+        fontFamily: { "headline": ["Manrope"], "body": ["Inter"], "label": ["Inter"] },
+        borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"}
+        }
+    }
+    }
+</script>
+<style>
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    body { background-color: #f7f9fc; color: #191c1e; font-family: 'Inter', sans-serif; min-height: max(884px, 100dvh); }
+    h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+</style>
+</head>
+<body class="min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-slate-50/80 backdrop-blur-xl flex justify-between items-center px-8 h-20 w-full shadow-sm">
+<div class="flex items-center gap-4">
+    <span class="material-symbols-outlined text-blue-600">menu</span>
+    <span class="text-blue-700 font-black tracking-tighter font-headline font-bold text-2xl tracking-tight">Üretim Paneli</span>
+</div>
+<div class="flex-1 max-w-md mx-8">
+    <div class="relative flex items-center">
+        <span class="material-symbols-outlined absolute left-4 text-slate-400">search</span>
+        <input class="w-full bg-surface-container-highest border-none rounded-full py-2.5 pl-12 pr-4 focus:ring-2 focus:ring-primary/20 text-sm" placeholder="Sistem veya kayıt ara..." type="text"/>
+    </div>
+</div>
+<div class="flex items-center gap-4">
+    <div class="text-right hidden sm:block">
+        <p class="text-xs font-bold text-slate-500 uppercase tracking-widest">Tesis Müdürü</p>
+        <p class="font-bold text-on-surface">Alex Sterling</p>
+    </div>
+    <img alt="User profile" class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm hover:scale-105 transition-transform duration-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZM9ELGeAHiriYgba8yjDpWgGcmRJfLOisbl5RHM3-WpTAteyXchGZ0JSCavEzBmQKzxCi_-ShnmDNcmououv_Ur4KSidSKP6BxMBbrNsWYNp60VszNVl46qLbBReOQdzbqxDPEnK3dyaq_1-5t5wgqwUlj2c1A_rGxYBpmGtYPiHgQkYCd83XzB8-xw0_QXeOHBMiwJiH6Qltrf5jMqPdl8Z90KCSwPA0ty71P3czoDGmoC8RX2CibyCn27B6U0s221-GaQi883pt"/>
+</div>
+</header>
+
+<!-- NavigationDrawer -->
+<aside class="h-full w-72 fixed left-0 top-0 z-40 bg-slate-50 border-r border-slate-200/10 shadow-2xl shadow-slate-900/5 flex flex-col p-6 space-y-2 pt-24">
+    <a class="flex items-center gap-4 px-4 py-3.5 bg-white text-slate-500 shadow-sm rounded-2xl hover:translate-x-1 transition-all active:scale-[0.98]" href="production.html">
+        <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+        <span class="font-body font-medium text-sm">Anasayfa</span>
+    </a>
+    
+    <!-- Operations Group -->
+    <div class="space-y-1">
+        <button onclick="document.getElementById('prodSubMenu').classList.toggle('hidden'); document.getElementById('prodChevron').classList.toggle('-rotate-180')" class="w-full flex items-center justify-between px-4 py-3.5 bg-primary/10 text-primary shadow-sm rounded-2xl transition-all hover:bg-primary/20 cursor-pointer">
+            <div class="flex items-center gap-4">
+                <span class="material-symbols-outlined transition-transform hover:scale-110" data-icon="precision_manufacturing">precision_manufacturing</span>
+                <span class="font-body font-semibold text-sm">Üretim Paneli</span>
+            </div>
+            <span id="prodChevron" class="material-symbols-outlined text-sm transition-transform duration-300">expand_more</span>
+        </button>
+        <div id="prodSubMenu" class="pl-12 space-y-1 mt-1 transition-all">
+            <a href="montaj.html" class="block px-4 py-2 text-sm font-bold text-primary bg-primary/5 rounded-xl transition-colors">Montaj</a>
+            <a href="paketleme.html" class="block px-4 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition-colors">Paketleme</a>
+            <a href="kalite_kontrol.html" class="block px-4 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition-colors">Kalite Kontrol</a>
+            <a href="planlama_tasarim.html" class="block px-4 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition-colors">Planlama / Tasarım</a>
+        </div>
+    </div>
+    
+    <a class="flex items-center gap-4 px-4 py-3.5 text-slate-500 hover:text-slate-900 hover:translate-x-1 transition-all active:scale-[0.98]" href="../stock_dashboard/stock.html">
+        <span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+        <span class="font-body font-medium text-sm">Stok Durumu</span>
+    </a>
+    <a class="flex items-center gap-4 px-4 py-3.5 text-slate-500 hover:text-slate-900 hover:translate-x-1 transition-all active:scale-[0.98]" href="../maintenance_dashboard/bakim.html">
+        <span class="material-symbols-outlined" data-icon="engineering">engineering</span>
+        <span class="font-body font-medium text-sm">Bakım</span>
+    </a>
+    
+    <div class="mt-auto pt-6 border-t border-slate-200/40">
+        <div class="p-4 bg-primary/5 rounded-xl">
+            <p class="text-xs font-bold text-primary mb-1">TESİS DURUMU</p>
+            <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+                <span class="text-sm font-semibold">Sektör 7G: Optimal</span>
+            </div>
+        </div>
+    </div>
+</aside>
+
+<!-- Main Canvas -->
+<main class="pl-72 pt-20">
+    <div class="p-10 space-y-10">
+        <section class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div>
+                <h1 class="text-4xl font-extrabold tracking-tight text-on-surface">Montaj Departmanı</h1>
+                <p class="text-slate-500 mt-1 font-medium">Montaj hattı verileri ve makine durum performans arayüzü.</p>
+            </div>
+        </section>
+
+        <!-- Data Entry & Table Grid -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Form Area -->
+            <div class="lg:col-span-4 bg-surface-container-lowest rounded-xl p-8 shadow-sm h-fit border border-slate-100">
+                <h3 class="text-xl font-bold mb-6 text-on-surface border-b border-slate-100 pb-4">Yeni Kayıt / Güncelleme</h3>
+                <form id="deptForm" class="space-y-5">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1.5">Makine / İstasyon Adı</label>
+                        <input type="text" id="recordName" required placeholder="Örn: Kaynak İstasyonu 1" class="w-full rounded-xl border-slate-200 shadow-sm focus:border-primary focus:ring focus:ring-primary/20 text-sm p-3 font-medium text-slate-800 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1.5">Çalışma Durumu</label>
+                        <select id="recordStatus" class="w-full rounded-xl border-slate-200 shadow-sm focus:border-primary focus:ring focus:ring-primary/20 text-sm p-3 font-bold text-slate-800 outline-none bg-white cursor-pointer select-none">
+                            <option value="Aktif">Aktif Çalışıyor</option>
+                            <option value="Pasif">Pasif / Durdu</option>
+                            <option value="Bakımda">Bakımda</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1.5">Performans / Verimlilik (%)</label>
+                        <input type="number" id="recordPerformance" min="0" max="100" required placeholder="0 - 100" class="w-full rounded-xl border-slate-200 shadow-sm focus:border-primary focus:ring focus:ring-primary/20 text-sm p-3 font-bold text-slate-800 outline-none">
+                    </div>
+                    <button type="submit" class="w-full py-3 mt-4 bg-primary text-white font-bold rounded-xl shadow-md shadow-primary/20 hover:scale-105 active:scale-95 transition-all">Veritabanına Ekle</button>
+                </form>
+            </div>
+
+            <!-- Data Table -->
+            <div class="lg:col-span-8 bg-surface-container-lowest rounded-xl shadow-sm border border-slate-100 overflow-hidden flex flex-col h-full min-h-[500px]">
+                <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+                    <h3 class="text-xl font-bold text-on-surface">Mevcut İstasyon Verileri</h3>
+                    <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full" id="recordCount">0 Kayıt</span>
+                </div>
+                <!-- Table Container -->
+                <div class="overflow-x-auto overflow-y-auto max-h-[600px] flex-1">
+                    <table class="w-full text-left">
+                        <thead class="sticky top-0 bg-slate-50/90 backdrop-blur-md z-10 shadow-sm">
+                            <tr>
+                                <th class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest">İstasyon Adı</th>
+                                <th class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest">Durum</th>
+                                <th class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest">Performans</th>
+                                <th class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest text-right">İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTableBody" class="divide-y divide-slate-100">
+                            <!-- JS ile Dinamik Doldurulacak -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </div>
+    <div class="h-10"></div>
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const DEPARTMENT_KEY = 'montaj';
+
+    // Veritabanı yapısını yükle veya oluştur
+    let db = JSON.parse(localStorage.getItem('productionDatabase')) || {
+        montaj: [], paketleme: [], kalite_kontrol: [], planlama_tasarim: []
+    };
+
+    // Eğer önceki sürümlerde böyle bir obje yoksa düzelt
+    if(Array.isArray(db)) {
+        db = { montaj: [], paketleme: [], kalite_kontrol: [], planlama_tasarim: [] };
+    }
+
+    const tableBody = document.getElementById('dataTableBody');
+    const form = document.getElementById('deptForm');
+    const countBadge = document.getElementById('recordCount');
+
+    // Renk Çözücü
+    const getStatusStyle = (status) => {
+        if(status === 'Aktif') return 'bg-secondary-container text-on-secondary-container';
+        if(status === 'Pasif') return 'bg-error-container text-on-error-container';
+        if(status === 'Bakımda') return 'bg-orange-100 text-orange-800';
+        return 'bg-slate-100 text-slate-800';
+    };
+
+    const getPerfColor = (val) => {
+        if(val >= 85) return 'text-secondary';
+        if(val >= 50) return 'text-orange-500';
+        return 'text-error';
+    };
+
+    // Tabloyu Çizdir
+    const renderTable = () => {
+        tableBody.innerHTML = '';
+        const records = db[DEPARTMENT_KEY] || [];
+        countBadge.innerText = `${records.length} Kayıt`;
+
+        if(records.length === 0){
+            tableBody.innerHTML = `<tr><td colspan="4" class="px-6 py-12 text-center text-slate-400 font-medium">Bu departmanda henüz makine kaydı yok. Lütfen soldan ekleyin.</td></tr>`;
+            return;
+        }
+
+        records.reverse().forEach((record, idx) => {
+            // Index hesaplama ters çevrildiği için orijinal verinin indeksine erişim:
+            const originalIndex = records.length - 1 - idx; 
+
+            const tr = document.createElement('tr');
+            tr.className = 'hover:bg-slate-50/50 transition-colors group';
+            tr.innerHTML = `
+                <td class="px-6 py-5 font-bold text-on-surface">${record.name}</td>
+                <td class="px-6 py-5">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter ${getStatusStyle(record.status)}">
+                        ${record.status}
+                    </span>
+                </td>
+                <td class="px-6 py-5">
+                    <span class="text-lg font-black ${getPerfColor(record.performance)}">%${record.performance}</span>
+                </td>
+                <td class="px-6 py-5 text-right">
+                    <button onclick="deleteRow(${originalIndex})" class="w-8 h-8 inline-flex items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-error hover:text-white transition-colors opacity-0 group-hover:opacity-100">
+                        <span class="material-symbols-outlined text-sm">delete</span>
+                    </button>
+                </td>
+            `;
+            tableBody.appendChild(tr);
+        });
+    };
+
+    // Global silme foksiyonu
+    window.deleteRow = (index) => {
+        db[DEPARTMENT_KEY].splice(index, 1);
+        localStorage.setItem('productionDatabase', JSON.stringify(db));
+        renderTable();
+    };
+
+    // Kayıt Ekle
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const name = document.getElementById('recordName').value;
+        const status = document.getElementById('recordStatus').value;
+        const performance = parseInt(document.getElementById('recordPerformance').value);
+
+        if(!db[DEPARTMENT_KEY]){
+            db[DEPARTMENT_KEY] = [];
+        }
+
+        db[DEPARTMENT_KEY].push({
+            id: Date.now(),
+            name: name,
+            status: status,
+            performance: performance
+        });
+
+        localStorage.setItem('productionDatabase', JSON.stringify(db));
+        form.reset();
+        renderTable();
+    });
+
+    // İlk yükleme
+    renderTable();
+});
+</script>
+</body>
+</html>

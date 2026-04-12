@@ -1,0 +1,408 @@
+<!--Powered by Elanur Tuana İŞCEN-->
+
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Industrial Pulse - HR &amp; Personnel Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-error": "#ffffff",
+              "surface": "#f7f9fc",
+              "secondary-fixed-dim": "#4ae183",
+              "surface-variant": "#e0e3e6",
+              "primary-fixed": "#dbe1ff",
+              "primary-container": "#496eda",
+              "surface-dim": "#d8dadd",
+              "on-tertiary-container": "#fffbff",
+              "on-background": "#191c1e",
+              "on-secondary-container": "#00743a",
+              "surface-container-highest": "#e0e3e6",
+              "tertiary-fixed": "#f8d8ff",
+              "surface-container-high": "#e6e8eb",
+              "secondary-fixed": "#6bfe9c",
+              "error-container": "#ffdad6",
+              "surface-container-lowest": "#ffffff",
+              "primary-fixed-dim": "#b5c4ff",
+              "surface-bright": "#f7f9fc",
+              "outline": "#747684",
+              "secondary": "#006d37",
+              "on-primary-container": "#fefcff",
+              "inverse-on-surface": "#eff1f4",
+              "secondary-container": "#6bfe9c",
+              "inverse-surface": "#2d3133",
+              "error": "#ba1a1a",
+              "tertiary-fixed-dim": "#ebb2ff",
+              "on-secondary-fixed": "#00210c",
+              "outline-variant": "#c4c6d5",
+              "background": "#f7f9fc",
+              "surface-container": "#eceef1",
+              "surface-container-low": "#f2f4f7",
+              "on-surface": "#191c1e",
+              "tertiary": "#80409b",
+              "inverse-primary": "#b5c4ff",
+              "on-tertiary": "#ffffff",
+              "on-surface-variant": "#434653",
+              "on-primary": "#ffffff",
+              "on-error-container": "#93000a",
+              "on-secondary": "#ffffff",
+              "tertiary-container": "#9b59b6",
+              "primary": "#2b54bf",
+              "surface-tint": "#2e57c2",
+              "on-tertiary-fixed": "#320047",
+              "on-secondary-fixed-variant": "#005228",
+              "on-tertiary-fixed-variant": "#692984",
+              "on-primary-fixed-variant": "#053da9",
+              "on-primary-fixed": "#00174d"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-sm h-20 flex justify-between items-center px-8 border-none">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-blue-600 dark:text-blue-400 p-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors active:scale-95 duration-200 cursor-pointer rounded-full" data-icon="menu">menu</span>
+<span class="text-blue-700 dark:text-blue-400 font-black tracking-tighter font-['Manrope'] font-bold text-2xl tracking-tight">Industrial Pulse</span>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex gap-8">
+<a class="text-blue-700 dark:text-blue-400 font-bold font-['Inter'] font-medium text-sm" href="#">Dashboard</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-all font-['Inter'] font-medium text-sm" href="#">Operations</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-all font-['Inter'] font-medium text-sm" href="#">Analytics</a>
+</nav>
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center overflow-hidden active:scale-95 duration-200 cursor-pointer border-2 border-white shadow-sm">
+<img alt="User profile photo" class="w-full h-full object-cover" data-alt="close up headshot of a smiling professional man with clean-cut appearance in a well-lit studio setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCObVOV8G95OZalAr6RgOpKASYwyFplGQnJznpkSzkTf89hWmtT0Jwl_etp5CBuz5Ymll5Yz3Wmm1R-G0zkZDtc4-Q_5EqRaCq1QPPb2QooXatchXALeo106YKFOdhmDQkv178LWeSJuECKoXeFv1FXCE9h0tkEJ2TCPMgDTvhF0F6A070sSs6hSsAco5tCOrKM6XGmhROe8du3no4SZsQ1os74qK9qiqdo5SXaOVsNk_FO1H0AN0YJQiKpQxadX94GvuzwzZWXY8kH"/>
+</div>
+</div>
+</header>
+<!-- NavigationDrawer -->
+<aside class="h-full w-72 fixed left-0 top-0 z-40 bg-slate-50 dark:bg-slate-950 border-r border-slate-200/10 shadow-2xl shadow-slate-900/5 flex flex-col p-6 space-y-2 pt-24">
+<div class="flex items-center gap-4 mb-8 p-4 bg-white dark:bg-slate-900/50 rounded-xl shadow-sm">
+<div class="w-12 h-12 rounded-xl bg-tertiary-container flex items-center justify-center overflow-hidden">
+<img alt="Manager Avatar" class="w-full h-full object-cover" data-alt="professional corporate headshot of a confident woman manager with a warm smile against a soft neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJx8irz2vQvDlH6Tev33oB781v4zQLxTbNFBnifJLo_00KSC5SYBw1p2ClrT6vAoxP-j-lrdSnHytkpch0TbIt1x8Rz3zQSPSXhM5fMK8lVPMistAaptVp3BkrB8c8-9jjqURA8qa3n3X_M49o_6jymDLMFWSYNeQ381P4B1aed1B2OBETkZmO6mtiQb767f2rGn7jJmhxfaTZg7-fnDIaD7FYtLJmAAK5Ehj256zO32PlvuxrXtDzqaEDKTXYExh4oCeHe41OSlHQ"/>
+</div>
+<div>
+<p class="font-bold text-sm font-['Inter']">Alex Sterling</p>
+<p class="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Plant Manager</p>
+</div>
+</div>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 p-3 bg-white dark:bg-slate-900 text-blue-700 dark:text-blue-400 shadow-sm rounded-2xl font-['Inter'] font-medium text-sm" href="../login_register/admin_dashboard/adminDashboard.html">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Anasayfa</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:translate-x-1 transition-all font-['Inter'] font-medium text-sm active:scale-[0.98]" href="hr.html">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span>Personel (İK)</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:translate-x-1 transition-all font-['Inter'] font-medium text-sm active:scale-[0.98]" href="../finance_dashboard/maas.html">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span>Maaş & Bordro</span>
+</a>
+</nav>
+
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-72 pt-24 px-8 pb-12">
+<header class="mb-10 flex justify-between items-end">
+<div>
+<h1 class="text-4xl font-extrabold text-on-surface tracking-tight">Personnel Intelligence</h1>
+<p class="text-slate-500 font-medium">Monitoring human capital and operational health.</p>
+</div>
+<div class="flex gap-4">
+<button class="px-6 py-3 bg-white rounded-full text-sm font-bold text-slate-600 shadow-sm border border-transparent hover:shadow-md transition-all">Export Report</button>
+<button class="px-6 py-3 bg-gradient-to-r from-primary to-primary-container text-white rounded-full text-sm font-bold shadow-lg shadow-primary/20 active:scale-95 transition-all">Add Personnel</button>
+</div>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-8">
+<!-- Widget 1: Employee Distribution (Pie Chart Placeholder) -->
+<section class="col-span-12 lg:col-span-5 bg-surface-container-low rounded-xl p-8 flex flex-col justify-between h-[450px] relative overflow-hidden group">
+<div class="flex justify-between items-start mb-4">
+<h2 class="text-xl font-bold text-on-surface">Departmental Load</h2>
+<span class="material-symbols-outlined text-slate-400" data-icon="more_vert">more_vert</span>
+</div>
+<div class="flex-1 flex items-center justify-center relative">
+<!-- Semi-Circle Chart Visualization -->
+<div class="w-64 h-64 rounded-full border-[24px] border-tertiary-fixed relative flex items-center justify-center">
+<div class="absolute inset-0 border-[24px] border-primary-container rounded-full" style="clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%); transform: rotate(45deg);"></div>
+<div class="absolute inset-0 border-[24px] border-secondary-container rounded-full" style="clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%); transform: rotate(-60deg);"></div>
+<div class="text-center">
+<span class="text-3xl font-black text-on-surface">1,284</span>
+<p class="text-xs text-slate-500 uppercase font-bold tracking-widest">Employees</p>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-2 mt-4">
+<div class="p-3 bg-surface-container-lowest rounded-2xl text-center">
+<div class="w-2 h-2 rounded-full bg-primary mx-auto mb-1"></div>
+<p class="text-xs font-bold text-on-surface">Production</p>
+<p class="text-lg font-black text-primary">62%</p>
+</div>
+<div class="p-3 bg-surface-container-lowest rounded-2xl text-center">
+<div class="w-2 h-2 rounded-full bg-secondary mx-auto mb-1"></div>
+<p class="text-xs font-bold text-on-surface">Logistics</p>
+<p class="text-lg font-black text-secondary">24%</p>
+</div>
+<div class="p-3 bg-surface-container-lowest rounded-2xl text-center">
+<div class="w-2 h-2 rounded-full bg-tertiary mx-auto mb-1"></div>
+<p class="text-xs font-bold text-on-surface">Admin</p>
+<p class="text-lg font-black text-tertiary">14%</p>
+</div>
+</div>
+</section>
+<!-- Widget 2: Attendance (Bar Chart) -->
+<section class="col-span-12 lg:col-span-7 bg-surface-container-low rounded-xl p-8 h-[450px] flex flex-col">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h2 class="text-xl font-bold text-on-surface">Staff Attendance</h2>
+<p class="text-xs text-slate-400 font-medium">Daily average attendance across last 7 days</p>
+</div>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-[10px] font-bold rounded-full uppercase tracking-tighter">98.4% Peak</span>
+</div>
+</div>
+<div class="flex-1 flex items-end justify-between gap-4 px-4">
+<!-- Custom Bar Chart Implementation -->
+<div class="flex flex-col items-center gap-4 group">
+<div class="w-12 bg-primary-container/20 rounded-full h-48 relative overflow-hidden">
+<div class="absolute bottom-0 w-full bg-primary-container h-[85%] rounded-t-full transition-all group-hover:h-[90%]"></div>
+</div>
+<span class="text-xs font-bold text-slate-500">Mon</span>
+</div>
+<div class="flex flex-col items-center gap-4 group">
+<div class="w-12 bg-primary-container/20 rounded-full h-48 relative overflow-hidden">
+<div class="absolute bottom-0 w-full bg-primary-container h-[92%] rounded-t-full transition-all group-hover:h-[95%]"></div>
+</div>
+<span class="text-xs font-bold text-slate-500">Tue</span>
+</div>
+<div class="flex flex-col items-center gap-4 group">
+<div class="w-12 bg-primary-container/20 rounded-full h-48 relative overflow-hidden">
+<div class="absolute bottom-0 w-full bg-primary-container h-[88%] rounded-t-full transition-all group-hover:h-[92%]"></div>
+</div>
+<span class="text-xs font-bold text-slate-500">Wed</span>
+</div>
+<div class="flex flex-col items-center gap-4 group">
+<div class="w-12 bg-primary-container/20 rounded-full h-48 relative overflow-hidden">
+<div class="absolute bottom-0 w-full bg-primary-container h-[95%] rounded-t-full transition-all group-hover:h-[98%]"></div>
+</div>
+<span class="text-xs font-bold text-slate-500">Thu</span>
+</div>
+<div class="flex flex-col items-center gap-4 group">
+<div class="w-12 bg-primary-container/20 rounded-full h-48 relative overflow-hidden">
+<div class="absolute bottom-0 w-full bg-primary-container h-[75%] rounded-t-full transition-all group-hover:h-[80%]"></div>
+</div>
+<span class="text-xs font-bold text-slate-500">Fri</span>
+</div>
+<div class="flex flex-col items-center gap-4 group">
+<div class="w-12 bg-primary-container/20 rounded-full h-48 relative overflow-hidden">
+<div class="absolute bottom-0 w-full bg-primary-container h-[40%] rounded-t-full transition-all group-hover:h-[45%]"></div>
+</div>
+<span class="text-xs font-bold text-slate-500">Sat</span>
+</div>
+<div class="flex flex-col items-center gap-4 group">
+<div class="w-12 bg-primary-container/20 rounded-full h-48 relative overflow-hidden">
+<div class="absolute bottom-0 w-full bg-primary-container h-[35%] rounded-t-full transition-all group-hover:h-[40%]"></div>
+</div>
+<span class="text-xs font-bold text-slate-500">Sun</span>
+</div>
+</div>
+</section>
+<!-- Widget 3: Recent Hires & Events -->
+<section class="col-span-12 lg:col-span-4 bg-surface-container-low rounded-xl p-8 flex flex-col gap-6">
+<div class="flex justify-between items-center">
+<h2 class="text-xl font-bold text-on-surface">Recent Hires</h2>
+<a class="text-primary text-xs font-bold hover:underline" href="#">View All</a>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-4 p-4 bg-surface-container-lowest rounded-2xl shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+<div class="w-12 h-12 rounded-full overflow-hidden">
+<img alt="Jordan Smith" class="w-full h-full object-cover" data-alt="portrait of a young smiling man wearing glasses and a casual denim shirt in a bright modern office" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWonW3NnjtKekTWk6Uuo3D-4vVtEC0Kq6o4p68ZoR9fV0rmPrDAuQCOIXhq1PJDzR9MGA_GUhSqOsd7QLwG58HggZe0Z5Lcbd5JvDeSFPIeDIh8tcBD3G3EdEIPuNZQbanNLMBkmNnj6lO2TizbkxNrw4v_0H9nOJRMkws-tXVfVDaF1DFFFixcMaUDBzOquNldBlg_5H6TcwXRplFsspS_04oRILIhW6MEqJhumhRLKIITQx_cvhypJOR31oStDXP2WO2qVfftMuj"/>
+</div>
+<div class="flex-1">
+<p class="font-bold text-sm">Jordan Smith</p>
+<p class="text-xs text-slate-500">QA Engineer • 2d ago</p>
+</div>
+<span class="material-symbols-outlined text-slate-300" data-icon="chevron_right">chevron_right</span>
+</div>
+<div class="flex items-center gap-4 p-4 bg-surface-container-lowest rounded-2xl shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+<div class="w-12 h-12 rounded-full overflow-hidden">
+<img alt="Sarah Chen" class="w-full h-full object-cover" data-alt="cheerful woman with long brown hair smiling into the camera outdoors at dusk with warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCqMNHHrP-sCJ1aZAtx8ylNVVyQQWAhoD-B9b2QiVkcb2vz6AuWokv_7qgqzXpiMnczI2wSm489TVeE1sNEyELzr6oVmBl2AIM7OK1zPLy0TlRtfYwH02Rq3yvh6Z_KARQQZvrYnOpdRRoUmg1cUfd3Lj9lqc2S62hj4EEnISNEhKpL31W66YjRBmjJhOK_pzAwNCYhAQkQh-wgAHGUWDCQ_fJco9oCDZ69lePOq_JM_ExL-cA5k4xAPxp6v-ytAYYg0WJRoF_GGLI"/>
+</div>
+<div class="flex-1">
+<p class="font-bold text-sm">Sarah Chen</p>
+<p class="text-xs text-slate-500">Logistics Lead • 3d ago</p>
+</div>
+<span class="material-symbols-outlined text-slate-300" data-icon="chevron_right">chevron_right</span>
+</div>
+<div class="flex items-center gap-4 p-4 bg-surface-container-lowest rounded-2xl shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+<div class="w-12 h-12 rounded-full overflow-hidden">
+<img alt="Marcus Voe" class="w-full h-full object-cover" data-alt="man with professional attire and friendly gaze against a blurred tech office background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3v8e6jrC7aNfW0AUYv9njTCEeMp6LwLwc9G3L2SnQOaaQCkOtAQcmHiHqDKsF94hEVPSUaw8mgTXTBj0GWTx14uaLMQSrEJaNHCIDYKdMLL35oitnoJrlPOuAC24ejKSbrB-_uFzW149x6tBFs8-h3_Me0-mUdcZaNmefAreuYnq7BvQNg8QF2tI0-Q1AmK9AhfM1-ML8PlG6-lu-VUI95GWxxpZO_shKx_WRMipzKQ6uA55dg5O5RSZFreutwhIBBqsoXnwkIslt"/>
+</div>
+<div class="flex-1">
+<p class="font-bold text-sm">Marcus Voe</p>
+<p class="text-xs text-slate-500">Automation Tech • 5d ago</p>
+</div>
+<span class="material-symbols-outlined text-slate-300" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+<div class="mt-4 p-6 bg-gradient-to-br from-tertiary-fixed to-tertiary/20 rounded-2xl">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-tertiary" data-icon="cake">cake</span>
+<p class="font-bold text-on-surface">Upcoming Birthday</p>
+</div>
+<p class="text-sm font-medium text-slate-600">Robert Vance (HOD Production) celebrates in 2 days.</p>
+</div>
+</section>
+<!-- Widget 4: Employee Search Table -->
+<section class="col-span-12 lg:col-span-8 bg-surface-container-lowest rounded-xl p-8 shadow-2xl shadow-slate-900/5">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+<h2 class="text-xl font-bold text-on-surface">Employee Roster</h2>
+<div class="relative w-full md:w-80 group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors" data-icon="search">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-surface-container rounded-full border-none focus:ring-2 focus:ring-primary/20 transition-all text-sm font-medium" placeholder="Search by name, role..." type="text"/>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-separate border-spacing-y-4">
+<thead>
+<tr class="text-slate-400 text-xs font-bold uppercase tracking-widest">
+<th class="px-4 pb-2">Name</th>
+<th class="px-4 pb-2">Role</th>
+<th class="px-4 pb-2">Performance</th>
+<th class="px-4 pb-2">Status</th>
+<th class="px-4 pb-2 text-right">Actions</th>
+</tr>
+</thead>
+<tbody>
+<!-- Table Row 1 -->
+<tr class="bg-surface-container-low/50 hover:bg-surface-container-low transition-colors rounded-2xl overflow-hidden">
+<td class="px-4 py-4 first:rounded-l-2xl last:rounded-r-2xl">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-slate-200 overflow-hidden">
+<img alt="Elena Riggs" class="w-full h-full object-cover" data-alt="close up of a professional woman with thoughtful expression and natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHNgtsH-BF7J0BOPVR09-VIDMDRjgyzRyPRBjd0VO5X2VRSo_S5G7021OSIcz2zp-Kksr4mdGAFUpxx4B_-n7T8uuUf1lVFHdz9m-D9koOJoHmxOm8mG4Q2a793hZeJf1afWaRfkaWxOhRq9jzM1nvNKqOYvY2VDDON8Ea-gK5KKstA6eagIZKDWMq9GCQkcqB8lWs79NHlCcXbp1oVjWqXK44ueAd4nIP2kqSOkBhjQu2Sh84zNijd9ugIZCORlvejL1EF5faWkQd"/>
+</div>
+<span class="font-bold text-sm">Elena Riggs</span>
+</div>
+</td>
+<td class="px-4 py-4 text-sm font-medium text-slate-600">Site Supervisor</td>
+<td class="px-4 py-4">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-slate-300 text-sm" data-icon="star">star</span>
+<span class="text-xs font-bold ml-1 text-slate-400">4.2</span>
+</div>
+</td>
+<td class="px-4 py-4">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-[10px] font-bold rounded-full uppercase">On-Shift</span>
+</td>
+<td class="px-4 py-4 text-right last:rounded-r-2xl">
+<button class="p-2 hover:bg-white rounded-full transition-colors"><span class="material-symbols-outlined text-slate-400" data-icon="edit">edit</span></button>
+</td>
+</tr>
+<!-- Table Row 2 -->
+<tr class="bg-surface-container-low/50 hover:bg-surface-container-low transition-colors rounded-2xl overflow-hidden">
+<td class="px-4 py-4 first:rounded-l-2xl last:rounded-r-2xl">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-slate-200 overflow-hidden">
+<img alt="David Miller" class="w-full h-full object-cover" data-alt="headshot of a man with short hair and friendly features in a casual gray sweater" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFo6gUAi10-ebAJAZ4xCl377cpwqyTf7BmuWIvdcAyoKRBpK4vR9jB0jkSREu7PL1Kj-x2ekMvMv4bDP0juVGB3Xy54HG_GV2gE0OpS8MRglDl_e_s5uwfQmo2hb7zAH0RmO1Fntb6jgOBZUnROvAxfbSXR-JnHu2X_ie5X33ZECUk1tar5Uj0SWR16Mw6MRMi5y9ZyXZSFq3_TaUtAzO-O9R1h0uGPtJCyN1mGh-fL1ROfiMMHLbH0JT672lt6huulY1_-6xImV9Z"/>
+</div>
+<span class="font-bold text-sm">David Miller</span>
+</div>
+</td>
+<td class="px-4 py-4 text-sm font-medium text-slate-600">Logistics Officer</td>
+<td class="px-4 py-4">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold ml-1 text-slate-400">5.0</span>
+</div>
+</td>
+<td class="px-4 py-4">
+<span class="px-3 py-1 bg-primary-container text-on-primary-container text-[10px] font-bold rounded-full uppercase">Remote</span>
+</td>
+<td class="px-4 py-4 text-right last:rounded-r-2xl">
+<button class="p-2 hover:bg-white rounded-full transition-colors"><span class="material-symbols-outlined text-slate-400" data-icon="edit">edit</span></button>
+</td>
+</tr>
+<!-- Table Row 3 -->
+<tr class="bg-surface-container-low/50 hover:bg-surface-container-low transition-colors rounded-2xl overflow-hidden">
+<td class="px-4 py-4 first:rounded-l-2xl last:rounded-r-2xl">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-slate-200 overflow-hidden">
+<img alt="Lucia Grant" class="w-full h-full object-cover" data-alt="close up profile of a woman with bright expression against a clean office background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAnQCpmfVHTr158sB3kySHTGgpgOWftP3vs52EA6f-flSWxgHKwUKO5fQbDrh6aPeEfVlxZjkeQUjVjCiA0xKOUgVQNDMNaTgBrAUEzd5G97SO0SCLq7FOIiFrT1kBQidOK8z0ibsYtv5bUGGkRZ3Mc1O2XQ_T0IOYjPQhG_iv8kymI_fMyqwDGcXgwn_x0Y4MLKhCQaq5hBlgr-iH5rkQIQCjGL0JnlcWl-G2GJNbMm-PDz-1epFVF9mWo7eqJD3miw03CTmV-78C"/>
+</div>
+<span class="font-bold text-sm">Lucia Grant</span>
+</div>
+</td>
+<td class="px-4 py-4 text-sm font-medium text-slate-600">Material Handler</td>
+<td class="px-4 py-4">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-slate-300 text-sm" data-icon="star">star</span>
+<span class="material-symbols-outlined text-slate-300 text-sm" data-icon="star">star</span>
+<span class="text-xs font-bold ml-1 text-slate-400">3.8</span>
+</div>
+</td>
+<td class="px-4 py-4">
+<span class="px-3 py-1 bg-error-container text-on-error-container text-[10px] font-bold rounded-full uppercase">On Leave</span>
+</td>
+<td class="px-4 py-4 text-right last:rounded-r-2xl">
+<button class="p-2 hover:bg-white rounded-full transition-colors"><span class="material-symbols-outlined text-slate-400" data-icon="edit">edit</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="mt-6 flex justify-center">
+<button class="text-slate-500 font-bold text-xs uppercase tracking-widest hover:text-primary transition-colors flex items-center gap-2">
+<span>View All 428 Employees</span>
+<span class="material-symbols-outlined text-sm" data-icon="expand_more">expand_more</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- FAB for Quick Actions -->
+<button class="fixed bottom-8 right-8 w-16 h-16 bg-primary text-white rounded-full shadow-2xl shadow-primary/40 flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50">
+<span class="material-symbols-outlined scale-125" data-icon="person_add">person_add</span>
+</button>
+</body></html>
