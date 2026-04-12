@@ -1,24 +1,18 @@
 package com.fabrika.model;
 
-public class Depo extends Department implements SurecYurutulebilir {
+public class SatinAlma extends Department {
 
-    public Depo(String sorumluPersonel) {
-        super("Depo ve Stok", sorumluPersonel);
+    public SatinAlma(String sorumluPersonel) {
+        super("Satın Alma", sorumluPersonel);
     }
 
-    public void stokGirisCikis(String malzemeAdi, String islemTuru) {
+    public void tedarikciEkle(String firmaAdi) {
         islemAnimasyonu();
-        System.out.println(malzemeAdi + " icin depo " + islemTuru + " islemi yapildi.");
+        System.out.println(firmaAdi + " isimli tedarikçi sisteme kaydedildi.");
     }
 
-    public void kritikStokKontrol() {
+    public void malzemeAl(String malzemeAdi, int miktar) {
         islemAnimasyonu();
-        System.out.println("Kritik stok seviyesindeki malzemeler kontrol edildi. Uyarilar olusturuldu.");
-    }
-
-    @Override
-    public void departmanSureciniYurut() {
-        stokGirisCikis("Demir Profil", "GIRIS");
-        kritikStokKontrol();
+        System.out.println(miktar + " adet " + malzemeAdi + " siparişi oluşturuldu.");
     }
 }

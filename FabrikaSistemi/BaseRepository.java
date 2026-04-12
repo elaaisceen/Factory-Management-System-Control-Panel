@@ -1,24 +1,24 @@
 package com.fabrika.model;
 
-public class Finans extends Department implements SurecYurutulebilir {
+public class Uretim extends Department {
 
-    public Finans(String sorumluPersonel) {
-        super("Finans", sorumluPersonel);
+        public Uretim(String sorumluPersonel) {
+            super("Üretim", sorumluPersonel);
+        }
+
+        public void planlamaYap(String projeKodu) {
+            islemAnimasyonu();
+            System.out.println(projeKodu + " kodlu üretim projesinin planlaması yapıldı.");
+        }
+
+        public void montajYap() {
+            islemAnimasyonu();
+            System.out.println("Montaj hattındaki işlemler tamamlandı.");
+        }
+
+        public void kaliteKontrol() {
+            islemAnimasyonu();
+            System.out.println("Ürünler kalite kontrolden geçti. Sorun yok!");
+        }
     }
 
-    public void butcePlanla() {
-        islemAnimasyonu();
-        System.out.println("Aylik fabrika butcesi ve odenekler planlandi.");
-    }
-
-    public void muhasebeIslemi() {
-        islemAnimasyonu();
-        System.out.println("Faturalar ve giderler muhasebelestirildi.");
-    }
-
-    @Override
-    public void departmanSureciniYurut() {
-        butcePlanla();
-        muhasebeIslemi();
-    }
-}
