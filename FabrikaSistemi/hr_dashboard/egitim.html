@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eğitim Takip — Industrial Pulse</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #f0f2f5;
+      --surface: #ffffff;
+      --border: #e4e7ec;
+      --text-primary: #111827;
+      --text-secondary: #6b7280;
+      --text-muted: #9ca3af;
+      --accent: #2563eb;
+      --accent-light: #eff6ff;
+      --ok-bg: #dcfce7;
+      --ok-text: #166534;
+      --bad-bg: #fee2e2;
+      --bad-text: #991b1b;
+      --warn-bg: #fef9c3;
+      --warn-text: #854d0e;
+      --pending-bg: #f1f5f9;
+      --pending-text: #475569;
+      --sidebar-w: 240px;
+      --topbar-h: 52px;
+      --radius: 12px;
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ════ SIDEBAR ════ */
+    .sidebar {
+      width: var(--sidebar-w);
+      min-height: 100vh;
+      background: #fff;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      z-index: 200;
+    }
+
+    .sidebar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 20px 18px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sidebar-logo {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .sidebar-nav {
+      padding: 6px 10px;
+      flex: 1;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      margin-bottom: 2px;
+    }
+
+    .nav-item:hover {
+      background: #f1f5f9;
+      color: var(--text-primary);
+    }
+
+    .nav-item.active {
+      background: var(--accent-light);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .main-wrap {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topbar {
+      height: var(--topbar-h);
+      background: #1e2340;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .topbar-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #e2e8f0;
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 7px 18px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .content {
+      padding: 26px;
+      flex: 1;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .entry-section {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      background: #fafbfc;
+    }
+
+    .entry-form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      align-items: end;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .field label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+    }
+
+    .field input,
+    .field select {
+      height: 35px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0 10px;
+      font-size: 13px;
+      outline: none;
+    }
+
+    .field input:focus,
+    .field select:focus {
+      border-color: var(--accent);
+    }
+
+    .btn-add {
+      height: 35px;
+      padding: 0 16px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 13px;
+    }
+
+    /* ── Table & Search ── */
+    .table-controls {
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .search-box {
+      position: relative;
+      flex: 1;
+      max-width: 300px;
+    }
+
+    .search-box input {
+      width: 100%;
+      height: 36px;
+      padding-left: 36px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      font-size: 13px;
+      outline: none;
+    }
+
+    .search-box i {
+      position: absolute;
+      left: 12px;
+      top: 9px;
+      font-size: 18px;
+      color: var(--text-muted);
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 4px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .tab {
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-secondary);
+      white-space: nowrap;
+    }
+
+    .tab:hover {
+      background: #f1f5f9;
+    }
+
+    .tab.active {
+      background: var(--accent-light);
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      padding: 12px 16px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-align: left;
+      background: #fafbfc;
+      border-bottom: 1px solid var(--border);
+    }
+
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      vertical-align: middle;
+    }
+
+    tr:hover {
+      background: #f9fafb;
+    }
+
+    .row-expired {
+      background: #fff1f2;
+    }
+
+    .row-warning {
+      background: #fffbeb;
+    }
+
+    .status-pill {
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .pill-active {
+      background: var(--ok-bg);
+      color: var(--ok-text);
+    }
+
+    .pill-expired {
+      background: var(--bad-bg);
+      color: var(--bad-text);
+    }
+
+    .pill-warning {
+      background: var(--warn-bg);
+      color: var(--warn-text);
+    }
+
+    .pill-history {
+      background: #f1f5f9;
+      color: #475569;
+    }
+
+    .btn-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-edit {
+      background: #eff6ff;
+      color: #2563eb;
+    }
+
+    .btn-edit:hover {
+      background: #dbeafe;
+    }
+
+    /* ════ MODAL ════ */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.4);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal {
+      background: #fff;
+      border-radius: 16px;
+      width: 400px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+
+    .modal-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .modal-footer {
+      padding: 12px 20px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <aside class="sidebar">
+    <div class="sidebar-brand"><span class="sidebar-logo">Industrial Pulse</span></div>
+    <nav class="sidebar-nav">
+      <a class="nav-item" href="hr.html"><i class="material-icons-round">dashboard</i>Anasayfa</a>
+      <a class="nav-item" href="personel.html"><i class="material-icons-round">groups</i>Personel (İK)</a>
+      <a class="nav-item" href="bordro.html"><i class="material-icons-round">receipt_long</i>Maaş & Bordro</a>
+      <a class="nav-item active" href="egitim.html"><i class="material-icons-round">school</i>Eğitim</a>
+    </nav>
+  </aside>
+
+  <div class="main-wrap">
+    <div class="topbar">
+      <span class="topbar-title">Eğitim Yönetimi</span>
+      <a href="hr.html" class="btn-back"><i class="material-icons-round">arrow_back</i>İK Merkezine Dön</a>
+    </div>
+
+    <div class="content">
+      <div class="card">
+        <div class="entry-section">
+          <h3
+            style="font-size:11px; color:var(--text-muted); margin-bottom:12px; text-transform:uppercase; letter-spacing:1px">
+            Yeni Eğitim Kaydı</h3>
+          <form class="entry-form" id="eduForm">
+            <div class="field"><label>Personel</label><input type="text" id="e_name" placeholder="Ad Soyad" required>
+            </div>
+            <div class="field">
+              <label>Departman</label>
+              <select id="e_dept" required>
+                <option value="">Seçin...</option>
+                <option>Üretim</option>
+                <option>Ar-Ge</option>
+                <option>BTBS</option>
+                <option>İK</option>
+                <option>Operasyon</option>
+                <option>Pazarlama</option>
+              </select>
+            </div>
+            <div class="field"><label>Eğitim Konusu</label><input type="text" id="e_subject" placeholder="Eğitim adı"
+                required></div>
+            <div class="field"><label>Bitiş Tarihi</label><input type="date" id="e_date"></div>
+            <div class="field" style="flex-direction:row; gap:8px; align-items:center; padding-bottom:8px">
+              <input type="checkbox" id="e_isIndefinite" style="width:16px; height:16px"> <label
+                style="margin:0">Süresiz</label>
+            </div>
+            <button type="submit" class="btn-add"><i class="material-icons-round">add</i>Kaydet</button>
+          </form>
+        </div>
+
+        <div class="table-controls">
+          <div class="search-box">
+            <i class="material-icons-round">search</i>
+            <input type="text" id="tableSearch" placeholder="Arama yapın..." onkeyup="render()">
+          </div>
+          <div class="filter-tabs">
+            <div class="tab active" data-filter="current" onclick="setFilter('current')">Ana Tablo</div>
+            <div class="tab" data-filter="all" onclick="setFilter('all')">Tüm Eğitimler</div>
+            <div class="tab" data-filter="indefinite" onclick="setFilter('indefinite')">Süresiz</div>
+            <div class="tab" data-filter="history" onclick="setFilter('history')">Geçmiş Eğitimler</div>
+          </div>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Personel</th>
+              <th>Konu</th>
+              <th>Bitiş Tarihi</th>
+              <th>Durum</th>
+              <th style="text-align:right">İşlem</th>
+            </tr>
+          </thead>
+          <tbody id="eduTable"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit/Update Modal -->
+  <div class="modal-overlay" id="editModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 style="font-size:15px; font-weight:600" id="modalTitle">Eğitimi Güncelle</h2>
+        <button class="btn-icon" onclick="closeModal()" style="background:none"><i
+            class="material-icons-round">close</i></button>
+      </div>
+      <div class="modal-body">
+        <div id="modalNote"
+          style="padding:10px; border-radius:8px; background:#eff6ff; color:#2563eb; font-size:12px; margin-bottom:8px; display:none">
+          Bu eğitimin süresi dolmuş. Güncelleme yapıldığında eski kayıt geçmişe aktarılacak, yeni bir kayıt
+          eklenecektir.
+        </div>
+        <div class="field"><label>Yeni Bitiş Tarihi</label><input type="date" id="m_newDate"></div>
+        <div class="field" style="flex-direction:row; gap:8px; align-items:center; padding-top:8px">
+          <input type="checkbox" id="m_isIndefinite" style="width:16px; height:16px"> <label style="margin:0">Süresiz
+            Yap</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="tab" onclick="closeModal()">İptal</button>
+        <button class="btn-add" onclick="saveUpdate()">Güncelle</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const LS_KEY = 'factory_trainings';
+    let activeId = null;
+    let currentFilter = 'current';
+
+    function getTrainings() { return JSON.parse(localStorage.getItem(LS_KEY) || '[]'); }
+    function saveTrainings(data) { localStorage.setItem(LS_KEY, JSON.stringify(data)); }
+
+    function calculateStatus(dateStr, isIndefinite) {
+      if (isIndefinite) return 'active';
+      if (!dateStr) return 'active';
+      const diff = (new Date(dateStr) - new Date()) / (1000 * 60 * 60 * 24);
+      if (diff < 0) return 'expired';
+      if (diff < 15) return 'warning';
+      return 'active';
+    }
+
+    function setFilter(f) {
+      currentFilter = f;
+      document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.filter === f));
+      render();
+    }
+
+    function render() {
+      const list = getTrainings();
+      const tbody = document.getElementById('eduTable');
+      const search = document.getElementById('tableSearch').value.toLowerCase();
+
+      // Filtreleme
+      let filtered = list.filter(item => {
+        const isMatch = item.name.toLowerCase().includes(search) || item.subject.toLowerCase().includes(search);
+        if (!isMatch) return false;
+
+        const status = calculateStatus(item.date, item.isIndefinite);
+
+        if (currentFilter === 'current') return (status === 'expired' || status === 'warning') && !item.isHistory;
+        if (currentFilter === 'indefinite') return item.isIndefinite && !item.isHistory;
+        if (currentFilter === 'history') return item.isHistory;
+        if (currentFilter === 'all') return !item.isHistory;
+        return true;
+      });
+
+      // Sıralama Mantığı
+      filtered.sort((a, b) => {
+        if (currentFilter === 'all' || currentFilter === 'history') return b.id - a.id; // Yeni -> Eski
+
+        const sA = calculateStatus(a.date, a.isIndefinite);
+        const sB = calculateStatus(b.date, b.isIndefinite);
+
+        const priority = { 'expired': 1, 'warning': 2, 'active': 3 };
+        if (priority[sA] !== priority[sB]) return priority[sA] - priority[sB];
+
+        // Bitiş tarihi önceliği (yakın olan üstte)
+        if (a.date && b.date) return new Date(a.date) - new Date(b.date);
+        return 0;
+      });
+
+      tbody.innerHTML = filtered.map(item => {
+        const status = calculateStatus(item.date, item.isIndefinite);
+        const sLabel = item.isHistory ? 'GEÇMİŞ' : (item.isIndefinite ? 'SÜRESİZ' : (status === 'active' ? 'AKTİF' : (status === 'expired' ? 'DOLDU' : 'YAKLAŞIYOR')));
+        const sClass = item.isHistory ? 'pill-history' : (status === 'active' ? 'pill-active' : (status === 'expired' ? 'pill-expired' : 'pill-warning'));
+        const rowClass = !item.isHistory && status === 'expired' ? 'row-expired' : (status === 'warning' ? 'row-warning' : '');
+
+        return `<tr class="${rowClass}">
+        <td><b>${item.name}</b><br><small>${item.dept}</small></td>
+        <td>${item.subject}${item.isIndefinite ? ' <span style="color:var(--accent); font-size:10px; font-weight:700">(SÜRESİZ)</span>' : ''}</td>
+        <td>${item.isIndefinite ? '-' : (item.date || '-')}</td>
+        <td><span class="status-pill ${sClass}">${sLabel}</span></td>
+        <td style="text-align:right">
+          ${item.isHistory ? '<small style="color:var(--text-muted)">Geçmiş Eğitim</small>' :
+            `<button class="btn-icon btn-edit" onclick="openModal(${item.id})"><i class="material-icons-round" style="font-size:18px">settings_backup_restore</i></button>`}
+        </td>
+      </tr>`;
+      }).join('') || '<tr><td colspan="5" style="text-align:center; padding:40px; color:var(--text-muted)">Gösterilecek kayıt bulunamadı.</td></tr>';
+    }
+
+    function openModal(id) {
+      activeId = id;
+      const list = getTrainings();
+      const item = list.find(x => x.id === id);
+      const status = calculateStatus(item.date, item.isIndefinite);
+
+      document.getElementById('modalTitle').textContent = item.isIndefinite ? "Eğitim Bilgilerini Düzenle" : "Eğitimi Güncelle";
+      document.getElementById('modalNote').style.display = (status === 'expired') ? 'block' : 'none';
+      document.getElementById('m_newDate').value = item.date || '';
+      document.getElementById('m_isIndefinite').checked = item.isIndefinite;
+      document.getElementById('editModal').classList.add('open');
+    }
+
+    function closeModal() { document.getElementById('editModal').classList.remove('open'); activeId = null; }
+
+    function saveUpdate() {
+      const list = getTrainings();
+      const item = list.find(x => x.id === activeId);
+      const status = calculateStatus(item.date, item.isIndefinite);
+      const newDate = document.getElementById('m_newDate').value;
+      const newIndefinite = document.getElementById('m_isIndefinite').checked;
+
+      if (status === 'expired') {
+        // Eski kaydı geçmişe at
+        item.isHistory = true;
+        // Yeni kayıt ekle
+        list.push({
+          id: Date.now(),
+          name: item.name,
+          dept: item.dept,
+          subject: item.subject,
+          date: newIndefinite ? '' : newDate,
+          isIndefinite: newIndefinite,
+          isHistory: false
+        });
+      } else {
+        // Normal düzenleme
+        item.date = newIndefinite ? '' : newDate;
+        item.isIndefinite = newIndefinite;
+      }
+
+      saveTrainings(list);
+      closeModal();
+      render();
+    }
+
+    document.getElementById('eduForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const list = getTrainings();
+      list.push({
+        id: Date.now(),
+        name: document.getElementById('e_name').value,
+        dept: document.getElementById('e_dept').value,
+        subject: document.getElementById('e_subject').value,
+        date: document.getElementById('e_isIndefinite').checked ? '' : document.getElementById('e_date').value,
+        isIndefinite: document.getElementById('e_isIndefinite').checked,
+        isHistory: false
+      });
+      saveTrainings(list);
+      e.target.reset();
+      render();
+    });
+
+    document.getElementById('e_isIndefinite').addEventListener('change', e => {
+      document.getElementById('e_date').disabled = e.target.checked;
+      if (e.target.checked) document.getElementById('e_date').value = '';
+    });
+
+    render();
+  </script>
+</body>
+
+</html>

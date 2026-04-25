@@ -204,49 +204,49 @@
         Yeni Operasyon
       </button>
 
-      <!-- Dropdown Menü (Başlangıçta Gizli) -->
-      <div id="newDataMenu" class="hidden absolute right-0 mt-2 w-64 bg-white border border-slate-100 rounded-2xl shadow-2xl z-[100] overflow-hidden">
+      <!-- Dropdown Menü -->
+      <div id="newDataMenu" class="hidden absolute right-0 mt-2 w-56 bg-white border border-slate-100 rounded-2xl shadow-xl z-50 overflow-hidden">
         <div class="p-2 space-y-1">
-          <button onclick="openOperationModal('uretim')" class="w-full flex items-center gap-3 p-3 hover:bg-blue-50 rounded-xl transition-colors group">
-            <span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">precision_manufacturing</span>
-            <div class="text-left">
+          <button onclick="openDeptModal('production')" class="w-full flex items-center gap-3 p-3 hover:bg-slate-50 rounded-xl transition-colors group text-left">
+            <span class="material-symbols-outlined text-blue-500 bg-blue-50 p-2 rounded-lg">precision_manufacturing</span>
+            <div>
               <p class="text-sm font-bold text-slate-700">Üretim</p>
-              <p class="text-[10px] text-slate-400">Montaj, Paketleme, Kalite</p>
+              <p class="text-[10px] text-slate-400">Montaj, Paketleme vb.</p>
             </div>
           </button>
-          <button onclick="openOperationModal('finans')" class="w-full flex items-center gap-3 p-3 hover:bg-emerald-50 rounded-xl transition-colors group">
-            <span class="material-symbols-outlined text-emerald-600 bg-emerald-50 p-2 rounded-lg">payments</span>
-            <div class="text-left">
-              <p class="text-sm font-bold text-slate-700">Finans</p>
-              <p class="text-[10px] text-slate-400">Maaş, Bütçe, Muhasebe</p>
-            </div>
-          </button>
-          <button onclick="openOperationModal('hr')" class="w-full flex items-center gap-3 p-3 hover:bg-indigo-50 rounded-xl transition-colors group">
-            <span class="material-symbols-outlined text-indigo-600 bg-indigo-50 p-2 rounded-lg">groups</span>
-            <div class="text-left">
+          <button onclick="openDeptModal('hr')" class="w-full flex items-center gap-3 p-3 hover:bg-slate-50 rounded-xl transition-colors group text-left">
+            <span class="material-symbols-outlined text-green-500 bg-green-50 p-2 rounded-lg">groups</span>
+            <div>
               <p class="text-sm font-bold text-slate-700">İnsan Kaynakları</p>
-              <p class="text-[10px] text-slate-400">Personel Kaydı, Performans</p>
+              <p class="text-[10px] text-slate-400">Personel Ekle</p>
             </div>
           </button>
-          <button onclick="openOperationModal('depo')" class="w-full flex items-center gap-3 p-3 hover:bg-amber-50 rounded-xl transition-colors group">
-            <span class="material-symbols-outlined text-amber-600 bg-amber-50 p-2 rounded-lg">inventory_2</span>
-            <div class="text-left">
-              <p class="text-sm font-bold text-slate-700">Depo / Stok</p>
-              <p class="text-[10px] text-slate-400">Envanter, Stok Girişi</p>
+          <button onclick="openDeptModal('finance')" class="w-full flex items-center gap-3 p-3 hover:bg-slate-50 rounded-xl transition-colors group text-left">
+            <span class="material-symbols-outlined text-purple-500 bg-purple-50 p-2 rounded-lg">payments</span>
+            <div>
+              <p class="text-sm font-bold text-slate-700">Finans</p>
+              <p class="text-[10px] text-slate-400">İşlem Kaydı</p>
             </div>
           </button>
-          <button onclick="openOperationModal('it')" class="w-full flex items-center gap-3 p-3 hover:bg-slate-50 rounded-xl transition-colors group">
-            <span class="material-symbols-outlined text-slate-700 bg-slate-100 p-2 rounded-lg">developer_mode</span>
-            <div class="text-left">
+          <button onclick="openDeptModal('stock')" class="w-full flex items-center gap-3 p-3 hover:bg-slate-50 rounded-xl transition-colors group text-left">
+            <span class="material-symbols-outlined text-orange-500 bg-orange-50 p-2 rounded-lg">inventory_2</span>
+            <div>
+              <p class="text-sm font-bold text-slate-700">Stok</p>
+              <p class="text-[10px] text-slate-400">Malzeme Girişi</p>
+            </div>
+          </button>
+          <button onclick="openDeptModal('it')" class="w-full flex items-center gap-3 p-3 hover:bg-slate-50 rounded-xl transition-colors group text-left">
+            <span class="material-symbols-outlined text-red-500 bg-red-50 p-2 rounded-lg">terminal</span>
+            <div>
               <p class="text-sm font-bold text-slate-700">IT</p>
-              <p class="text-[10px] text-slate-400">Destek, Sistem Kaydı</p>
+              <p class="text-[10px] text-slate-400">Destek Talebi</p>
             </div>
           </button>
-          <button onclick="openOperationModal('satin_alma')" class="w-full flex items-center gap-3 p-3 hover:bg-cyan-50 rounded-xl transition-colors group">
-            <span class="material-symbols-outlined text-cyan-600 bg-cyan-50 p-2 rounded-lg">shopping_cart</span>
-            <div class="text-left">
+          <button onclick="openDeptModal('purchasing')" class="w-full flex items-center gap-3 p-3 hover:bg-slate-50 rounded-xl transition-colors group text-left">
+            <span class="material-symbols-outlined text-amber-500 bg-amber-50 p-2 rounded-lg">shopping_cart</span>
+            <div>
               <p class="text-sm font-bold text-slate-700">Satın Alma</p>
-              <p class="text-[10px] text-slate-400">Sipariş, Tedarikçi</p>
+              <p class="text-[10px] text-slate-400">Yeni Sipariş</p>
             </div>
           </button>
         </div>
@@ -494,224 +494,83 @@
         }
     } else {
         // Kullanıcı iptal ettiyse bir şey yapma, sayfada kalsın
-        console.log("Çıkı�<!-- Dinamik Operasyon Modalı -->
-<div id="opModal" class="hidden fixed inset-0 z-[150] flex justify-center items-center">
-    <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" id="opModalOverlay"></div>
-    <div class="bg-white rounded-3xl p-8 shadow-2xl w-full max-w-lg relative z-10 scale-100 transition-all">
-        <div class="flex justify-between items-center mb-6">
-            <div class="flex items-center gap-3">
-                <span id="modalIcon" class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-xl">add_circle</span>
-                <h3 id="modalTitle" class="text-2xl font-bold font-headline text-on-surface">Yeni Kayıt</h3>
-            </div>
-            <button onclick="closeOpModal()" class="text-slate-400 hover:text-slate-800 transition-colors">
-                <span class="material-symbols-outlined">close</span>
-            </button>
-        </div>
-        
-        <form id="opForm" class="space-y-5">
-            <input type="hidden" id="opType">
-            
-            <!-- Departmana Göre Değişen Alanlar Buraya Gelecek -->
-            <div id="dynamicFields" class="space-y-5"></div>
-
-            <div class="flex justify-end gap-3 pt-6 border-t border-slate-50">
-                <button type="button" onclick="closeOpModal()" class="px-6 py-2.5 rounded-full font-bold text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors">İptal</button>
-                <button type="submit" class="px-8 py-2.5 bg-primary text-white font-bold rounded-full shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all">Kaydet</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-<script>
-    // Departman Veri Yapıları ve Form Alanları
-    const DEPARTMENTS = {
-        uretim: {
-            title: 'Üretim Veri Girişi',
-            icon: 'precision_manufacturing',
-            color: 'primary',
-            storage: 'productionDatabase',
-            fields: [
-                { id: 'dept_select', label: 'Bölüm', type: 'select', options: ['montaj', 'paketleme', 'kalite_kontrol', 'planlama_tasarim'], labels: ['Montaj', 'Paketleme', 'Kalite Kontrol', 'Planlama'] },
-                { id: 'name', label: 'İstasyon/Makine Adı', type: 'text', placeholder: 'Örn: Kaynak Ünitesi A1' },
-                { id: 'status', label: 'Çalışma Durumu', type: 'select', options: ['Aktif', 'Pasif', 'Bakımda'] },
-                { id: 'performance', label: 'Performans (%)', type: 'number', min: 0, max: 100 }
-            ]
-        },
-        finans: {
-            title: 'Finansal Kayıt',
-            icon: 'payments',
-            color: 'emerald-600',
-            storage: 'financeDatabase',
-            fields: [
-                { id: 'type', label: 'İşlem Türü', type: 'select', options: ['maas', 'butce', 'muhasebe'], labels: ['Maaş Ödemesi', 'Bütçe Talebi', 'Muhasebe Kaydı'] },
-                { id: 'name', label: 'Kalem/Açıklama', type: 'text', placeholder: 'Örn: Ekim Ayı Personel Ödemeleri' },
-                { id: 'amount', label: 'Tutar ($)', type: 'number', min: 0 },
-                { id: 'status', label: 'Ödeme Durumu', type: 'select', options: ['Ödendi', 'Bekliyor', 'Gecikmiş'] }
-            ]
-        },
-        hr: {
-            title: 'Personel Kaydı (İK)',
-            icon: 'groups',
-            color: 'indigo-600',
-            storage: 'hrDatabase',
-            fields: [
-                { id: 'name', label: 'Ad Soyad', type: 'text', placeholder: 'Örn: Jane Doe' },
-                { id: 'role', label: 'Pozisyon/Departman', type: 'text', placeholder: 'Örn: Site Supervisor' },
-                { id: 'status', label: 'Çalışma Durumu', type: 'select', options: ['On-Shift', 'Remote', 'On Leave'] },
-                { id: 'performance', label: 'Performans Skoru (1-5)', type: 'number', min: 1, max: 5 }
-            ]
-        },
-        depo: {
-            title: 'Depo & Stok Girişi',
-            icon: 'inventory_2',
-            color: 'amber-600',
-            storage: 'stockDatabase',
-            fields: [
-                { id: 'name', label: 'Malzeme Adı', type: 'text', placeholder: 'Örn: Alüminyum Bobin' },
-                { id: 'sku', label: 'Stok Kodu (SKU)', type: 'text', placeholder: 'Örn: ALU-7822-M' },
-                { id: 'qty', label: 'Miktar', type: 'number', min: 0 },
-                { id: 'unit', label: 'Birim', type: 'select', options: ['adet kaldı', 'kg kaldı', 'Litre kaldı'], labels: ['Adet', 'Kilogram (kg)', 'Litre (L)'] },
-                { id: 'status', label: 'Kritiklik Durumu', type: 'select', options: ['Sağlıklı', 'Sipariş Verilmeli', 'Kritik Düşük'] }
-            ]
-        },
-        it: {
-            title: 'IT Sistem Kaydı',
-            icon: 'developer_mode',
-            color: 'slate-700',
-            storage: 'itDatabase',
-            fields: [
-                { id: 'type', label: 'Kayıt Türü', type: 'select', options: ['Sistem Günlüğü', 'Destek Talebi', 'Donanım Arızası'] },
-                { id: 'system', label: 'İlgili Sistem/Cihaz', type: 'text', placeholder: 'Örn: Server-Primary-01' },
-                { id: 'description', label: 'Açıklama', type: 'text' },
-                { id: 'priority', label: 'Öncelik', type: 'select', options: ['Düşük', 'Orta', 'Yüksek', 'Kritik'] }
-            ]
-        },
-        satin_alma: {
-            title: 'Satın Alma Talebi',
-            icon: 'shopping_cart',
-            color: 'cyan-600',
-            storage: 'purchasingDatabase',
-            fields: [
-                { id: 'supplier', label: 'Tedarikçi Firma', type: 'text', placeholder: 'Örn: Stark Industries' },
-                { id: 'item', label: 'Sipariş Edilen Ürün', type: 'text' },
-                { id: 'qty', label: 'Miktar', type: 'number', min: 1 },
-                { id: 'status', label: 'Sipariş Durumu', type: 'select', options: ['On Way', 'Pending', 'Delivered'] }
-            ]
-        }
-    };
-
-    function openOperationModal(deptKey) {
-        document.getElementById('newDataMenu').classList.add('hidden');
-        const dept = DEPARTMENTS[deptKey];
-        const modal = document.getElementById('opModal');
-        const dynamicFields = document.getElementById('dynamicFields');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalIcon = document.getElementById('modalIcon');
-        
-        document.getElementById('opType').value = deptKey;
-        modalTitle.innerText = dept.title;
-        modalIcon.innerText = dept.icon;
-        
-        // Form alanlarını oluştur
-        dynamicFields.innerHTML = '';
-        dept.fields.forEach(field => {
-            const div = document.createElement('div');
-            let content = `<label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1.5">${field.label}</label>`;
-            
-            if (field.type === 'select') {
-                content += `<select id="field_${field.id}" required class="w-full rounded-xl border-slate-200 shadow-sm focus:border-primary focus:ring focus:ring-primary/20 text-sm p-3 font-bold text-slate-800 outline-none bg-white cursor-pointer transition-all">`;
-                field.options.forEach((opt, idx) => {
-                    const label = field.labels ? field.labels[idx] : opt;
-                    content += `<option value="${opt}">${label}</option>`;
-                });
-                content += `</select>`;
-            } else {
-                content += `<input type="${field.type}" id="field_${field.id}" required placeholder="${field.placeholder || ''}" ${field.min !== undefined ? `min="${field.min}"` : ''} ${field.max !== undefined ? `max="${field.max}"` : ''} class="w-full rounded-xl border-slate-200 shadow-sm focus:border-primary focus:ring focus:ring-primary/20 text-sm p-3 font-medium text-slate-800 outline-none transition-all">`;
-            }
-            div.innerHTML = content;
-            dynamicFields.appendChild(div);
-        });
-
-        modal.classList.remove('hidden');
+        console.log("Çıkış işlemi kullanıcı tarafından iptal edildi.");
     }
-
-    function closeOpModal() {
-        document.getElementById('opModal').classList.add('hidden');
-        document.getElementById('opForm').reset();
-    }
-
-    document.getElementById('opModalOverlay').onclick = closeOpModal;
-
-    document.getElementById('opForm').onsubmit = function(e) {
-        e.preventDefault();
-        const deptKey = document.getElementById('opType').value;
-        const deptConfig = DEPARTMENTS[deptKey];
-        const data = { id: Date.now(), date: new Date().toISOString() };
-
-        deptConfig.fields.forEach(field => {
-            data[field.id] = document.getElementById(`field_${field.id}`).value;
-        });
-
-        // LocalStorage'a kaydet
-        if (deptKey === 'uretim') {
-            // Üretim özel yapısı (departmanlara ayrılmış)
-            let db = JSON.parse(localStorage.getItem(deptConfig.storage)) || { montaj: [], paketleme: [], kalite_kontrol: [], planlama_tasarim: [] };
-            if (Array.isArray(db)) db = { montaj: [], paketleme: [], kalite_kontrol: [], planlama_tasarim: [] }; // Eski yapı düzelitme
-            
-            const subDept = data.dept_select;
-            delete data.dept_select; // Orijinal sayfada bu alan kayıtta yok
-            db[subDept].push(data);
-            localStorage.setItem(deptConfig.storage, JSON.stringify(db));
-        } else {
-            // Standart Array yapısı
-            let db = JSON.parse(localStorage.getItem(deptConfig.storage)) || [];
-            db.push(data);
-            localStorage.setItem(deptConfig.storage, JSON.stringify(db));
-        }
-
-        alert(`${deptConfig.title} başarıyla kaydedildi!`);
-        closeOpModal();
-        
-        // İlgili dashboard'a yönlendirme onayı sorulabilir (opsiyonel)
-        if(confirm("Yeni veriyi görmek için ilgili sayfaya gitmek ister misiniz?")) {
-            const pages = {
-                uretim: '../../production_dashboard/production.html',
-                finans: '../../finance_dashboard/finance.html',
-                hr: '../../hr_dashboard/hr.html',
-                depo: '../../stock_dashboard/stock.html',
-                it: '../../it_dashboard/it.html',
-                satin_alma: '../../purchasing_dashboard/purchasing.html'
-            };
-            window.location.href = pages[deptKey];
-        }
-    };
-
-    // Dropdown Toggles
-    document.addEventListener('DOMContentLoaded', function() {
-        const newDataBtn = document.getElementById('newDataBtn');
-        const newDataMenu = document.getElementById('newDataMenu');
-
-        newDataBtn.onclick = function(e) {
-            e.stopPropagation();
-            newDataMenu.classList.toggle('hidden');
-        };
-
-        document.onclick = function(e) {
-            if (!newDataMenu.contains(e.target) && e.target !== newDataBtn) {
-                newDataMenu.classList.add('hidden');
-            }
-        };
-    });
+}
 </script>
-</body>
+<!--Veriyi Dışarı Çıkart JS-->
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const btn = document.querySelector('#exportBtn');
+    const menu = document.querySelector('#exportMenu');
+    const printBtn = document.querySelector('#printReport');
+    const pdfBtn = document.querySelector('#exportPDF');
 
-</html>
-ext-slate-700');
+    // 1. Butona basınca menüyü aç/kapat
+    btn.addEventListener('click', function(e) {
+        e.stopPropagation(); // Tıklamanın dışarı taşmasını engelle
+        menu.classList.toggle('hidden');
+    });
+
+    // 2. Sayfada başka bir yere basınca menüyü kapat
+    document.addEventListener('click', function() {
+        menu.classList.add('hidden');
+    });
+
+    // 3. Yazdır veya PDF'e basınca işlemi yap
+    [printBtn, pdfBtn].forEach(el => {
+        el.addEventListener('click', function() {
+            window.print();
+        });
+    });
+
+    // Excel için (Şimdilik sadece uyarı verir)
+    document.querySelector('#exportExcel').addEventListener('click', function() {
+        alert('Excel verisi hazırlanıyor...');
+    });
+});
+</script>
+<script>
+// Tab butonlarını değiştirilebilir yapma
+document.addEventListener('DOMContentLoaded', function() {
+    const timeBtns = document.querySelectorAll('.time-filter-btn');
+    timeBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Aktif sınıfları temizle
+            timeBtns.forEach(b => {
+                b.classList.remove('bg-white', 'shadow-sm', 'text-primary');
+                b.classList.add('text-slate-500', 'hover:text-slate-700');
+            });
+            // Tıklanan butona aktif sınıfları ekle
+            this.classList.remove('text-slate-500', 'hover:text-slate-700');
             this.classList.add('bg-white', 'shadow-sm', 'text-primary');
         });
     });
 });
 </script>
-</body>
+<!-- Dynamic Department Modal -->
+<div id="deptModal" class="hidden fixed inset-0 z-[100] flex justify-center items-center">
+    <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" onclick="closeDeptModal()"></div>
+    <div class="bg-white rounded-3xl p-8 shadow-2xl w-full max-w-md relative z-10 transition-all scale-100">
+        <div class="flex justify-between items-center mb-6">
+            <h3 id="modalTitle" class="text-2xl font-bold font-headline text-on-surface">Yeni Kayıt</h3>
+            <button type="button" onclick="closeDeptModal()" class="text-slate-400 hover:text-slate-800 transition-colors">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        
+        <form id="deptModalForm" class="space-y-4">
+            <!-- Form content will be dynamically injected -->
+            <div id="modalFormFields" class="space-y-4"></div>
+            
+            <div class="flex justify-end gap-3 pt-6 border-t border-slate-100">
+                <button type="button" onclick="closeDeptModal()" class="px-6 py-2.5 rounded-full font-bold text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors">İptal</button>
+                <button type="submit" class="px-6 py-2.5 bg-primary text-white font-bold rounded-full shadow-md shadow-primary/20 hover:scale-105 active:scale-95 transition-all">Kaydet</button>
+            </div>
+        </form>
+    </div>
+</div>
 
+<script src="adminDashboard.js"></script>
+</body>
 </html>

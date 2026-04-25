@@ -1,0 +1,534 @@
+<!--Powered by Elanur Tuana İŞCEN-->
+
+<!DOCTYPE html>
+
+<html class="light" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kullanıcı İzinleri</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-error": "#ffffff",
+              "surface": "#f7f9fc",
+              "secondary-fixed-dim": "#4ae183",
+              "surface-variant": "#e0e3e6",
+              "primary-fixed": "#dbe1ff",
+              "primary-container": "#496eda",
+              "surface-dim": "#d8dadd",
+              "on-tertiary-container": "#fffbff",
+              "on-background": "#191c1e",
+              "on-secondary-container": "#00743a",
+              "surface-container-highest": "#e0e3e6",
+              "tertiary-fixed": "#f8d8ff",
+              "surface-container-high": "#e6e8eb",
+              "secondary-fixed": "#6bfe9c",
+              "error-container": "#ffdad6",
+              "surface-container-lowest": "#ffffff",
+              "primary-fixed-dim": "#b5c4ff",
+              "surface-bright": "#f7f9fc",
+              "outline": "#747684",
+              "secondary": "#006d37",
+              "on-primary-container": "#fefcff",
+              "inverse-on-surface": "#eff1f4",
+              "secondary-container": "#6bfe9c",
+              "inverse-surface": "#2d3133",
+              "error": "#ba1a1a",
+              "tertiary-fixed-dim": "#ebb2ff",
+              "on-secondary-fixed": "#00210c",
+              "outline-variant": "#c4c6d5",
+              "background": "#f7f9fc",
+              "surface-container": "#eceef1",
+              "surface-container-low": "#f2f4f7",
+              "on-surface": "#191c1e",
+              "tertiary": "#80409b",
+              "inverse-primary": "#b5c4ff",
+              "on-tertiary": "#ffffff",
+              "on-surface-variant": "#434653",
+              "on-primary": "#ffffff",
+              "on-error-container": "#93000a",
+              "on-secondary": "#ffffff",
+              "tertiary-container": "#9b59b6",
+              "primary": "#2b54bf",
+              "surface-tint": "#2e57c2",
+              "on-tertiary-fixed": "#320047",
+              "on-secondary-fixed-variant": "#005228",
+              "on-tertiary-fixed-variant": "#692984",
+              "on-primary-fixed-variant": "#053da9",
+              "on-primary-fixed": "#00174d"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+  </head>
+<body class="bg-surface font-body text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-slate-50/80 backdrop-blur-xl flex justify-between items-center px-8 h-20 w-full shadow-sm">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-blue-600">menu</span>
+<h1 class="text-blue-700 font-black tracking-tighter font-headline text-2xl">Industrial Pulse</h1>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex items-center space-x-8 text-sm">
+<span class="text-blue-700 font-bold">Kullanıcı İzinleri</span>
+<span class="text-slate-500 hover:bg-slate-200/50 transition-colors px-3 py-1 rounded-lg">Sistemler</span>
+<span class="text-slate-500 hover:bg-slate-200/50 transition-colors px-3 py-1 rounded-lg">Ağ</span>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/20">
+<img alt="Kullanıcı profil fotoğrafı" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3jWAUuKBl2fvyhvORldOGH5GJp9hgt-KKHM9oWJrior-ODz9uckh2_m0KkgF4uGaZSOC0fEAXFi44loVPPb5BleFV93n-kQSZzXVvQ_9WI33PIECmS1ulHU7euhfZfG2bEHIcXfYnVbhqYyix_hTnX4bJC1X09Wma_0cJit1cCiGy75aS8X1QElPFkogIvJKC8xcFd-8UFE6niPkGp2nO6alvpQk_-AUxBoZxfQ3encgt6cJfryURgHyaNjitUpOp3wJuInip-yUx"/>
+</div>
+</div>
+</header>
+<!-- NavigationDrawer (Sidebar) -->
+<aside class="h-full w-72 fixed left-0 top-0 z-40 bg-slate-50 border-r border-slate-200/10 shadow-2xl shadow-slate-900/5 pt-24 hidden lg:flex flex-col p-6 space-y-2">
+<!-- Profile Section -->
+<div class="flex items-center gap-4 mb-8 px-2">
+<div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div>
+<p class="font-headline font-bold text-sm text-on-surface">Alex Sterling</p>
+<p class="text-xs text-slate-500">Fabrika Müdürü • Sektör 7G</p>
+</div>
+</div>
+<!-- Nav Links -->
+<nav class="flex flex-col space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-900 hover:translate-x-1 transition-all" href="it.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-medium text-sm">Kontrol Paneli</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-900 hover:translate-x-1 transition-all" href="sunucu_durumu.html">
+<span class="material-symbols-outlined">dns</span>
+<span class="font-medium text-sm">Sunucu Durumu</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-white text-blue-700 shadow-sm rounded-2xl transition-all active:scale-[0.98]" href="kullanici_izinleri.html">
+<span class="material-symbols-outlined">admin_panel_settings</span>
+<span class="font-medium text-sm">Kullanıcı İzinleri</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-900 hover:translate-x-1 transition-all" href="destek_talepleri.html">
+<span class="material-symbols-outlined">confirmation_number</span>
+<span class="font-medium text-sm">Destek Talepleri</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-900 hover:translate-x-1 transition-all" href="sistem_kayitlari.html">
+<span class="material-symbols-outlined">terminal</span>
+<span class="font-medium text-sm">Sistem Kayıtları</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-900 hover:translate-x-1 transition-all" href="ayarlar.html">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-medium text-sm">Ayarlar</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-900 hover:translate-x-1 transition-all" href="../index.html">
+<span class="material-symbols-outlined">home</span>
+<span class="font-medium text-sm">Anasayfa</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content -->
+<main class="lg:ml-72 pt-28 px-8 pb-12">
+<div class="max-w-7xl mx-auto space-y-8">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="font-headline font-extrabold text-4xl text-on-surface tracking-tight">Kullanıcı İzinleri</h2>
+<p class="text-on-surface-variant mt-2">Sistem erişim seviyeleri ve yetki yönetimi.</p>
+</div>
+<div class="flex gap-3">
+    <button onclick="openAddModal()" class="px-6 py-2 bg-gradient-to-r from-primary to-primary-container text-white rounded-full text-sm font-semibold shadow-lg shadow-primary/20 transition-all hover:scale-105 active:scale-95">
+        Yeni Rol Ekle
+    </button>
+</div>
+</div>
+
+<!-- Modal: Add New User -->
+<div id="addUserModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-slate-900/40 backdrop-blur-sm p-4">
+    <div class="bg-white rounded-3xl p-8 w-full max-w-lg shadow-2xl border border-outline-variant/20">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="font-headline font-bold text-2xl text-on-surface">Yeni Kullanıcı Kaydı</h3>
+            <button onclick="closeAddModal()" class="w-10 h-10 rounded-full hover:bg-slate-100 flex items-center justify-center transition-colors">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        <div class="space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 mb-1">Ad Soyad</label>
+                    <input id="userName" type="text" placeholder="Örn: Ela Aksoy" class="w-full px-4 py-3 rounded-xl border-slate-200 focus:border-primary focus:ring-primary text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 mb-1">Departman</label>
+                    <input id="userDept" type="text" placeholder="Örn: BT, Finans" class="w-full px-4 py-3 rounded-xl border-slate-200 focus:border-primary focus:ring-primary text-sm">
+                </div>
+            </div>
+            <div>
+                <label class="block text-sm font-bold text-slate-700 mb-1">Rol / Görev</label>
+                <select id="userRole" class="w-full px-4 py-3 rounded-xl border-slate-200 focus:border-primary focus:ring-primary text-sm">
+                    <option value="Sistem Admin">Sistem Admin</option>
+                    <option value="Operatör">Operatör</option>
+                    <option value="İzleyici">İzleyici</option>
+                    <option value="Yönetici">Yönetici</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-bold text-slate-700 mb-1">Erişim Seviyesi</label>
+                <select id="userAccess" class="w-full px-4 py-3 rounded-xl border-slate-200 focus:border-primary focus:ring-primary text-sm">
+                    <option value="Tam Erişim">Tam Erişim</option>
+                    <option value="Yönetici">Yönetici</option>
+                    <option value="Sınırlı">Sınırlı</option>
+                </select>
+            </div>
+            <button onclick="submitUser()" class="w-full py-4 bg-primary text-white rounded-2xl font-bold shadow-lg shadow-primary/30 hover:scale-[1.02] active:scale-[0.98] transition-all mt-4">
+                Kullanıcıyı Kaydet
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: User Details -->
+<div id="userDetailModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-slate-900/40 backdrop-blur-sm p-4">
+    <div class="bg-white rounded-3xl p-8 w-full max-w-2xl shadow-2xl border border-outline-variant/20">
+        <div class="flex justify-between items-center mb-6">
+            <div class="flex items-center gap-4">
+                <div id="detailAvatar" class="w-12 h-12 rounded-2xl flex items-center justify-center font-bold text-xl"></div>
+                <div>
+                    <h3 id="detailUserName" class="font-headline font-bold text-2xl text-on-surface">Kullanıcı Detayı</h3>
+                    <p id="detailUserDept" class="text-sm text-slate-500"></p>
+                </div>
+            </div>
+            <button onclick="closeUserDetailModal()" class="w-10 h-10 rounded-full hover:bg-slate-100 flex items-center justify-center transition-colors">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        
+        <div class="space-y-8">
+            <div class="grid grid-cols-3 gap-4">
+                <div onclick="cycleStatus()" class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100 cursor-pointer transition-all hover:bg-slate-100">
+                    <p class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Çalışma Modu</p>
+                    <p id="detailUserStatus" class="text-[10px] font-bold mt-1 px-2 py-0.5 rounded-full inline-block"></p>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100">
+                    <p class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Erişim Seviyesi</p>
+                    <p id="detailUserAccess" class="text-[10px] font-bold mt-1 px-2 py-0.5 rounded-full inline-block"></p>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100">
+                    <p class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Görev / Rol</p>
+                    <p id="detailUserRole" class="text-sm font-bold mt-1 text-primary"></p>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 space-y-4">
+                <div class="flex justify-between items-center text-sm">
+                    <span class="text-slate-500 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-sm">business</span>
+                        Departman / Bölüm
+                    </span>
+                    <span id="detailUserDeptInfo" class="font-bold text-slate-800"></span>
+                </div>
+                <div class="flex justify-between items-center text-sm">
+                    <span class="text-slate-500 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-sm">login</span>
+                        Son Giriş
+                    </span>
+                    <span id="detailLastLogin" class="font-bold text-slate-800"></span>
+                </div>
+                <div class="flex justify-between items-center text-sm">
+                    <span class="text-slate-500 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-sm">shield_person</span>
+                        Güvenlik Denetimi
+                    </span>
+                    <span class="text-green-600 font-bold">Doğrulandı</span>
+                </div>
+            </div>
+            <button onclick="openEditModal()" class="w-full py-3 border-2 border-primary/20 text-primary rounded-2xl text-sm font-bold hover:bg-primary/5 transition-all flex items-center justify-center gap-2">
+                <span class="material-symbols-outlined text-sm">edit</span>
+                Bilgileri Düzenle
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Edit User -->
+<div id="editUserModal" class="fixed inset-0 z-[110] hidden flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
+    <div class="bg-white rounded-3xl p-8 w-full max-w-lg shadow-2xl border border-outline-variant/20">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="font-headline font-bold text-2xl text-on-surface">Kullanıcıyı Düzenle</h3>
+            <button onclick="closeEditModal()" class="w-10 h-10 rounded-full hover:bg-slate-100 flex items-center justify-center transition-colors">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        <div class="space-y-4">
+            <div>
+                <label class="block text-sm font-bold text-slate-700 mb-1">Ad Soyad</label>
+                <input id="editUserName" type="text" class="w-full px-4 py-3 rounded-xl border-slate-200 focus:border-primary focus:ring-primary text-sm">
+            </div>
+            <div>
+                <label class="block text-sm font-bold text-slate-700 mb-1">Departman / Bölüm</label>
+                <input id="editUserDept" type="text" class="w-full px-4 py-3 rounded-xl border-slate-200 focus:border-primary focus:ring-primary text-sm">
+            </div>
+            <div>
+                <label class="block text-sm font-bold text-slate-700 mb-1">Rol / Görev</label>
+                <select id="editUserRole" class="w-full px-4 py-3 rounded-xl border-slate-200 focus:border-primary focus:ring-primary text-sm">
+                    <option value="Fabrika Müdürü">Fabrika Müdürü</option>
+                    <option value="Sistem Admin">Sistem Admin</option>
+                    <option value="Operatör">Operatör</option>
+                    <option value="İzleyici">İzleyici</option>
+                    <option value="Yönetici">Yönetici</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-bold text-slate-700 mb-1">Erişim Seviyesi</label>
+                <select id="editUserAccess" class="w-full px-4 py-3 rounded-xl border-slate-200 focus:border-primary focus:ring-primary text-sm">
+                    <option value="Tam Erişim">Tam Erişim</option>
+                    <option value="Yönetici">Yönetici</option>
+                    <option value="Sınırlı">Sınırlı</option>
+                </select>
+            </div>
+            <button onclick="saveUserEdits()" class="w-full py-4 bg-primary text-white rounded-2xl font-bold shadow-lg shadow-primary/30 hover:scale-[1.02] active:scale-[0.98] transition-all mt-4">
+                Değişiklikleri Kaydet
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Users Table -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/10 overflow-hidden">
+<table class="w-full text-left">
+<thead class="bg-surface-container-low text-on-surface-variant text-xs uppercase tracking-wider">
+<tr>
+<th class="px-6 py-4 font-bold">Kullanıcı</th>
+<th class="px-6 py-4 font-bold">Departman</th>
+<th class="px-6 py-4 font-bold">Rol</th>
+<th class="px-6 py-4 font-bold">Erişim Seviyesi</th>
+<th class="px-6 py-4 font-bold">Son Giriş</th>
+<th class="px-6 py-4 font-bold">İşlem</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface" id="usersTableBody">
+    <!-- Users will be loaded here -->
+</tbody>
+</table>
+</div>
+</div>
+</main>
+
+<script>
+    let currentUserIndex = -1;
+    const defaultUsers = [
+        { initials: 'AS', name: 'Alex Sterling', dept: 'Yönetim', role: 'Fabrika Müdürü', access: 'Tam Erişim', status: 'Ofisten', accessClass: 'bg-primary/20 text-primary', lastLogin: 'Şimdi', color: 'bg-primary/10 text-primary' },
+        { initials: 'MV', name: 'Mark V.', dept: 'BT', role: 'Sistem Admin', access: 'Yönetici', status: 'Remote', accessClass: 'bg-secondary/20 text-secondary', lastLogin: '12 dk önce', color: 'bg-secondary/10 text-secondary' },
+        { initials: 'SK', name: 'Sarah K.', dept: 'Üretim', role: 'Operatör', access: 'Sınırlı', status: 'Hibrit', accessClass: 'bg-slate-100 text-slate-500', lastLogin: '2 sa önce', color: 'bg-slate-100 text-slate-500' }
+    ];
+
+    function loadUsers() {
+        let users = JSON.parse(localStorage.getItem('it_user_management'));
+        if (!users) {
+            users = defaultUsers;
+            localStorage.setItem('it_user_management', JSON.stringify(users));
+        } else {
+            // Sync with default styling if fields are missing
+            users = users.map((u, i) => ({
+                ...defaultUsers[i % defaultUsers.length],
+                status: u.status || 'Ofisten',
+                ...u
+            }));
+        }
+        renderUsers(users);
+    }
+
+    function renderUsers(users) {
+        const tbody = document.getElementById('usersTableBody');
+        tbody.innerHTML = users.map((user, index) => `
+            <tr class="hover:bg-slate-50 transition-colors text-sm">
+                <td class="px-6 py-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full ${user.color} flex items-center justify-center font-bold text-xs">${user.initials}</div>
+                        <span class="font-bold text-slate-800">${user.name}</span>
+                    </div>
+                </td>
+                <td class="px-6 py-4 text-slate-500">${user.dept}</td>
+                <td class="px-6 py-4 text-slate-500">${user.role}</td>
+                <td class="px-6 py-4">
+                    <span class="px-3 py-1 ${user.accessClass} rounded-full text-[10px] font-bold uppercase tracking-wider">${user.access}</span>
+                </td>
+                <td class="px-6 py-4 text-slate-500">${user.lastLogin}</td>
+                <td class="px-6 py-4">
+                    <button onclick="openUserDetailModal(${index})" class="text-primary hover:underline font-semibold">Detaylar</button>
+                </td>
+            </tr>
+        `).join('');
+    }
+
+    function openAddModal() {
+        document.getElementById('addUserModal').classList.remove('hidden');
+    }
+
+    function closeAddModal() {
+        document.getElementById('addUserModal').classList.add('hidden');
+        document.getElementById('userName').value = '';
+        document.getElementById('userDept').value = '';
+    }
+
+    function submitUser() {
+        const name = document.getElementById('userName').value;
+        const dept = document.getElementById('userDept').value;
+        const role = document.getElementById('userRole').value;
+        const access = document.getElementById('userAccess').value;
+
+        if (!name || !dept) return alert('Lütfen tüm alanları doldurun!');
+
+        const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+        
+        let accessClass = 'bg-primary/20 text-primary';
+        if (access === 'Yönetici') accessClass = 'bg-secondary/20 text-secondary';
+        if (access === 'Sınırlı') accessClass = 'bg-slate-100 text-slate-500';
+
+        const newUser = {
+            initials: initials,
+            name: name,
+            dept: dept,
+            role: role,
+            access: access,
+            status: 'Ofisten',
+            accessClass: accessClass,
+            lastLogin: 'Şimdi',
+            color: 'bg-primary/10 text-primary'
+        };
+
+        let users = JSON.parse(localStorage.getItem('it_user_management')) || [];
+        users.push(newUser);
+        localStorage.setItem('it_user_management', JSON.stringify(users));
+
+        loadUsers();
+        closeAddModal();
+    }
+
+    function openUserDetailModal(index) {
+        currentUserIndex = index;
+        const users = JSON.parse(localStorage.getItem('it_user_management'));
+        const user = users[index];
+
+        document.getElementById('detailUserName').innerText = user.name;
+        document.getElementById('detailUserDept').innerText = user.dept;
+        document.getElementById('detailUserDeptInfo').innerText = user.dept;
+        document.getElementById('detailLastLogin').innerText = user.lastLogin;
+        
+        const avatar = document.getElementById('detailAvatar');
+        avatar.innerText = user.initials;
+        avatar.className = `w-12 h-12 rounded-2xl flex items-center justify-center font-bold text-xl ${user.color}`;
+
+        updateStatusDisplay(user.status || 'Ofisten');
+        updateAccessDisplay(user.access);
+        updateRoleDisplay(user.role);
+
+        document.getElementById('userDetailModal').classList.remove('hidden');
+    }
+
+    function updateStatusDisplay(status) {
+        const el = document.getElementById('detailUserStatus');
+        el.innerText = status.toUpperCase();
+        let cls = 'bg-green-100 text-green-700'; // Ofisten
+        if (status === 'Remote') cls = 'bg-blue-100 text-blue-700';
+        if (status === 'Hibrit') cls = 'bg-purple-100 text-purple-700';
+        el.className = `text-[10px] font-bold mt-1 px-2 py-0.5 rounded-full inline-block ${cls}`;
+    }
+
+    function updateAccessDisplay(access) {
+        const el = document.getElementById('detailUserAccess');
+        el.innerText = access.toUpperCase();
+        let cls = 'bg-primary/20 text-primary';
+        if (access === 'Yönetici') cls = 'bg-secondary/20 text-secondary';
+        if (access === 'Sınırlı') cls = 'bg-slate-100 text-slate-500';
+        el.className = `text-[10px] font-bold mt-1 px-2 py-0.5 rounded-full inline-block ${cls}`;
+    }
+
+    function updateRoleDisplay(role) {
+        document.getElementById('detailUserRole').innerText = role;
+    }
+
+    function cycleStatus() {
+        if (currentUserIndex === -1) return;
+        let users = JSON.parse(localStorage.getItem('it_user_management'));
+        const statuses = ['Ofisten', 'Remote', 'Hibrit'];
+        let idx = statuses.indexOf(users[currentUserIndex].status || 'Ofisten');
+        let next = statuses[(idx + 1) % statuses.length];
+        users[currentUserIndex].status = next;
+
+        localStorage.setItem('it_user_management', JSON.stringify(users));
+        updateStatusDisplay(next);
+        loadUsers();
+    }
+
+    function openEditModal() {
+        if (currentUserIndex === -1) return;
+        const users = JSON.parse(localStorage.getItem('it_user_management'));
+        const user = users[currentUserIndex];
+
+        document.getElementById('editUserName').value = user.name;
+        document.getElementById('editUserDept').value = user.dept;
+        document.getElementById('editUserRole').value = user.role;
+        document.getElementById('editUserAccess').value = user.access;
+
+        document.getElementById('editUserModal').classList.remove('hidden');
+    }
+
+    function closeEditModal() {
+        document.getElementById('editUserModal').classList.add('hidden');
+    }
+
+    function saveUserEdits() {
+        if (currentUserIndex === -1) return;
+        let users = JSON.parse(localStorage.getItem('it_user_management'));
+        const user = users[currentUserIndex];
+
+        const newName = document.getElementById('editUserName').value;
+        const newDept = document.getElementById('editUserDept').value;
+        const newRole = document.getElementById('editUserRole').value;
+        const newAccess = document.getElementById('editUserAccess').value;
+
+        if (!newName || !newDept) return alert('Lütfen zorunlu alanları doldurun!');
+
+        user.name = newName;
+        user.dept = newDept;
+        user.role = newRole;
+        user.access = newAccess;
+        user.initials = newName.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+        
+        // Update access class
+        if (newAccess === 'Tam Erişim') user.accessClass = 'bg-primary/20 text-primary';
+        else if (newAccess === 'Yönetici') user.accessClass = 'bg-secondary/20 text-secondary';
+        else user.accessClass = 'bg-slate-100 text-slate-500';
+
+        localStorage.setItem('it_user_management', JSON.stringify(users));
+        
+        openUserDetailModal(currentUserIndex); // Refresh detail modal
+        loadUsers(); // Refresh table
+        closeEditModal();
+    }
+
+    function closeUserDetailModal() {
+        document.getElementById('userDetailModal').classList.add('hidden');
+        currentUserIndex = -1;
+    }
+
+    document.addEventListener('DOMContentLoaded', loadUsers);
+</script>
+</body></html>

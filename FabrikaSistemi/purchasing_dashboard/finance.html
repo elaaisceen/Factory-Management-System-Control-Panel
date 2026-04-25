@@ -159,19 +159,9 @@
         <!-- Dashboard Navigation Items -->
         <nav class="space-y-1">
             <a class="flex items-center gap-3 p-3 bg-white dark:bg-slate-900 text-blue-700 dark:text-blue-400 shadow-sm rounded-2xl transition-all cursor-pointer active:scale-[0.98]"
-                href="../login_register/admin_dashboard/adminDashboard.html">
+                href="purchasing.html">
                 <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
                 <span class="font-['Inter'] font-medium text-sm">Anasayfa</span>
-            </a>
-            <a class="flex items-center gap-3 p-3 bg-white dark:bg-slate-900 text-blue-700 dark:text-blue-400 shadow-sm rounded-2xl transition-all cursor-pointer active:scale-[0.98]"
-                href="finance.html">
-                <span class="material-symbols-outlined" data-icon="payments">payments</span>
-                <span class="font-['Inter'] font-medium text-sm font-bold">Finans</span>
-            </a>
-            <a class="flex items-center gap-3 p-3 text-slate-500 hover:text-slate-900 hover:translate-x-1 transition-all font-['Inter'] font-medium text-sm active:scale-[0.98]"
-                href="../it_dashboard/destek_merkezi.html">
-                <span class="material-symbols-outlined">support_agent</span>
-                <span>BT Destek Merkezi</span>
             </a>
         </nav>
 
@@ -192,10 +182,8 @@
             <!-- Header Section -->
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
                 <div>
-                    <h2 class="font-headline text-4xl font-extrabold text-on-surface tracking-tight">Finans Departmanına
-                        Hoşgeldiniz...</h2>
-                    <p class="text-on-surface-variant font-medium mt-1">Finansal Check-Up & Operasyonel Denetim Paneli
-                    </p>
+                    <h2 class="font-headline text-4xl font-extrabold text-on-surface tracking-tight">Güncel Finans Durumu</h2>
+                    
                 </div>
                 <div class="flex gap-3">
 
@@ -227,49 +215,6 @@
                         </div>
                     </div>
 
-                    <!--Yeni Veri Ekleme-->
-                    <div class="relative inline-block text-left">
-                        <!-- Ana Buton -->
-                        <button id="newDataBtn"
-                            class="px-6 py-2.5 bg-primary text-white font-semibold rounded-full shadow-lg hover:scale-105 transition-all flex items-center gap-2 text-sm">
-                            <span class="material-symbols-outlined text-lg">add</span>
-                            Yeni Veri Ekle
-                        </button>
-
-                        <!-- Dropdown Menü (Başlangıçta Gizli) -->
-                        <div id="newDataMenu"
-                            class="hidden absolute right-0 mt-2 w-56 bg-white border border-slate-100 rounded-2xl shadow-xl z-50 overflow-hidden">
-                            <div class="p-2 space-y-1">
-                                <a href="/stitch/finance_dashboard/muhabase.html"
-                                    class="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-xl transition-colors group">
-                                    <span
-                                        class="material-symbols-outlined text-blue-500 bg-blue-50 p-2 rounded-lg">account_balance</span>
-                                    <div>
-                                        <p class="text-sm font-bold text-slate-700">Muhasebe Kaydı</p>
-                                        <p class="text-[10px] text-slate-400">Fatura, Fiş, KDV</p>
-                                    </div>
-                                </a>
-                                <a href="/stitch/finance_dashboard/butce.html"
-                                    class="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-xl transition-colors group">
-                                    <span
-                                        class="material-symbols-outlined text-amber-500 bg-amber-50 p-2 rounded-lg">payments</span>
-                                    <div>
-                                        <p class="text-sm font-bold text-slate-700">Bütçe & Talep</p>
-                                        <p class="text-[10px] text-slate-400">Onay Bekleyenler</p>
-                                    </div>
-                                </a>
-                                <a href="/stitch/finance_dashboard/maas.html"
-                                    class="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-xl transition-colors group">
-                                    <span
-                                        class="material-symbols-outlined text-purple-500 bg-purple-50 p-2 rounded-lg">group</span>
-                                    <div>
-                                        <p class="text-sm font-bold text-slate-700">Maaş</p>
-                                        <p class="text-[10px] text-slate-400">Personel Ödemeleri</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
             <!-- Bento Summary Cards -->
@@ -455,287 +400,11 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- TableView for Recent Financial Transactions -->
-            <div class="bg-surface-container-lowest rounded-xl soft-ui-shadow border border-white/50 overflow-hidden">
-                <div class="p-8 flex justify-between items-center border-b border-slate-50">
-                    <h4 class="font-headline text-xl font-bold">Son Finansal İşlemler</h4>
-                    <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto sm:ml-6">
-                        <div class="relative min-w-[220px]">
-                            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
-                            <input id="recentSearchInput" type="text" placeholder="İşlem veya şirket ara" class="w-full rounded-full border-slate-200 pl-10 pr-3 py-2 text-sm">
-                        </div>
-                        <select id="recentDepartmentFilter" class="rounded-full border-slate-200 text-sm px-3 py-2">
-                            <option value="all">Tüm Departmanlar</option>
-                            <option value="Satın Alma">Satın Alma</option>
-                            <option value="finans">Finans İşlemleri</option>
-                            <option value="Lojistik">Depo ve Lojistik</option>
-                            <option value="it">Bilgi Teknolojileri</option>
-                            <option value="ik">İnsan Kaynakları</option>
-                            <option value="uretim">Üretim</option>
-                        </select>
-                        <select id="recentStatusFilter" class="rounded-full border-slate-200 text-sm px-3 py-2">
-                            <option value="all">Tüm Durumlar</option>
-                            <option value="Ödendi">Ödendi</option>
-                            <option value="Gecikti">Gecikti</option>
-                            <option value="İşlem Bekliyor">İşlem Bekliyor</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left">
-                        <thead>
-                            <tr class="bg-slate-50/50">
-                                <th class="px-8 py-4 text-[10px] font-bold uppercase tracking-widest text-slate-500">
-                                    İşlem ID</th>
-                                <th class="px-8 py-4 text-[10px] font-bold uppercase tracking-widest text-slate-500">
-                                    Alıcı/Şirket</th>
-                                <th class="px-8 py-4 text-[10px] font-bold uppercase tracking-widest text-slate-500">
-                                    Departman</th>
-                                <th class="px-8 py-4 text-[10px] font-bold uppercase tracking-widest text-slate-500">
-                                    Tarih</th>
-                                <th class="px-8 py-4 text-[10px] font-bold uppercase tracking-widest text-slate-500">
-                                    Tutar</th>
-                                <th
-                                    class="px-8 py-4 text-[10px] font-bold uppercase tracking-widest text-slate-500 text-center">
-                                    Durum</th>
-                                <th class="px-8 py-4 text-[10px] font-bold uppercase tracking-widest text-slate-500">
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody id="recentTransactionsBody" class="divide-y divide-slate-50">
-                            <tr class="hover:bg-slate-50 transition-colors" data-department="Satın Alma" data-status="Ödendi">
-                                <td class="px-8 py-5 text-sm font-bold text-on-surface">#TXN-88219</td>
-                                <td class="px-8 py-5">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-8 h-8 bg-slate-100 rounded-lg flex items-center justify-center">
-                                            <span class="material-symbols-outlined text-sm text-slate-400"
-                                                data-icon="factory">factory</span>
-                                        </div>
-                                        <div>
-                                            <p class="text-sm font-semibold">Steel Dynamics Inc.</p>
-                                            <p class="text-[10px] text-slate-500">Malzeme Alımı</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-8 py-5 text-sm text-on-surface-variant font-medium">Satın Alma</td>
-                                <td class="px-8 py-5 text-sm text-on-surface-variant font-medium">24 Eki 2023</td>
-                                <td class="px-8 py-5 text-sm font-bold text-on-surface">-$12,400.00</td>
-                                <td class="px-8 py-5 text-center">
-                                    <span
-                                        class="recent-status-badge px-3 py-1 rounded-full text-[10px] font-bold bg-secondary/10 text-secondary border border-secondary/20">Ödendi</span>
-                                </td>
-                                <td class="px-8 py-5 text-right"></td>
-                            </tr>
-                            <tr class="hover:bg-slate-50 transition-colors" data-department="Muhasebe" data-status="Gecikti">
-                                <td class="px-8 py-5 text-sm font-bold text-on-surface">#TXN-88220</td>
-                                <td class="px-8 py-5">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-8 h-8 bg-slate-100 rounded-lg flex items-center justify-center">
-                                            <span class="material-symbols-outlined text-sm text-slate-400"
-                                                data-icon="bolt">bolt</span>
-                                        </div>
-                                        <div>
-                                            <p class="text-sm font-semibold">National Grid Co.</p>
-                                            <p class="text-[10px] text-slate-500">Aylık Faturalar</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-8 py-5 text-sm text-on-surface-variant font-medium">Muhasebe</td>
-                                <td class="px-8 py-5 text-sm text-on-surface-variant font-medium">23 Eki 2023</td>
-                                <td class="px-8 py-5 text-sm font-bold text-on-surface">-$4,250.00</td>
-                                <td class="px-8 py-5 text-center">
-                                    <span
-                                        class="recent-status-badge px-3 py-1 rounded-full text-[10px] font-bold bg-error/10 text-error border border-error/20">Gecikti</span>
-                                </td>
-                                <td class="px-8 py-5 text-right"></td>
-                            </tr>
-                            <tr class="hover:bg-slate-50 transition-colors" data-department="Lojistik" data-status="İşlem Bekliyor">
-                                <td class="px-8 py-5 text-sm font-bold text-on-surface">#TXN-88221</td>
-                                <td class="px-8 py-5">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-8 h-8 bg-slate-100 rounded-lg flex items-center justify-center">
-                                            <span class="material-symbols-outlined text-sm text-slate-400"
-                                                data-icon="shopping_cart">shopping_cart</span>
-                                        </div>
-                                        <div>
-                                            <p class="text-sm font-semibold">Logistics Express</p>
-                                            <p class="text-[10px] text-slate-500">Kargo/Nakliye Ücretleri</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-8 py-5 text-sm text-on-surface-variant font-medium">Lojistik</td>
-                                <td class="px-8 py-5 text-sm text-on-surface-variant font-medium">22 Eki 2023</td>
-                                <td class="px-8 py-5 text-sm font-bold text-on-surface">-$890.00</td>
-                                <td class="px-8 py-5 text-center">
-                                    <span
-                                        class="recent-status-badge px-3 py-1 rounded-full text-[10px] font-bold bg-primary/10 text-primary border border-primary/20">İşlem Bekliyor</span>
-                                </td>
-                                <td class="px-8 py-5 text-right relative">
-                                    <button class="recent-action-trigger text-slate-400 hover:text-on-surface">
-                                        <span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
-                                    </button>
-                                    <div class="recent-action-menu hidden absolute right-8 top-12 bg-white border border-slate-200 rounded-xl shadow-xl p-1 z-10">
-                                        <button class="recent-approve-btn block w-full text-left px-3 py-2 text-sm hover:bg-slate-50 rounded-lg">Ödendi</button>
-                                        <button class="recent-reject-btn block w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg">Gecikti</button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="hover:bg-slate-50 transition-colors" data-department="İK" data-status="Ödendi">
-                                <td class="px-8 py-5 text-sm font-bold text-on-surface">#TXN-88222</td>
-                                <td class="px-8 py-5">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-8 h-8 bg-slate-100 rounded-lg flex items-center justify-center">
-                                            <span class="material-symbols-outlined text-sm text-slate-400"
-                                                data-icon="account_circle">account_circle</span>
-                                        </div>
-                                        <div>
-                                            <p class="text-sm font-semibold">Internal Payroll</p>
-                                            <p class="text-[10px] text-slate-500">İki Haftalık Personel Maaşı</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-8 py-5 text-sm text-on-surface-variant font-medium">İnsan Kaynakları</td>
-                                <td class="px-8 py-5 text-sm text-on-surface-variant font-medium">21 Eki 2023</td>
-                                <td class="px-8 py-5 text-sm font-bold text-on-surface">-$145,000.00</td>
-                                <td class="px-8 py-5 text-center">
-                                    <span
-                                        class="recent-status-badge px-3 py-1 rounded-full text-[10px] font-bold bg-secondary/10 text-secondary border border-secondary/20">Ödendi</span>
-                                </td>
-                                <td class="px-8 py-5 text-right"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="p-6 bg-slate-50/50 flex justify-center">
-                    <a href="tum_islemler.html" class="text-sm font-bold text-primary hover:underline">Tüm İşlemleri Görüntüle</a>
-                </div>
-            </div>
+            </div>  
         </div>
     </main>
-    <!-- Contextual FAB (Restricted to Dashboard screens per rules) -->
-    <button
-        class="fixed bottom-8 right-8 w-16 h-16 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50">
-        <span class="material-symbols-outlined" data-icon="chat">chat</span>
-    </button>
     
 </body>
-<script>
-    const recentSearchInput = document.getElementById("recentSearchInput");
-    const recentDepartmentFilter = document.getElementById("recentDepartmentFilter");
-    const recentStatusFilter = document.getElementById("recentStatusFilter");
-    const recentRows = Array.from(document.querySelectorAll("#recentTransactionsBody tr"));
-
-    function recentCloseMenus() {
-        document.querySelectorAll(".recent-action-menu").forEach(menu => menu.classList.add("hidden"));
-    }
-
-    // Helper to log system events
-    function logSystemEvent(user, action, location, status) {
-        const logs = JSON.parse(localStorage.getItem('systemLogs')) || [];
-        logs.unshift({
-            user: user,
-            action: action,
-            location: location,
-            time: new Date().toISOString(),
-            status: status
-        });
-        localStorage.setItem('systemLogs', JSON.stringify(logs.slice(0, 50)));
-    }
-
-    function renderFinanceTable() {
-        const finDb = JSON.parse(localStorage.getItem('financeDatabase')) || [];
-        const tbody = document.getElementById('recentTransactionsBody');
-        tbody.innerHTML = finDb.map(item => `
-            <tr class="hover:bg-slate-50 transition-colors" data-department="Finance" data-status="${item.status}">
-                <td class="px-8 py-5 text-sm font-bold text-on-surface">#${item.id}</td>
-                <td class="px-8 py-5">
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 bg-slate-100 rounded-lg flex items-center justify-center">
-                            <span class="material-symbols-outlined text-sm text-slate-400">payments</span>
-                        </div>
-                        <div>
-                            <p class="text-sm font-semibold">${item.company}</p>
-                            <p class="text-[10px] text-slate-500">${item.detail}</p>
-                        </div>
-                    </div>
-                </td>
-                <td class="px-8 py-5 text-sm text-on-surface-variant font-medium">Finans</td>
-                <td class="px-8 py-5 text-sm text-on-surface-variant font-medium">${item.date}</td>
-                <td class="px-8 py-5 text-sm font-bold text-on-surface">-$${parseFloat(item.amount).toLocaleString()}</td>
-                <td class="px-8 py-5 text-center">
-                    <span class="${recentBadgeClass(item.status)}">${item.status}</span>
-                </td>
-                <td class="px-8 py-5 text-right relative"></td>
-            </tr>
-        `).join('') + tbody.innerHTML;
-    }
-
-    function recentBadgeClass(status) {
-        if (status === "Ödendi") return "recent-status-badge px-3 py-1 rounded-full text-[10px] font-bold bg-secondary/10 text-secondary border border-secondary/20";
-        if (status === "Gecikti") return "recent-status-badge px-3 py-1 rounded-full text-[10px] font-bold bg-error/10 text-error border border-error/20";
-        return "recent-status-badge px-3 py-1 rounded-full text-[10px] font-bold bg-primary/10 text-primary border border-primary/20";
-    }
-
-    function recentApplyFilters() {
-        const q = recentSearchInput.value.trim().toLowerCase();
-        const dep = recentDepartmentFilter.value;
-        const st = recentStatusFilter.value;
-
-        recentRows.forEach(row => {
-            const textMatch = row.innerText.toLowerCase().includes(q);
-            const depMatch = dep === "all" || row.dataset.department === dep;
-            const stMatch = st === "all" || row.dataset.status === st;
-            row.style.display = textMatch && depMatch && stMatch ? "" : "none";
-        });
-    }
-
-    function recentUpdateStatus(row, newStatus) {
-        row.dataset.status = newStatus;
-        const badge = row.querySelector(".recent-status-badge");
-        badge.textContent = newStatus;
-        badge.className = recentBadgeClass(newStatus);
-        const actionCell = row.querySelector("td:last-child");
-        if (newStatus !== "İşlem Bekliyor") {
-            actionCell.innerHTML = "";
-        }
-        recentCloseMenus();
-        recentApplyFilters();
-    }
-
-    recentSearchInput.addEventListener("input", recentApplyFilters);
-    recentDepartmentFilter.addEventListener("change", recentApplyFilters);
-    recentStatusFilter.addEventListener("change", recentApplyFilters);
-
-    document.querySelectorAll(".recent-action-trigger").forEach(trigger => {
-        trigger.addEventListener("click", (event) => {
-            event.stopPropagation();
-            const menu = trigger.parentElement.querySelector(".recent-action-menu");
-            const isHidden = menu.classList.contains("hidden");
-            recentCloseMenus();
-            if (isHidden) menu.classList.remove("hidden");
-        });
-    });
-
-    document.querySelectorAll(".recent-approve-btn").forEach(btn => {
-        btn.addEventListener("click", (event) => {
-            const row = event.target.closest("tr");
-            recentUpdateStatus(row, "Ödendi");
-        });
-    });
-
-    document.querySelectorAll(".recent-reject-btn").forEach(btn => {
-        btn.addEventListener("click", (event) => {
-            const row = event.target.closest("tr");
-            recentUpdateStatus(row, "Gecikti");
-        });
-    });
-
-    // Initialize data
-    renderFinanceTable();
-
-    document.addEventListener("click", recentCloseMenus);
-</script>
-<script src="finance.js"></script>
+<script src="../finance_dashboard/finance.js"></script>
 
 </html>

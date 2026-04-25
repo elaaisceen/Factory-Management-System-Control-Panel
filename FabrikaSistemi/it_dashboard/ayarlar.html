@@ -1,0 +1,223 @@
+<!--Powered by Elanur Tuana İŞCEN-->
+
+<!DOCTYPE html>
+
+<html class="light" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Industrial Pulse | Ayarlar</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-error": "#ffffff",
+              "surface": "#f7f9fc",
+              "secondary-fixed-dim": "#4ae183",
+              "surface-variant": "#e0e3e6",
+              "primary-fixed": "#dbe1ff",
+              "primary-container": "#496eda",
+              "surface-dim": "#d8dadd",
+              "on-tertiary-container": "#fffbff",
+              "on-background": "#191c1e",
+              "on-secondary-container": "#00743a",
+              "surface-container-highest": "#e0e3e6",
+              "tertiary-fixed": "#f8d8ff",
+              "surface-container-high": "#e6e8eb",
+              "secondary-fixed": "#6bfe9c",
+              "error-container": "#ffdad6",
+              "surface-container-lowest": "#ffffff",
+              "primary-fixed-dim": "#b5c4ff",
+              "surface-bright": "#f7f9fc",
+              "outline": "#747684",
+              "secondary": "#006d37",
+              "on-primary-container": "#fefcff",
+              "inverse-on-surface": "#eff1f4",
+              "secondary-container": "#6bfe9c",
+              "inverse-surface": "#2d3133",
+              "error": "#ba1a1a",
+              "tertiary-fixed-dim": "#ebb2ff",
+              "on-secondary-fixed": "#00210c",
+              "outline-variant": "#c4c6d5",
+              "background": "#f7f9fc",
+              "surface-container": "#eceef1",
+              "surface-container-low": "#f2f4f7",
+              "on-surface": "#191c1e",
+              "tertiary": "#80409b",
+              "inverse-primary": "#b5c4ff",
+              "on-tertiary": "#ffffff",
+              "on-surface-variant": "#434653",
+              "on-primary": "#ffffff",
+              "on-error-container": "#93000a",
+              "on-secondary": "#ffffff",
+              "tertiary-container": "#9b59b6",
+              "primary": "#2b54bf",
+              "surface-tint": "#2e57c2",
+              "on-tertiary-fixed": "#320047",
+              "on-secondary-fixed-variant": "#005228",
+              "on-tertiary-fixed-variant": "#692984",
+              "on-primary-fixed-variant": "#053da9",
+              "on-primary-fixed": "#00174d"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+  </head>
+<body class="bg-surface font-body text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-slate-50/80 backdrop-blur-xl flex justify-between items-center px-8 h-20 w-full shadow-sm">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-blue-600">menu</span>
+<h1 class="text-blue-700 font-black tracking-tighter font-headline text-2xl">Industrial Pulse</h1>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex items-center space-x-8 text-sm">
+<span class="text-blue-700 font-bold">Ayarlar</span>
+<span class="text-slate-500 hover:bg-slate-200/50 transition-colors px-3 py-1 rounded-lg">Sistemler</span>
+<span class="text-slate-500 hover:bg-slate-200/50 transition-colors px-3 py-1 rounded-lg">Ağ</span>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/20">
+<img alt="Kullanıcı profil fotoğrafı" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3jWAUuKBl2fvyhvORldOGH5GJp9hgt-KKHM9oWJrior-ODz9uckh2_m0KkgF4uGaZSOC0fEAXFi44loVPPb5BleFV93n-kQSZzXVvQ_9WI33PIECmS1ulHU7euhfZfG2bEHIcXfYnVbhqYyix_hTnX4bJC1X09Wma_0cJit1cCiGy75aS8X1QElPFkogIvJKC8xcFd-8UFE6niPkGp2nO6alvpQk_-AUxBoZxfQ3encgt6cJfryURgHyaNjitUpOp3wJuInip-yUx"/>
+</div>
+</div>
+</header>
+<!-- NavigationDrawer (Sidebar) -->
+<aside class="h-full w-72 fixed left-0 top-0 z-40 bg-slate-50 border-r border-slate-200/10 shadow-2xl shadow-slate-900/5 pt-24 hidden lg:flex flex-col p-6 space-y-2">
+<!-- Profile Section -->
+<div class="flex items-center gap-4 mb-8 px-2">
+<div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div>
+<p class="font-headline font-bold text-sm text-on-surface">Alex Sterling</p>
+<p class="text-xs text-slate-500">Fabrika Müdürü • Sektör 7G</p>
+</div>
+</div>
+<!-- Nav Links -->
+<nav class="flex flex-col space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-900 hover:translate-x-1 transition-all" href="it.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-medium text-sm">Kontrol Paneli</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-900 hover:translate-x-1 transition-all" href="sunucu_durumu.html">
+<span class="material-symbols-outlined">dns</span>
+<span class="font-medium text-sm">Sunucu Durumu</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-900 hover:translate-x-1 transition-all" href="kullanici_izinleri.html">
+<span class="material-symbols-outlined">admin_panel_settings</span>
+<span class="font-medium text-sm">Kullanıcı İzinleri</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-900 hover:translate-x-1 transition-all" href="destek_talepleri.html">
+<span class="material-symbols-outlined">confirmation_number</span>
+<span class="font-medium text-sm">Destek Talepleri</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-900 hover:translate-x-1 transition-all" href="sistem_kayitlari.html">
+<span class="material-symbols-outlined">terminal</span>
+<span class="font-medium text-sm">Sistem Kayıtları</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-white text-blue-700 shadow-sm rounded-2xl transition-all active:scale-[0.98]" href="ayarlar.html">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-medium text-sm">Ayarlar</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-900 hover:translate-x-1 transition-all" href="../index.html">
+<span class="material-symbols-outlined">home</span>
+<span class="font-medium text-sm">Anasayfa</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content -->
+<main class="lg:ml-72 pt-28 px-8 pb-12">
+<div class="max-w-7xl mx-auto space-y-8">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="font-headline font-extrabold text-4xl text-on-surface tracking-tight">Ayarlar</h2>
+<p class="text-on-surface-variant mt-2">Sistem yapılandırması ve genel tercihler.</p>
+</div>
+<div class="flex gap-3">
+<button onclick="saveSettings()" class="px-6 py-2 bg-gradient-to-r from-primary to-primary-container text-white rounded-full text-sm font-semibold shadow-lg shadow-primary/20 transition-all hover:scale-105 active:scale-95">
+                        Değişiklikleri Kaydet
+                    </button>
+</div>
+</div>
+
+<!-- Settings Form -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="bg-surface-container-lowest rounded-xl p-8 shadow-sm border border-outline-variant/10 space-y-6">
+<h3 class="font-bold text-xl mb-4">Genel Ayarlar</h3>
+<div class="space-y-4">
+<div>
+<label class="block text-sm font-medium text-slate-700">Sistem Adı</label>
+<input class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm" type="text" value="Industrial Pulse"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-slate-700">Dil</label>
+<select class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm">
+<option selected="">Türkçe</option>
+<option>English</option>
+<option>Deutsch</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium text-slate-700">Tema</label>
+<div class="mt-2 flex gap-4">
+<label class="inline-flex items-center">
+<input checked="" class="form-radio text-primary" name="theme" type="radio" value="light"/>
+<span class="ml-2 text-sm">Aydınlık</span>
+</label>
+<label class="inline-flex items-center">
+<input class="form-radio text-primary" name="theme" type="radio" value="dark"/>
+<span class="ml-2 text-sm">Karanlık</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+
+<div class="bg-surface-container-lowest rounded-xl p-8 shadow-sm border border-outline-variant/10 space-y-6">
+<h3 class="font-bold text-xl mb-4">Bildirim Ayarları</h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<div>
+<p class="text-sm font-medium text-slate-700">E-posta Bildirimleri</p>
+<p class="text-xs text-slate-500">Kritik hatalar e-posta ile bildirilsin.</p>
+</div>
+<input checked="" class="rounded text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<p class="text-sm font-medium text-slate-700">SMS Bildirimleri</p>
+<p class="text-xs text-slate-500">Sistem kesintilerinde SMS gönderilsin.</p>
+</div>
+<input class="rounded text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+<script>
+    function saveSettings() {
+        alert('Ayarlar başarıyla kaydedildi!');
+    }
+</script>
+</body></html>

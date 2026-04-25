@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bordro Onayı — Industrial Pulse</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f0f2f5;
+  --surface: #ffffff;
+  --border: #e4e7ec;
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+  --accent: #2563eb;
+  --accent-light: #eff6ff;
+  --ok-bg: #dcfce7;    --ok-text: #166534;
+  --bad-bg: #fee2e2;   --bad-text: #991b1b;
+  --warn-bg: #fef9c3;  --warn-text: #854d0e;
+  --pending-bg: #f1f5f9; --pending-text: #475569;
+  --sidebar-w: 240px;
+  --topbar-h: 52px;
+  --radius: 12px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-lg: 0 10px 40px rgba(0,0,0,0.12);
+}
+
+html, body { height: 100%; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  display: flex;
+}
+
+/* ════ SIDEBAR ════ */
+.sidebar {
+  width: var(--sidebar-w);
+  min-height: 100vh;
+  background: #fff;
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; flex-shrink: 0;
+  position: fixed; top: 0; left: 0; bottom: 0;
+  z-index: 200;
+}
+.sidebar-brand {
+  display: flex; align-items: center; gap: 10px;
+  padding: 20px 18px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.sidebar-hamburger {
+  background: none; border: none; cursor: pointer;
+  color: var(--text-secondary); padding: 2px;
+  display: flex; align-items: center;
+}
+.sidebar-hamburger .material-icons-round { font-size: 22px; }
+.sidebar-logo {
+  font-size: 17px; font-weight: 700; color: var(--accent); letter-spacing: -.01em;
+}
+.sidebar-user {
+  margin: 14px 12px;
+  background: #f8fafc; border: 1px solid var(--border);
+  border-radius: 10px; padding: 10px 12px;
+  display: flex; align-items: center; gap: 10px;
+}
+.user-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; color: #fff; font-size: 15px; font-weight: 600;
+}
+.user-name { font-size: 13px; font-weight: 600; color: var(--text-primary); line-height: 1.2; }
+.user-role { font-size: 10px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: .05em; }
+
+.sidebar-nav { padding: 6px 10px; flex: 1; }
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 12px; border-radius: 8px;
+  font-size: 13.5px; font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all .15s; cursor: pointer; margin-bottom: 2px;
+}
+.nav-item .material-icons-round { font-size: 19px; flex-shrink: 0; }
+.nav-item:hover { background: #f1f5f9; color: var(--text-primary); }
+.nav-item.active { background: var(--accent-light); color: var(--accent); font-weight: 600; }
+
+/* ════ MAIN ════ */
+.main-wrap {
+  margin-left: var(--sidebar-w);
+  flex: 1; display: flex; flex-direction: column; min-height: 100vh;
+}
+
+/* ── Topbar / Back Banner ── */
+.topbar {
+  height: var(--topbar-h);
+  background: #1e2340;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px;
+  position: sticky; top: 0; z-index: 100; flex-shrink: 0;
+}
+.topbar-title {
+  font-size: 14px; font-weight: 600; color: #e2e8f0; letter-spacing: .01em;
+}
+.btn-back {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--accent); color: #fff;
+  border: none; border-radius: 50px; padding: 7px 18px;
+  font-family: inherit; font-size: 13px; font-weight: 500;
+  cursor: pointer; text-decoration: none;
+  transition: background .15s, transform .1s; white-space: nowrap;
+}
+.btn-back:hover  { background: #1d4ed8; }
+.btn-back:active { transform: scale(.97); }
+.btn-back .material-icons-round { font-size: 16px; }
+
+/* ── Content ── */
+.content { padding: 26px 26px 40px; flex: 1; }
+
+/* ── Page Header ── */
+.page-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  margin-bottom: 22px; gap: 16px; flex-wrap: wrap;
+}
+.page-title    { font-size: 20px; font-weight: 600; }
+.page-subtitle { font-size: 13px; color: var(--text-secondary); margin-top: 3px; }
+.stats-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.stat-chip {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 14px;
+  font-size: 12px; font-weight: 500; color: var(--text-secondary);
+  display: flex; align-items: center; gap: 5px;
+}
+.stat-chip span.num { font-size: 15px; font-weight: 600; color: var(--text-primary); }
+
+/* ── Card ── */
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden;
+}
+
+/* ── Entry Form ── */
+.entry-section {
+  padding: 16px 20px; border-bottom: 1px solid var(--border); background: #fafbfc;
+}
+.entry-section h3 {
+  font-size: 10.5px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: .07em; color: var(--text-muted); margin-bottom: 11px;
+}
+.entry-form {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+  gap: 10px; align-items: end;
+}
+.field { display: flex; flex-direction: column; gap: 4px; }
+.field label { font-size: 10px; font-weight: 500; color: var(--text-secondary); text-transform: uppercase; letter-spacing: .04em; }
+.field input, .field select {
+  height: 35px; border: 1px solid var(--border); border-radius: 8px;
+  padding: 0 11px; font-family: inherit; font-size: 13px; color: var(--text-primary);
+  background: #fff; transition: border-color .15s, box-shadow .15s; outline: none;
+}
+.field input:focus, .field select:focus {
+  border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37,99,235,.1);
+}
+.btn-add {
+  height: 35px; padding: 0 16px; background: var(--accent); color: #fff;
+  border: none; border-radius: 8px; font-family: inherit; font-size: 13px; font-weight: 500;
+  cursor: pointer; display: flex; align-items: center; gap: 5px;
+  transition: background .15s, transform .1s; white-space: nowrap; align-self: flex-end;
+}
+.btn-add:hover  { background: #1d4ed8; }
+.btn-add:active { transform: scale(.97); }
+
+/* ── Table ── */
+table { width: 100%; border-collapse: collapse; }
+thead th {
+  padding: 11px 16px; font-size: 10.5px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .07em; color: var(--text-muted);
+  text-align: left; border-bottom: 1px solid var(--border); background: #fafbfc;
+}
+tbody tr { border-bottom: 1px solid var(--border); transition: background .12s; }
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: #f9fafb; }
+tbody tr.row-approved { background: #f0fdf4; }
+tbody tr.row-warned   { background: #fffbeb; }
+td { padding: 13px 16px; font-size: 13.5px; vertical-align: middle; }
+.id-cell { font-family: 'DM Mono', monospace; font-size: 11.5px; color: var(--text-secondary); }
+.name-cell { font-weight: 500; }
+.sub-cell  { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+.amount-cell { font-weight: 600; font-variant-numeric: tabular-nums; }
+
+.status-pill {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 4px 10px; border-radius: 20px;
+  font-size: 11px; font-weight: 600; white-space: nowrap;
+}
+.pill-pending  { background: var(--pending-bg); color: var(--pending-text); }
+.pill-approved { background: var(--ok-bg);      color: var(--ok-text); }
+.pill-warned   { background: var(--warn-bg);     color: var(--warn-text); }
+
+.actions { display: flex; gap: 7px; justify-content: flex-end; }
+.icon-btn {
+  width: 30px; height: 30px; border: none; border-radius: 50%;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: transform .1s, background .15s;
+}
+.icon-btn:hover  { transform: scale(1.1); }
+.icon-btn:active { transform: scale(.93); }
+.btn-approve { background: #dcfce7; color: #16a34a; }
+.btn-approve:hover { background: #bbf7d0; }
+.btn-warn    { background: #fef9c3; color: #ca8a04; }
+.btn-warn:hover    { background: #fef08a; }
+
+.empty-row td { text-align: center; padding: 36px; color: var(--text-muted); font-size: 13px; }
+
+/* ════ MODAL ════ */
+.modal-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(17,24,39,.45); backdrop-filter: blur(4px);
+  z-index: 1000; align-items: center; justify-content: center;
+}
+.modal-overlay.open { display: flex; animation: fadeIn .2s; }
+@keyframes fadeIn { from{opacity:0}to{opacity:1} }
+
+.modal {
+  background: #fff; border-radius: 16px;
+  width: 460px; max-width: calc(100vw - 32px);
+  box-shadow: var(--shadow-lg);
+  animation: slideUp .22s cubic-bezier(.34,1.36,.64,1);
+}
+@keyframes slideUp { from{transform:translateY(24px);opacity:0}to{transform:translateY(0);opacity:1} }
+
+.modal-header {
+  padding: 18px 22px 14px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.modal-header h2 { font-size: 15px; font-weight: 600; }
+.modal-meta { font-size: 11.5px; color: var(--text-secondary); margin-top: 2px; }
+.btn-close {
+  width: 28px; height: 28px; border-radius: 7px;
+  border: 1px solid var(--border); background: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-secondary); transition: background .15s;
+}
+.btn-close:hover { background: var(--bg); }
+
+.modal-body { padding: 18px 22px; display: flex; flex-direction: column; gap: 13px; }
+.modal-field { display: flex; flex-direction: column; gap: 4px; }
+.modal-field label { font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: var(--text-secondary); }
+.modal-field input, .modal-field select, .modal-field textarea {
+  border: 1px solid var(--border); border-radius: 8px; padding: 8px 11px;
+  font-family: inherit; font-size: 13.5px; color: var(--text-primary);
+  outline: none; transition: border-color .15s, box-shadow .15s; resize: vertical;
+}
+.modal-field input:focus, .modal-field select:focus, .modal-field textarea:focus {
+  border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37,99,235,.1);
+}
+.warn-note {
+  background: var(--warn-bg); border: 1px solid #fde68a; border-radius: 8px;
+  padding: 9px 13px; font-size: 12.5px; color: var(--warn-text);
+  display: flex; gap: 8px; align-items: flex-start;
+}
+.warn-note .material-icons-round { font-size: 16px; margin-top: 1px; flex-shrink: 0; }
+.modal-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
+
+.modal-footer {
+  padding: 13px 22px 18px; border-top: 1px solid var(--border);
+  display: flex; justify-content: flex-end; gap: 9px;
+}
+.btn-secondary {
+  height: 36px; padding: 0 16px; border: 1px solid var(--border); background: #fff;
+  border-radius: 8px; font-family: inherit; font-size: 13px; font-weight: 500;
+  cursor: pointer; color: var(--text-primary); transition: background .15s;
+}
+.btn-secondary:hover { background: var(--bg); }
+.btn-primary {
+  height: 36px; padding: 0 16px; background: var(--accent); color: #fff;
+  border: none; border-radius: 8px; font-family: inherit; font-size: 13px; font-weight: 500;
+  cursor: pointer; transition: background .15s;
+}
+.btn-primary:hover { background: #1d4ed8; }
+
+@media (max-width: 768px) {
+  .sidebar { transform: translateX(-100%); transition: transform .25s; }
+  .sidebar.open { transform: translateX(0); }
+  .main-wrap { margin-left: 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <button class="sidebar-hamburger" onclick="document.getElementById('sidebar').classList.toggle('open')">
+      <span class="material-icons-round">menu</span>
+    </button>
+    <span class="sidebar-logo">Industrial Pulse</span>
+  </div>
+
+  <div class="sidebar-user">
+    <div class="user-avatar">A</div>
+    <div>
+      <div class="user-name">Alex Sterling</div>
+      <div class="user-role">Plant Manager</div>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="nav-item" href="hr.html">
+      <span class="material-icons-round">dashboard</span>
+      Anasayfa
+    </a>
+    <a class="nav-item" href="personel.html">
+      <span class="material-icons-round">groups</span>
+      Personel (İK)
+    </a>
+    <a class="nav-item active" href="bordro.html">
+      <span class="material-icons-round">receipt_long</span>
+      Maaş &amp; Bordro
+    </a>
+    <a class="nav-item" href="egitim.html">
+      <span class="material-icons-round">school</span>
+      Eğitim
+    </a>
+  </nav>
+</aside>
+
+<!-- MAIN -->
+<div class="main-wrap">
+
+  <!-- Top Back Banner -->
+  <div class="topbar">
+    <span class="topbar-title">Bordro Onay İşlemleri</span>
+    <a class="btn-back" href="hr.html">
+      <span class="material-icons-round">arrow_back</span>
+      İK Merkezine Dön
+    </a>
+  </div>
+
+  <div class="content">
+
+    <div class="page-header">
+      <div>
+        <div class="page-title">Bordro Onayı</div>
+        <div class="page-subtitle">Nisan 2026 — Bekleyen bordro kayıtları</div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-chip"><span class="num" id="statPending">0</span>&nbsp;Beklemede</div>
+        <div class="stat-chip"><span class="num" id="statApproved">0</span>&nbsp;Onaylı</div>
+        <div class="stat-chip"><span class="num" id="statWarn">0</span>&nbsp;İncelemede</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="entry-section">
+        <h3>Yeni Bordro Girişi</h3>
+        <div class="entry-form">
+          <div class="field">
+            <label>Çalışan Adı</label>
+            <input type="text" id="empName" placeholder="Ad Soyad">
+          </div>
+          <div class="field">
+            <label>Departman</label>
+            <select id="empDept">
+              <option value="">Seçin...</option>
+              <option>Mühendislik</option>
+              <option>İnsan Kaynakları</option>
+              <option>Finans</option>
+              <option>Pazarlama</option>
+              <option>Operasyon</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Brüt Maaş (₺)</label>
+            <input type="number" id="empBrut" placeholder="0.00">
+          </div>
+          <div class="field">
+            <label>Kesintiler (₺)</label>
+            <input type="number" id="empKes" placeholder="0.00">
+          </div>
+          <div class="field">
+            <label>Dönem</label>
+            <input type="month" id="empDone" value="2026-04">
+          </div>
+          <button class="btn-add" onclick="addRow()">
+            <span class="material-icons-round" style="font-size:16px">add</span>
+            Ekle
+          </button>
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Çalışan</th>
+            <th>Dönem</th>
+            <th>Brüt Maaş</th>
+            <th>Net Maaş</th>
+            <th>Durum</th>
+            <th style="text-align:right">İşlemler</th>
+          </tr>
+        </thead>
+        <tbody id="payrollTableBody">
+          <tr class="empty-row"><td colspan="7">Henüz kayıt yok. Yukarıdan bordro girişi yapın.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <h2>Bordro Gözden Geçir</h2>
+        <div class="modal-meta" id="modalMeta">—</div>
+      </div>
+      <button class="btn-close" onclick="closeModal()">
+        <span class="material-icons-round" style="font-size:17px">close</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="warn-note">
+        <span class="material-icons-round">warning_amber</span>
+        Bu kaydı onaylamadan önce lütfen bilgileri kontrol edin ve gerekiyorsa düzeltin.
+      </div>
+      <div class="modal-two-col">
+        <div class="modal-field">
+          <label>Çalışan Adı</label>
+          <input type="text" id="m_name">
+        </div>
+        <div class="modal-field">
+          <label>Departman</label>
+          <select id="m_dept">
+            <option>Mühendislik</option>
+            <option>İnsan Kaynakları</option>
+            <option>Finans</option>
+            <option>Pazarlama</option>
+            <option>Operasyon</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-two-col">
+        <div class="modal-field">
+          <label>Brüt Maaş (₺)</label>
+          <input type="number" id="m_brut">
+        </div>
+        <div class="modal-field">
+          <label>Kesintiler (₺)</label>
+          <input type="number" id="m_kes">
+        </div>
+      </div>
+      <div class="modal-field">
+        <label>Net Maaş (₺) — Otomatik</label>
+        <input type="text" id="m_net" readonly style="background:#f9fafb;color:var(--text-secondary);">
+      </div>
+      <div class="modal-field">
+        <label>Açıklama / Not</label>
+        <textarea id="m_note" rows="2" placeholder="Düzeltme sebebini veya notunuzu yazın..."></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="closeModal()">İptal</button>
+      <button class="btn-primary" onclick="saveModal()">
+        <span class="material-icons-round" style="font-size:14px;vertical-align:-3px;margin-right:4px">check_circle</span>
+        Düzelt &amp; Onayla
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  let rows = [], counter = 4492, activeRowId = null;
+
+  const fmt = n => '₺' + Number(n).toLocaleString('tr-TR', {minimumFractionDigits:2,maximumFractionDigits:2});
+
+  function addRow() {
+    const name = document.getElementById('empName').value.trim();
+    const dept = document.getElementById('empDept').value;
+    const brut = parseFloat(document.getElementById('empBrut').value) || 0;
+    const kes  = parseFloat(document.getElementById('empKes').value)  || 0;
+    const done = document.getElementById('empDone').value;
+    if (!name || !dept || !brut) { alert('Lütfen en az çalışan adı, departman ve brüt maaş girin.'); return; }
+    rows.push({ id: '#BRD-' + (++counter), name, dept, brut, kes, net: brut - kes, done, status: 'pending', note: '' });
+    ['empName','empBrut','empKes'].forEach(id => document.getElementById(id).value = '');
+    render();
+  }
+
+  function render() {
+    const tbody = document.getElementById('payrollTableBody');
+    if (!rows.length) {
+      tbody.innerHTML = '<tr class="empty-row"><td colspan="7">Henüz kayıt yok. Yukarıdan bordro girişi yapın.</td></tr>';
+      return updateStats();
+    }
+    tbody.innerHTML = rows.map(r => {
+      const pc = r.status==='approved' ? 'pill-approved' : r.status==='warned' ? 'pill-warned' : 'pill-pending';
+      const pl = r.status==='approved' ? '✓ Onaylandı'  : r.status==='warned' ? '⚠ İncelemede' : '# Beklemede';
+      const rc = r.status==='approved' ? 'row-approved'  : r.status==='warned' ? 'row-warned' : '';
+      return `<tr class="${rc}">
+        <td class="id-cell">${r.id}</td>
+        <td><div class="name-cell">${r.name}</div><div class="sub-cell">${r.dept}</div></td>
+        <td style="color:var(--text-secondary);font-size:12.5px">${r.done}</td>
+        <td class="amount-cell">${fmt(r.brut)}</td>
+        <td class="amount-cell">${fmt(r.net)}</td>
+        <td><span class="status-pill ${pc}">${pl}</span></td>
+        <td><div class="actions">
+          <button class="icon-btn btn-approve" title="Onayla" onclick="approveRow('${r.id}')">
+            <span class="material-icons-round" style="font-size:15px">check</span>
+          </button>
+          <button class="icon-btn btn-warn" title="Gözden Geçir" onclick="openModal('${r.id}')">
+            <span class="material-icons-round" style="font-size:15px">warning_amber</span>
+          </button>
+        </div></td>
+      </tr>`;
+    }).join('');
+    updateStats();
+  }
+
+  function approveRow(id) {
+    const r = rows.find(x => x.id===id); if (r) { r.status='approved'; render(); }
+  }
+
+  function openModal(id) {
+    const r = rows.find(x => x.id===id); if (!r) return;
+    activeRowId = id;
+    document.getElementById('modalMeta').textContent = r.id + ' — ' + r.name;
+    document.getElementById('m_name').value = r.name;
+    document.getElementById('m_dept').value = r.dept;
+    document.getElementById('m_brut').value = r.brut;
+    document.getElementById('m_kes').value  = r.kes;
+    document.getElementById('m_net').value  = fmt(r.net);
+    document.getElementById('m_note').value = r.note || '';
+    ['m_brut','m_kes'].forEach(id => {
+      const el = document.getElementById(id);
+      el.removeEventListener('input', updateNet); el.addEventListener('input', updateNet);
+    });
+    document.getElementById('modalOverlay').classList.add('open');
+  }
+
+  function updateNet() {
+    document.getElementById('m_net').value = fmt(
+      (parseFloat(document.getElementById('m_brut').value)||0) -
+      (parseFloat(document.getElementById('m_kes').value)||0)
+    );
+  }
+
+  function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('open'); activeRowId = null;
+  }
+
+  function saveModal() {
+    const r = rows.find(x => x.id===activeRowId); if (!r) return;
+    r.name   = document.getElementById('m_name').value.trim() || r.name;
+    r.dept   = document.getElementById('m_dept').value;
+    r.brut   = parseFloat(document.getElementById('m_brut').value) || r.brut;
+    r.kes    = parseFloat(document.getElementById('m_kes').value)  || 0;
+    r.net    = r.brut - r.kes;
+    r.note   = document.getElementById('m_note').value;
+    r.status = 'approved';
+    closeModal(); render();
+  }
+
+  function updateStats() {
+    document.getElementById('statPending').textContent  = rows.filter(r=>r.status==='pending').length;
+    document.getElementById('statApproved').textContent = rows.filter(r=>r.status==='approved').length;
+    document.getElementById('statWarn').textContent     = rows.filter(r=>r.status==='warned').length;
+  }
+
+  document.getElementById('modalOverlay').addEventListener('click', e => { if (e.target===e.currentTarget) closeModal(); });
+
+  rows = [
+    { id:'#BRD-4490', name:'Ahmet Yılmaz', dept:'Mühendislik',      brut:45000, kes:9200,  net:35800, done:'2026-04', status:'pending', note:'' },
+    { id:'#BRD-4491', name:'Selin Kaya',   dept:'İnsan Kaynakları', brut:32000, kes:6500,  net:25500, done:'2026-04', status:'pending', note:'' },
+    { id:'#BRD-4492', name:'Emre Doğan',   dept:'Finans',           brut:55000, kes:11800, net:43200, done:'2026-04', status:'pending', note:'' },
+  ];
+  render();
+</script>
+</body>
+</html>
