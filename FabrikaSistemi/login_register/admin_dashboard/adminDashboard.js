@@ -1,5 +1,18 @@
 let currentDept = '';
 
+// Toast bildirimi
+function showToast(message, type) {
+    const existing = document.getElementById('adminToast');
+    if (existing) existing.remove();
+    const toast = document.createElement('div');
+    toast.id = 'adminToast';
+    const bg = type === 'error' ? 'bg-red-600' : 'bg-slate-900';
+    toast.className = `fixed top-24 right-6 ${bg} text-white text-sm font-semibold px-5 py-3 rounded-xl shadow-2xl z-[200] flex items-center gap-2 transition-all animate-bounce`;
+    toast.innerHTML = `<span class="material-symbols-outlined text-base">${type === 'error' ? 'error' : 'check_circle'}</span> ${message}`;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 2800);
+}
+
 // Helper to log system events
 function logSystemEvent(user, action, location, status) {
     const logs = JSON.parse(localStorage.getItem('systemLogs')) || [];
@@ -56,7 +69,7 @@ function updateDashboard() {
         tbody.innerHTML = logs.slice(0, 10).map(log => {
             const date = new Date(log.time);
             const timeAgo = Math.floor((new Date() - date) / 60000);
-            const timeStr = timeAgo < 1 ? 'Just now' : (timeAgo < 60 ? `${timeAgo} mins ago` : `${Math.floor(timeAgo / 60)} hours ago`);
+            const timeStr = timeAgo < 1 ? 'Az önce' : (timeAgo < 60 ? `${timeAgo} dk önce` : `${Math.floor(timeAgo / 60)} saat önce`);
             const initials = log.user.split(' ').map(n => n[0]).join('');
 
             return `
@@ -382,13 +395,13 @@ document.addEventListener('DOMContentLoaded', function () {
                         break;
                 }
 
-                alert('Kayıt başarıyla eklendi!');
+                showToast('Kayıt başarıyla eklendi!');
                 updateDashboard();
                 closeDeptModal();
                 form.reset();
             } catch (error) {
                 console.error('Save error:', error);
-                alert('Kayıt sırasında bir hata oluştu.');
+                showToast('Kayıt sırasında bir hata oluştu.', 'error');
             }
         });
     }

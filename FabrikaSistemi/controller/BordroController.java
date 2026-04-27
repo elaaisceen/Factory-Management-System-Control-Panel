@@ -1,9 +1,5 @@
 package com.factory.stitch.controller;
 
-
-/**
- * Bu sinif Fabrika ERP backend modulu icin dokumante edilmis Java bileşenidir.
- */
 import com.factory.stitch.dto.ApiResponse;
 import com.factory.stitch.model.Bordro;
 import com.factory.stitch.service.MaasHesaplamaService;
@@ -12,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/bordro")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*") // HTML / JS frontend'den erişim için
 public class BordroController {
 
     private final MaasHesaplamaService maasService;
@@ -21,21 +17,23 @@ public class BordroController {
         this.maasService = maasService;
     }
 
+    /**
+     * Frontend maas.html den gelen FETCH POST isteğini yakalar
+     */
     @PostMapping("/kaydet")
     public ResponseEntity<ApiResponse> bordroyuKaydet(@RequestBody Bordro payload) {
         try {
+            // Service katmanı iş kuralları çalıştırılır (Transaction başlar)
             Bordro kaydedilen = maasService.bordroyuOnaylaVeKaydet(payload);
-            return ResponseEntity.ok(new ApiResponse(
-                    true,
-                    "Bordro basariyla islendi ve veritabanina kaydedildi. Personel: " + kaydedilen.getPersonelAd(),
-                    kaydedilen
-            ));
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(new ApiResponse(false, e.getMessage()));
+
+            return ResponseEntity.ok(new ApiResponse(true, 
+                "Bordro başarıyla işlendi ve veritabanına aktarıldı. Personel: " + kaydedilen.getPersonelAd(),
+                kaydedilen));
+
         } catch (Exception e) {
-            return ResponseEntity.internalServerError().body(
-                    new ApiResponse(false, "Hata olustu: Islem geri alindi. Detay: " + e.getMessage())
-            );
+            // Rollback senaryosu
+            return ResponseEntity.internalServerError()
+                    .body(new ApiResponse(false, "Hata oluştu: İşlem iptal edildi (Rollback). Detay: " + e.getMessage()));
         }
     }
 }

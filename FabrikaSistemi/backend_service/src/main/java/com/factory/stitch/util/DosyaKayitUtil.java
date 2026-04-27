@@ -7,16 +7,28 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 
 /**
- * Uygulama genelindeki işlem kayıtlarını (log) dosyaya yazmak için kullanılan yardımcı sınıf.
- * Final olarak tanımlanmıştır çünkü kalıtım yoluyla genişletilmesi amaçlanmamıştır.
+ * Uygulama genelindeki işlem kayıtlarını (log) dosyaya yazmak için kullanılan
+ * yardımcı sınıf.
+ * Final olarak tanımlanmıştır çünkü kalıtım yoluyla genişletilmesi
+ * amaçlanmamıştır.
+ *
+ * <p>
+ * <b>Sorumluluk sınırı:</b> Bu sınıf yalnızca dosya yazma işlemleri yapar.
+ * Kullanıcıdan giriş okuma (<code>sayiOku</code>) bu sınıfın görevi değildir;
+ * bu işlev {@link com.factory.stitch.Main#sayiOku(String)} metodunda tanımlıdır
+ * ve tüm servis sınıfları (SatinAlmaService, MalzemeServisi vb.) onu oradan
+ * kullanır.
+ * </p>
  */
 
 public final class DosyaKayitUtil {
-    // Kayıtların tutulacağı varsayılan dosya yolu: projenin ana dizinindeki "logs" klasörü içindedir.
+    // Kayıtların tutulacağı varsayılan dosya yolu: projenin ana dizinindeki "logs"
+    // klasörü içindedir.
     private static final Path LOG_DOSYASI = Path.of("logs", "islem-kaydi.txt");
 
     /**
-     * Private constructor tercih edilmiştir çünkü bu sınıfın dışarıdan "new" anahtar kelimesi ile örneğinin oluşturulmasını engellemek istenmiştir.
+     * Private constructor tercih edilmiştir çünkü bu sınıfın dışarıdan "new"
+     * anahtar kelimesi ile örneğinin oluşturulmasını engellemek istenmiştir.
      */
 
     private DosyaKayitUtil() {
@@ -45,7 +57,7 @@ public final class DosyaKayitUtil {
             System.out.println("[UYARI] İşlem dosyaya yazılamadı: " + e.getMessage());
         }
     }
-    
+
     /**
      * Log dosyasının sistemdeki tam yolunu döndürür.
      * * @return Dosyanın tam yoludur.

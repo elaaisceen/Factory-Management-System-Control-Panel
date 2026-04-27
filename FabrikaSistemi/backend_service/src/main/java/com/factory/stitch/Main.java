@@ -12,69 +12,41 @@ import com.factory.stitch.model.SurecYurutulebilir;
 import com.factory.stitch.model.Uretim;
 import com.factory.stitch.util.DosyaKayitUtil;
 import com.factory.stitch.config.DatabaseConnection;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Scanner;
 
+// NOT: Bu Scanner tüm uygulama boyunca tek bir System.in akışını paylaşır.
+// Her metod çağrısında yeni Scanner açmak System.in'i kapatır ve sonraki
+// okumalar başarısız olur. Bu nedenle paylaşımlı static scanner kullanılır.
+
+@SpringBootApplication
 public class Main {
 
-    // Log kayıtlarında zamanı standart bir formatta (Gün.Ay.Yıl Saat:Dakika:Saniye) göstermek için sabit tanımladık.
     private static final DateTimeFormatter ZAMAN_FORMATI = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
 
     public static void main(String[] args) {
-        try {
-        System.out.println("Sistem baslatiliyor... Veritabanina baglaniliyor.");
-        DatabaseConnection.getConnection();  // Veritabanı bağlantısını test etmek için ekledik. Gerçek uygulamada bu satır kaldırılabilir veya farklı bir şekilde kullanılabilir. İstersen direk kapatabilirsin, hata gözüküyor ama çalışıyor.
-        System.out.println("Baglanti Basarili!");
-    } catch (Exception e) {
-        System.out.println("KRITIK HATA: Veritabani baglantisi kurulamadi! Mesaj: " + e.getMessage());
-        // Bağlantı yoksa sistemi başlatmamak daha güvenlidir
-        return; 
+        SpringApplication.run(Main.class, args);
     }
-        Scanner input = new Scanner(System.in);
 
-        Map<Integer, Department> rolMatrisi = new LinkedHashMap<>();
-        rolMatrisi.put(1, new HumanResources("Ahmet Y."));
-        rolMatrisi.put(2, new Uretim("Mehmet K."));
-        rolMatrisi.put(3, new Depo("Ali Riza"));
-        rolMatrisi.put(4, new It("Ela Eda"));
-        rolMatrisi.put(5, new SatinAlma("Gizem S."));
-        rolMatrisi.put(6, new Finans("Aylin T."));
-
-        boolean sistemAcik = true;
-        while (sistemAcik) {
-            System.out.println("\n===== FABRIKA YONETIM SISTEMI =====");
-            System.out.println("Rol seciniz:");
-            System.out.println("1. IK | 2. Uretim | 3. Depo | 4. BT | 5. Satin Alma | 6. Finans | 0. Cikis");
-            System.out.print("Secim: ");
-
-            // Kullanıcıdan giriş alırken hata payını (harf girilmesi vb.) sayiOku metoduyla engelliyoruz.
-
-            int secim = sayiOku(input);
-            if (secim == 0) {
-                sistemAcik = false;
-                continue;
+    @Bean
+    public CommandLineRunner runConsoleApp() {
+        return args -> {
+            try {
+                System.out.println("=== Fabrika ERP Spring Boot Backend Baslatildi ===");
+                DatabaseConnection.getConnection();
+                System.out.println("Baglanti Basarili!");
+            } catch (Exception e) {
+                System.out.println("Veritabani uyarisi: " + e.getMessage());
             }
-
-            // Polymorphism (Çok Biçimlilik) burada devreye giriyor:
-            // Hangi sınıf olursa olsun (IT, Depo vb.) hepsi bir 'Department'tır.
-
-            Department departman = rolMatrisi.get(secim);
-            if (departman == null) {
-                System.out.println("Gecersiz rol secimi.");
-                continue;
-            }
-
-            // Seçilen departmanın alt menüsüne yönlendiriyoruz.
-
-            departmanMenu(input, departman);
-        }
-
-        input.close();
-        System.out.println("Sistem kapatildi.");
+            // Not: Spring Boot REST API olarak calisacagi icin Scanner loop'u devre disi birakildi.
+        };
     }
+
 
     // Seçilen departmana özel işlemleri yöneten alt menü.
 
@@ -89,7 +61,7 @@ public class Main {
             System.out.println("0. Ust Menuye Don");
             System.out.print("Secim: ");
 
-            int altSecim = sayiOku(input);
+            int altSecim = sayiOku("Lutfen bir secim yapiniz: ");
             switch (altSecim) {
                 case 1:
                     // Override edilmiş metod çağrılır.
@@ -135,15 +107,24 @@ public class Main {
     /**
      * Input validation (Giriş Doğrulama):
      * Kullanıcı sayı yerine harf girerse programın çökmesini engeller.
+     *
+     * Paylaşımlı static Scanner kullanılır: her çağrıda yeni Scanner(System.in)
+     * açmak, önceki Scanner kapandığında System.in'i de kapattığından sonraki
+     * okumalar NoSuchElementException fırlatır. Bu yöntem bu sorunu önler.
+     *
+     * @param mesaj Kullanıcıya gösterilecek istem metni
+     * @return Kullanıcının girdiği geçerli tam sayı
      */
+    private static final Scanner KONSOL_OKUYUCU = new Scanner(System.in);
 
-    private static int sayiOku(Scanner input) {
-        while (!input.hasNextInt()) {
-            input.nextLine(); // Hatalı girişi temizle
+    public static int sayiOku(String mesaj) {
+        System.out.print(mesaj);
+        while (!KONSOL_OKUYUCU.hasNextInt()) {
+            KONSOL_OKUYUCU.nextLine(); // Geçersiz satırı temizle
             System.out.print("Lutfen sayisal bir secim girin: ");
         }
-        int sonuc = input.nextInt();
-        input.nextLine(); // Buffer temizliği (Enter karakterini yutması için)
+        int sonuc = KONSOL_OKUYUCU.nextInt();
+        KONSOL_OKUYUCU.nextLine(); // Satır sonunu temizle
         return sonuc;
     }
 }
