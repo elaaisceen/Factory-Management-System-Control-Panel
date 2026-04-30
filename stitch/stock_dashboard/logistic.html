@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Lojistik Operasyonlari | Depo</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2b54bf",
+                        surface: "#f7f9fc",
+                        "on-surface": "#191c1e",
+                        secondary: "#006d37"
+                    },
+                    fontFamily: {
+                        headline: ["Manrope"],
+                        body: ["Inter"]
+                    },
+                    borderRadius: { DEFAULT: "1rem", lg: "2rem" }
+                }
+            }
+        };
+    </script>
+    <style>
+        body { font-family: "Inter", sans-serif; background-color: #f7f9fc; }
+        .soft-shadow { box-shadow: 0 24px 48px rgba(25, 28, 30, 0.05); }
+    </style>
+</head>
+<body class="bg-surface">
+<header class="bg-slate-50/80 backdrop-blur-xl shadow-sm fixed top-0 w-full z-50 flex justify-between items-center px-8 h-20">
+    <h1 class="text-blue-700 font-black font-headline text-2xl">Lojistik Panel</h1>
+    <a href="stock.html" class="text-sm font-bold text-slate-500 hover:text-primary transition-colors">← Depo Genel Bakisa Don</a>
+</header>
+
+<main class="pt-28 px-8 pb-12 max-w-7xl mx-auto">
+    <div class="mb-10">
+        <h2 class="font-headline font-extrabold text-4xl text-on-surface">Operasyonlar</h2>
+        <p class="text-slate-500 mt-2">Giren/çıkan ürün sevkiyatları ve araç takibi.</p>
+    </div>
+
+    <div class="bg-white rounded-3xl soft-shadow overflow-hidden">
+        <div class="p-6 border-b flex justify-between items-center">
+            <h3 class="font-headline font-bold text-xl">Aktif Sevkiyatlar</h3>
+            <span class="px-4 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-bold">Bugün</span>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left">
+                <thead class="bg-slate-50 text-[10px] uppercase font-black text-slate-400 tracking-widest">
+                    <tr>
+                        <th class="px-6 py-4">İşlem Tipi</th>
+                        <th class="px-6 py-4">Ürün Detayı</th>
+                        <th class="px-6 py-4">Miktar</th>
+                        <th class="px-6 py-4">Araç / Plaka</th>
+                        <th class="px-6 py-4">Durum</th>
+                        <th class="px-6 py-4 text-right">İşlem</th>
+                    </tr>
+                </thead>
+                <tbody id="shipmentTableBody" class="divide-y divide-slate-100 text-sm"></tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+<button onclick="openCreateModal()" class="fixed bottom-10 right-10 w-16 h-16 bg-secondary text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-all z-50" title="Yeni lojistik kaydi">
+    <span class="material-symbols-outlined text-3xl">local_shipping</span>
+</button>
+
+<div id="logisticsModal" class="hidden fixed inset-0 z-[60] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+    <div class="bg-white w-full max-w-lg rounded-3xl p-8 shadow-2xl">
+        <div class="flex justify-between items-center mb-6">
+            <h3 id="modalTitle" class="font-headline font-black text-2xl">Yeni Lojistik Kaydi</h3>
+            <button type="button" onclick="toggleModal('logisticsModal')" class="material-symbols-outlined text-slate-400">close</button>
+        </div>
+        <form id="logisticsForm" class="space-y-4">
+            <input type="hidden" id="editIndex" value="-1"/>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="type" class="block text-xs font-bold uppercase mb-1 text-slate-500">İşlem Tipi</label>
+                    <select id="type" class="w-full rounded-xl border-slate-200 focus:ring-secondary" required>
+                        <option value="GIRIS">Mal Kabul (Giriş)</option>
+                        <option value="CIKIS">Sevkiyat (Çıkış)</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="status" class="block text-xs font-bold uppercase mb-1 text-slate-500">Durum</label>
+                    <select id="status" class="w-full rounded-xl border-slate-200 focus:ring-secondary" required>
+                        <option value="Tamamlandi">Tamamlandı</option>
+                        <option value="Yukleniyor">Yükleniyor</option>
+                        <option value="Planlandi">Planlandı</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <label for="product" class="block text-xs font-bold uppercase mb-1 text-slate-500">Ürün Bilgisi</label>
+                <input id="product" type="text" class="w-full rounded-xl border-slate-200" placeholder="Ürün adı veya SKU girin" required>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="quantity" class="block text-xs font-bold uppercase mb-1 text-slate-500">Miktar</label>
+                    <input id="quantity" type="text" class="w-full rounded-xl border-slate-200" placeholder="250 Adet" required>
+                </div>
+                <div>
+                    <label for="plate" class="block text-xs font-bold uppercase mb-1 text-slate-500">Araç Plakası</label>
+                    <input id="plate" type="text" class="w-full rounded-xl border-slate-200" placeholder="34 AA 000" required>
+                </div>
+            </div>
+
+            <div>
+                <label for="carrier" class="block text-xs font-bold uppercase mb-1 text-slate-500">Taşıyıcı Bilgisi</label>
+                <input id="carrier" type="text" class="w-full rounded-xl border-slate-200" placeholder="Tir - Lojistik A.S." required>
+            </div>
+
+            <div class="flex gap-3 mt-8">
+                <button type="button" onclick="toggleModal('logisticsModal')" class="flex-1 py-3 font-bold text-slate-500">İptal</button>
+                <button type="submit" class="flex-1 py-3 bg-secondary text-white rounded-xl font-bold shadow-lg shadow-secondary/20">Kaydet</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    const shipments = [
+        { type: "GIRIS", product: "Celik Profil A-1", quantity: "250 Adet", plate: "34 ABC 123", carrier: "Tir - Lojistik A.S.", status: "Tamamlandi" },
+        { type: "CIKIS", product: "Bakir Kablo (Rulo)", quantity: "40 Rulo", plate: "06 XYZ 789", carrier: "Kamyonet - Oz Lojistik", status: "Yukleniyor" }
+    ];
+
+    function toggleModal(id) {
+        const modal = document.getElementById(id);
+        modal.classList.toggle("hidden");
+    }
+
+    function getTypeBadge(type) {
+        if (type === "GIRIS") {
+            return '<span class="material-symbols-outlined text-sm">download</span> GIRIS';
+        }
+        return '<span class="material-symbols-outlined text-sm">upload</span> CIKIS';
+    }
+
+    function getStatusBadge(status) {
+        if (status === "Tamamlandi") {
+            return '<span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-[10px] font-black uppercase">Tamamlandi</span>';
+        }
+        if (status === "Yukleniyor") {
+            return '<span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-[10px] font-black uppercase">Yukleniyor</span>';
+        }
+        return '<span class="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-[10px] font-black uppercase">Planlandi</span>';
+    }
+
+    function renderTable() {
+        const tableBody = document.getElementById("shipmentTableBody");
+        tableBody.innerHTML = "";
+
+        shipments.forEach((item, index) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td class="px-6 py-4 font-bold ${item.type === "GIRIS" ? "text-green-600" : "text-orange-600"} flex items-center gap-2">
+                    ${getTypeBadge(item.type)}
+                </td>
+                <td class="px-6 py-4 font-medium">${item.product}</td>
+                <td class="px-6 py-4 text-slate-500">${item.quantity}</td>
+                <td class="px-6 py-4">
+                    <div class="flex flex-col">
+                        <span class="font-bold">${item.plate}</span>
+                        <span class="text-[10px] text-slate-400">${item.carrier}</span>
+                    </div>
+                </td>
+                <td class="px-6 py-4">${getStatusBadge(item.status)}</td>
+                <td class="px-6 py-4 text-right">
+                    <button type="button" onclick="openEditModal(${index})" class="text-primary font-bold text-xs hover:underline">Duzenle</button>
+                </td>
+            `;
+            tableBody.appendChild(row);
+        });
+    }
+
+    function resetForm() {
+        document.getElementById("editIndex").value = "-1";
+        document.getElementById("modalTitle").textContent = "Yeni Lojistik Kaydi";
+        document.getElementById("logisticsForm").reset();
+    }
+
+    function openCreateModal() {
+        resetForm();
+        toggleModal("logisticsModal");
+    }
+
+    function openEditModal(index) {
+        const item = shipments[index];
+        if (!item) return;
+
+        document.getElementById("editIndex").value = String(index);
+        document.getElementById("modalTitle").textContent = "Lojistik Kaydi Duzenle";
+        document.getElementById("type").value = item.type;
+        document.getElementById("status").value = item.status;
+        document.getElementById("product").value = item.product;
+        document.getElementById("quantity").value = item.quantity;
+        document.getElementById("plate").value = item.plate;
+        document.getElementById("carrier").value = item.carrier;
+
+        const modal = document.getElementById("logisticsModal");
+        if (modal.classList.contains("hidden")) {
+            toggleModal("logisticsModal");
+        }
+    }
+
+    document.getElementById("logisticsForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const payload = {
+            type: document.getElementById("type").value,
+            status: document.getElementById("status").value,
+            product: document.getElementById("product").value.trim(),
+            quantity: document.getElementById("quantity").value.trim(),
+            plate: document.getElementById("plate").value.trim(),
+            carrier: document.getElementById("carrier").value.trim()
+        };
+
+        const editIndex = Number(document.getElementById("editIndex").value);
+        if (editIndex >= 0 && shipments[editIndex]) {
+            shipments[editIndex] = payload;
+            alert("Kayit guncellendi.");
+        } else {
+            shipments.push(payload);
+            alert("Yeni lojistik kaydi eklendi.");
+        }
+
+        renderTable();
+        toggleModal("logisticsModal");
+        resetForm();
+    });
+
+    renderTable();
+</script>
+<script src="../login_register/userLoader.js"></script>
+</body>
+</html>
+
+

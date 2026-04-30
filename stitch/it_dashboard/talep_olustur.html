@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BT Destek Talebi Oluştur</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2b54bf',
+                        'primary-container': '#dbe1ff',
+                        secondary: '#5b5d72',
+                        'secondary-container': '#e0e1f9',
+                        error: '#ba1a1a',
+                        'error-container': '#ffdad6',
+                        surface: '#fdfbff',
+                        'on-surface': '#1b1b1f',
+                        'outline-variant': '#c4c6d0'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        headline: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 font-sans text-on-surface min-h-screen flex items-center justify-center p-4">
+
+    <div class="bg-white rounded-[32px] shadow-2xl border border-slate-200 w-full max-w-2xl overflow-hidden animate-in fade-in zoom-in duration-500">
+        <!-- Header -->
+        <div class="bg-primary p-8 text-white relative overflow-hidden">
+            <div class="relative z-10">
+                <h1 class="text-3xl font-extrabold tracking-tight">Yeni Destek Talebi</h1>
+                <p class="text-primary-container/80 mt-2 font-medium">Lütfen teknik sorununuzu veya talebinizi detaylandırın.</p>
+            </div>
+            <!-- Decorative circle -->
+            <div class="absolute -right-12 -top-12 w-48 h-48 bg-white/10 rounded-full blur-3xl"></div>
+        </div>
+
+        <!-- Form Body -->
+        <div class="p-8 md:p-12 space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Personnel Name -->
+                <div class="space-y-2">
+                    <label class="flex items-center gap-2 text-sm font-bold text-slate-700 ml-1">
+                        <span class="material-symbols-outlined text-sm text-primary">person</span>
+                        Ad Soyad
+                    </label>
+                    <input type="text" id="reqName" placeholder="Örn: Mehmet Yılmaz" class="w-full px-5 py-4 rounded-2xl border-2 border-slate-100 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all text-sm outline-none">
+                </div>
+
+                <!-- Department -->
+                <div class="space-y-2">
+                    <label class="flex items-center gap-2 text-sm font-bold text-slate-700 ml-1">
+                        <span class="material-symbols-outlined text-sm text-primary">business</span>
+                        Departman
+                    </label>
+                    <select id="reqDept" class="w-full px-5 py-4 rounded-2xl border-2 border-slate-100 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all text-sm outline-none bg-white">
+                        <option value="Üretim">Üretim</option>
+                        <option value="Finans">Finans</option>
+                        <option value="İK">İnsan Kaynakları</option>
+                        <option value="Lojistik">Lojistik</option>
+                        <option value="Satın Alma">Satın Alma</option>
+                        <option value="BT">Bilgi Teknolojileri</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Ticket Title -->
+            <div class="space-y-2">
+                <label class="flex items-center gap-2 text-sm font-bold text-slate-700 ml-1">
+                    <span class="material-symbols-outlined text-sm text-primary">edit_note</span>
+                    Talep Konusu
+                </label>
+                <input type="text" id="reqTitle" placeholder="Kısa bir başlık yazın..." class="w-full px-5 py-4 rounded-2xl border-2 border-slate-100 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all text-sm outline-none">
+            </div>
+
+            <!-- BT Assignee -->
+            <div class="space-y-2">
+                <label class="flex items-center gap-2 text-sm font-bold text-slate-700 ml-1">
+                    <span class="material-symbols-outlined text-sm text-primary">support_agent</span>
+                    İlgili BT Uzmanı (Opsiyonel)
+                </label>
+                <div class="flex gap-4">
+                    <label class="flex-1 cursor-pointer group">
+                        <input type="radio" name="assignee" value="AS" class="hidden peer" checked>
+                        <div class="p-3 text-center rounded-xl border-2 border-slate-100 peer-checked:border-primary peer-checked:bg-primary/5 transition-all group-hover:bg-slate-50">
+                            <p class="text-xs font-bold text-slate-600 peer-checked:text-primary">Alex S.</p>
+                        </div>
+                    </label>
+                    <label class="flex-1 cursor-pointer group">
+                        <input type="radio" name="assignee" value="SK" class="hidden peer">
+                        <div class="p-3 text-center rounded-xl border-2 border-slate-100 peer-checked:border-primary peer-checked:bg-primary/5 transition-all group-hover:bg-slate-50">
+                            <p class="text-xs font-bold text-slate-600 peer-checked:text-primary">Sarah K.</p>
+                        </div>
+                    </label>
+                    <label class="flex-1 cursor-pointer group">
+                        <input type="radio" name="assignee" value="MV" class="hidden peer">
+                        <div class="p-3 text-center rounded-xl border-2 border-slate-100 peer-checked:border-primary peer-checked:bg-primary/5 transition-all group-hover:bg-slate-50">
+                            <p class="text-xs font-bold text-slate-600 peer-checked:text-primary">Mark V.</p>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div class="space-y-2">
+                <label class="flex items-center gap-2 text-sm font-bold text-slate-700 ml-1">
+                    <span class="material-symbols-outlined text-sm text-primary">description</span>
+                    Açıklama
+                </label>
+                <textarea id="reqDesc" rows="4" placeholder="Sorununuzu detaylandırın..." class="w-full px-5 py-4 rounded-2xl border-2 border-slate-100 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all text-sm outline-none resize-none"></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <button onclick="submitTicket()" class="w-full py-5 bg-primary text-white rounded-2xl font-bold shadow-xl shadow-primary/30 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3">
+                <span class="material-symbols-outlined">send</span>
+                Talebi Gönder
+            </button>
+            
+            <div id="successMsg" class="hidden text-center text-green-600 font-bold animate-bounce mt-4">
+                Talebiniz BT departmanına başarıyla iletildi!
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function submitTicket() {
+            const name = document.getElementById('reqName').value;
+            const dept = document.getElementById('reqDept').value;
+            const title = document.getElementById('reqTitle').value;
+            const desc = document.getElementById('reqDesc').value;
+            const assignee = document.querySelector('input[name="assignee"]:checked').value;
+
+            if (!name || !title || !desc) {
+                alert('Lütfen tüm zorunlu alanları doldurun!');
+                return;
+            }
+
+            const assigneeData = {
+                'AS': { color: 'bg-primary/20 text-primary' },
+                'SK': { color: 'bg-secondary/20 text-secondary' },
+                'MV': { color: 'bg-slate-200 text-slate-600' }
+            };
+
+            const newTicket = {
+                id: Date.now(),
+                title: title,
+                requester: name,
+                dept: dept,
+                time: 'Şimdi',
+                category: 'Genel Destek',
+                priority: 'Orta',
+                status: 'Beklemede',
+                taskStatus: 'Başlanmadı',
+                rejectionReason: '',
+                icon: 'support',
+                iconClass: 'bg-primary/10 text-primary',
+                badgeClass: 'bg-secondary-container text-on-secondary-container',
+                assignee: assignee,
+                assigneeColor: assigneeData[assignee].color,
+                border: '',
+                description: desc
+            };
+
+            let tickets = JSON.parse(localStorage.getItem('it_support_tickets')) || [];
+            tickets.unshift(newTicket);
+            localStorage.setItem('it_support_tickets', JSON.stringify(tickets));
+
+            document.getElementById('successMsg').classList.remove('hidden');
+            setTimeout(() => {
+                window.location.href = 'destek_talepleri.html';
+            }, 1500);
+        }
+    </script>
+    <script src="../login_register/userLoader.js"></script>
+</body>
+</html>
+
+
+

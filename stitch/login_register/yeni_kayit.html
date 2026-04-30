@@ -1,0 +1,211 @@
+<!--Powered by Elanur Tuana İŞCEN-->
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Yeni Kayıt - Pulse Industrial</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "surface": "#f7f9fc","surface-container-lowest":"#ffffff","surface-container":"#eceef1",
+          "surface-container-low":"#f2f4f7","on-surface":"#191c1e","on-surface-variant":"#434653",
+          "primary":"#2b54bf","on-primary":"#ffffff","outline":"#747684","outline-variant":"#c4c6d5",
+          "error":"#ba1a1a","secondary":"#006d37","on-secondary":"#ffffff"
+        },
+        fontFamily: { "headline": ["Manrope"], "body": ["Inter"], "label": ["Inter"] },
+        borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+      },
+    },
+  }
+</script>
+<style>
+  body { background-color: #f7f9fc; font-family: 'Inter', sans-serif; min-height: 100dvh; }
+  .glass-panel { background: rgba(255,255,255,0.8); backdrop-filter: blur(20px); }
+  .soft-shadow { box-shadow: 0 20px 50px rgba(43,84,191,0.05); }
+  .input-inset { background: #f2f4f7; transition: all 0.2s ease; }
+  .input-inset:focus { background: #fff; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); outline: 2px solid #2b54bf33; }
+  .input-inset-wrap { background: #f2f4f7; transition: all 0.2s ease; }
+  .input-inset-wrap:focus-within { background: #fff; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); }
+  .icon { width: 20px; height: 20px; flex-shrink: 0; color: #747684; }
+  select.input-inset { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23747684' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; appearance: none; }
+</style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 md:p-8 overflow-x-hidden">
+<div class="fixed inset-0 -z-10 overflow-hidden">
+  <div class="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] bg-green-500/5 rounded-full blur-3xl"></div>
+  <div class="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-500/5 rounded-full blur-3xl"></div>
+</div>
+<main class="w-full max-w-2xl glass-panel rounded-xl soft-shadow border border-white/20 my-8">
+  <section class="p-8 md:p-12">
+    <!-- Başlık -->
+    <div class="mb-8">
+      <div class="flex items-center gap-2 mb-1">
+        <svg class="w-5 h-5 text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+          <line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/>
+        </svg>
+        <span class="text-xs font-bold uppercase tracking-widest text-green-600">Yeni Üye Kaydı</span>
+      </div>
+      <h2 class="font-headline font-bold text-3xl text-on-surface mt-2">Hesap Oluştur</h2>
+      <p class="text-on-surface-variant text-sm mt-1">Endüstriyel ekosistemimize hemen katılın.</p>
+    </div>
+
+    <!-- Hata / Başarı Bannerları -->
+    <div id="errorBanner" class="hidden mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-800 text-sm font-medium flex items-center gap-2">
+      <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span id="errorText"></span>
+    </div>
+    <div id="successBanner" class="hidden mb-4 p-3 bg-green-50 border border-green-200 rounded-lg text-green-800 text-sm font-medium"></div>
+
+    <form class="space-y-5" id="registerForm" autocomplete="off">
+      <!-- Ad / Soyad -->
+      <div class="grid grid-cols-2 gap-4">
+        <div class="space-y-1.5">
+          <label class="text-[10px] font-bold uppercase tracking-widest text-outline px-1">Ad</label>
+          <input id="firstName" name="firstName" class="w-full input-inset border-none rounded-lg py-3 px-4 font-medium text-sm" placeholder="Mehmet" type="text"/>
+        </div>
+        <div class="space-y-1.5">
+          <label class="text-[10px] font-bold uppercase tracking-widest text-outline px-1">Soyad</label>
+          <input id="lastName" name="lastName" class="w-full input-inset border-none rounded-lg py-3 px-4 font-medium text-sm" placeholder="Yılmaz" type="text"/>
+        </div>
+      </div>
+
+      <!-- E-posta -->
+      <div class="space-y-1.5">
+        <label class="text-[10px] font-bold uppercase tracking-widest text-outline px-1">E-Posta</label>
+        <div class="input-inset-wrap flex items-center px-4 py-3 rounded-lg">
+          <svg class="icon mr-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+          </svg>
+          <input id="email" name="email" class="bg-transparent border-none focus:ring-0 w-full font-medium text-sm placeholder:text-outline-variant" placeholder="mehmet.yilmaz@fabrika.com" type="email"/>
+        </div>
+      </div>
+
+      <!-- Telefon -->
+      <div class="space-y-1.5">
+        <label class="text-[10px] font-bold uppercase tracking-widest text-outline px-1">Telefon Numarası</label>
+        <div class="input-inset-wrap flex items-center px-4 py-3 rounded-lg">
+          <svg class="icon mr-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.42 2 2 0 0 1 3.6 1.24h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.73 16.92z"/>
+          </svg>
+          <input id="telefon" name="telefon" class="bg-transparent border-none focus:ring-0 w-full font-medium text-sm placeholder:text-outline-variant" placeholder="0555 123 45 67" type="tel"/>
+        </div>
+      </div>
+
+      <!-- Cinsiyet + Askerlik -->
+      <div class="grid grid-cols-2 gap-4">
+        <div class="space-y-1.5">
+          <label class="text-[10px] font-bold uppercase tracking-widest text-outline px-1">Cinsiyet</label>
+          <select id="cinsiyet" name="cinsiyet" class="w-full input-inset border-none rounded-lg py-3 px-4 font-medium text-sm text-on-surface">
+            <option value="" disabled selected>Seçiniz</option>
+            <option value="erkek">Erkek</option>
+            <option value="kadin">Kadın</option>
+            <option value="belirsiz">Belirtmek İstemiyorum</option>
+          </select>
+        </div>
+        <div class="space-y-1.5">
+          <label class="text-[10px] font-bold uppercase tracking-widest text-outline px-1">Askerlik Durumu</label>
+          <select id="askerlik" name="askerlik" class="w-full input-inset border-none rounded-lg py-3 px-4 font-medium text-sm text-on-surface">
+            <option value="" disabled selected>Seçiniz</option>
+            <option value="yapildi">Yapıldı</option>
+            <option value="yapilmadi">Yapılmadı</option>
+            <option value="muaf">Muaf</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Mezuniyet -->
+      <div class="space-y-1.5">
+        <label class="text-[10px] font-bold uppercase tracking-widest text-outline px-1">Mezuniyet Bilgisi</label>
+        <select id="mezuniyet" name="mezuniyet" class="w-full input-inset border-none rounded-lg py-3 px-4 font-medium text-sm text-on-surface">
+          <option value="" disabled selected>Seçiniz</option>
+          <option value="lise">Lise</option>
+          <option value="on_lisans">Ön Lisans</option>
+          <option value="lisans">Lisans</option>
+          <option value="yuksek_lisans">Yüksek Lisans</option>
+          <option value="doktora">Doktora</option>
+        </select>
+      </div>
+
+      <!-- Pozisyon -->
+      <div class="space-y-1.5">
+        <label class="text-[10px] font-bold uppercase tracking-widest text-outline px-1">Firmamızdaki Pozisyonunuz</label>
+        <div class="input-inset-wrap flex items-center px-4 py-3 rounded-lg">
+          <svg class="icon mr-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+          </svg>
+          <select id="pozisyon" name="pozisyon" class="bg-transparent border-none focus:ring-0 w-full font-medium text-sm text-on-surface appearance-none">
+            <option value="" disabled selected>Seçiniz</option>
+            <option value="1">Genel Müdür</option>
+            <option value="2">Geliştirici / Admin</option>
+            <option value="3">Bilgi Teknolojileri Personeli</option>
+            <option value="4">Bilgi Teknolojileri Yöneticisi</option>
+            <option value="5">İnsan Kaynakları Personeli</option>
+            <option value="6">İnsan Kaynakları Yöneticisi</option>
+            <option value="7">Depo Personeli</option>
+            <option value="8">Depo Yöneticisi</option>
+            <option value="9">Üretim Personeli</option>
+            <option value="10">Üretim Yöneticisi</option>
+            <option value="11">Finans Personeli</option>
+            <option value="12">Finans Yöneticisi</option>
+            <option value="13">Satın Alma Personeli</option>
+            <option value="14">Satın Alma Yöneticisi</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Şifreler -->
+      <div class="grid grid-cols-2 gap-4">
+        <div class="space-y-1.5">
+          <label class="text-[10px] font-bold uppercase tracking-widest text-outline px-1">Şifre</label>
+          <div class="input-inset-wrap flex items-center px-4 py-3 rounded-lg">
+            <svg class="icon mr-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+            <input id="sifre" name="sifre" class="bg-transparent border-none focus:ring-0 w-full font-medium text-sm placeholder:text-outline-variant" placeholder="••••••••" type="password"/>
+          </div>
+        </div>
+        <div class="space-y-1.5">
+          <label class="text-[10px] font-bold uppercase tracking-widest text-outline px-1">Şifre Onay</label>
+          <div class="input-inset-wrap flex items-center px-4 py-3 rounded-lg">
+            <svg class="icon mr-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 12l2 2 4-4"/><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+            <input id="sifreOnay" name="sifreOnay" class="bg-transparent border-none focus:ring-0 w-full font-medium text-sm placeholder:text-outline-variant" placeholder="••••••••" type="password"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kayıt Ol Butonu -->
+      <div class="pt-2 flex flex-col gap-4">
+        <button id="registerBtn" type="submit"
+          class="w-full bg-green-700 text-white py-4 rounded-lg font-headline font-bold text-lg shadow-lg shadow-green-200 hover:bg-green-800 active:scale-95 transition-all">
+          Kayıt Ol
+        </button>
+        <div class="flex items-start gap-2 px-2">
+          <input id="sozlesme" class="rounded mt-0.5 text-green-700 w-4 h-4 border-outline-variant flex-shrink-0" type="checkbox"/>
+          <span class="text-xs text-outline leading-tight font-medium">Kullanım koşullarını ve gizlilik politikasını kabul ediyorum.</span>
+        </div>
+      </div>
+    </form>
+
+    <div class="mt-8 pt-6 border-t border-surface-container text-center">
+      <p class="text-sm text-on-surface-variant">Zaten bir hesabınız var mı?
+        <a class="text-blue-600 font-bold hover:underline" href="loginRegister.html">Giriş Yapın</a>
+      </p>
+    </div>
+  </section>
+</main>
+<script src="yeni_kayit.js"></script>
+<script src="../login_register/userLoader.js"></script>
+</body>
+</html>
+
+
+

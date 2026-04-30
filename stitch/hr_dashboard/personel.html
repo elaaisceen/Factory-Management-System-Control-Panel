@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personel Yönetimi — İnsan Kaynakları</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f0f2f5;
+  --surface: #ffffff;
+  --border: #e4e7ec;
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+  --accent: #2563eb;
+  --accent-light: #eff6ff;
+  --ok-bg: #dcfce7;    --ok-text: #166534;
+  --bad-bg: #fee2e2;   --bad-text: #991b1b;
+  --warn-bg: #fef9c3;  --warn-text: #854d0e;
+  --sidebar-w: 240px;
+  --topbar-h: 52px;
+  --radius: 12px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.05);
+}
+
+html, body { height: 100%; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  display: flex;
+}
+
+/* ════ SIDEBAR ════ */
+.sidebar {
+  width: var(--sidebar-w);
+  min-height: 100vh;
+  background: #fff;
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; flex-shrink: 0;
+  position: fixed; top: 0; left: 0; bottom: 0;
+  z-index: 200;
+}
+.sidebar-brand {
+  display: flex; align-items: center; gap: 10px;
+  padding: 20px 18px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.sidebar-hamburger {
+  background: none; border: none; cursor: pointer;
+  color: var(--text-secondary); padding: 2px;
+  display: flex; align-items: center;
+}
+.sidebar-logo { font-size: 17px; font-weight: 700; color: var(--accent); }
+
+.sidebar-user {
+  margin: 14px 12px;
+  background: #f8fafc; border: 1px solid var(--border);
+  border-radius: 10px; padding: 10px 12px;
+  display: flex; align-items: center; gap: 10px;
+}
+.user-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; color: #fff; font-size: 15px; font-weight: 600;
+}
+.user-name { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+.user-role { font-size: 10px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; }
+
+.sidebar-nav { padding: 6px 10px; flex: 1; }
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 12px; border-radius: 8px;
+  font-size: 13.5px; font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all .15s; margin-bottom: 2px;
+}
+.nav-item:hover { background: #f1f5f9; color: var(--text-primary); }
+.nav-item.active { background: var(--accent-light); color: var(--accent); font-weight: 600; }
+.nav-item .material-icons-round { font-size: 19px; }
+
+/* ════ MAIN ════ */
+.main-wrap {
+  margin-left: var(--sidebar-w);
+  flex: 1; display: flex; flex-direction: column; min-height: 100vh;
+}
+
+.topbar {
+  height: var(--topbar-h);
+  background: #1e2340;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px;
+  position: sticky; top: 0; z-index: 100;
+}
+.topbar-title { font-size: 14px; font-weight: 600; color: #e2e8f0; }
+.btn-back {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--accent); color: #fff;
+  border: none; border-radius: 50px; padding: 7px 18px;
+  font-size: 13px; font-weight: 500;
+  cursor: pointer; text-decoration: none;
+}
+
+.content { padding: 26px; flex: 1; }
+
+.page-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  margin-bottom: 22px;
+}
+.page-title { font-size: 20px; font-weight: 600; }
+.page-subtitle { font-size: 13px; color: var(--text-secondary); margin-top: 3px; }
+
+/* ── Card ── */
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden;
+  margin-bottom: 24px;
+}
+
+/* ── Form ── */
+.entry-section { padding: 20px; border-bottom: 1px solid var(--border); background: #fafbfc; }
+.entry-section h3 {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .05em; color: var(--text-muted); margin-bottom: 16px;
+}
+.entry-form {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+.field { display: flex; flex-direction: column; gap: 4px; }
+.field label { font-size: 10px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; }
+.field input, .field select {
+  height: 36px; border: 1px solid var(--border); border-radius: 8px;
+  padding: 0 12px; font-family: inherit; font-size: 13px; outline: none;
+}
+.field input:focus, .field select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37,99,235,.1); }
+
+.btn-submit {
+  height: 38px; padding: 0 20px; background: var(--accent); color: #fff;
+  border: none; border-radius: 8px; font-family: inherit; font-size: 13px; font-weight: 600;
+  cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
+  margin-top: 10px; transition: background .15s;
+}
+.btn-submit:hover { background: #1d4ed8; }
+
+/* ── Controls ── */
+.table-controls {
+  padding: 12px 20px; border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+}
+.search-box { position: relative; flex: 1; max-width: 320px; }
+.search-box input {
+  width: 100%; height: 36px; padding: 0 12px 0 36px;
+  border: 1px solid var(--border); border-radius: 8px; font-size: 13px; outline: none;
+}
+.search-box .material-icons-round { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-size: 18px; color: var(--text-muted); }
+
+.filter-tabs { display: flex; gap: 4px; background: #f1f5f9; padding: 3px; border-radius: 9px; }
+.filter-tab {
+  padding: 6px 14px; font-size: 12px; font-weight: 600; color: var(--text-secondary);
+  border-radius: 7px; cursor: pointer; transition: all .15s;
+}
+.filter-tab.active { background: #fff; color: var(--accent); box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+
+/* ── Table ── */
+.table-wrap { overflow-x: auto; width: 100%; }
+table { width: 100%; border-collapse: collapse; }
+thead th {
+  padding: 12px 16px; font-size: 10px; font-weight: 700;
+  text-transform: uppercase; color: var(--text-muted);
+  text-align: left; border-bottom: 1px solid var(--border); background: #fafbfc;
+}
+tbody tr { border-bottom: 1px solid var(--border); transition: background .1s; }
+tbody tr:hover { background: #f9fafb; }
+tbody tr.status-inactive { opacity: 0.6; background: #f3f4f6; }
+td { padding: 14px 16px; font-size: 13px; vertical-align: middle; }
+
+.status-pill {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600;
+}
+.pill-active { background: var(--ok-bg); color: var(--ok-text); }
+.pill-inactive { background: var(--bad-bg); color: var(--bad-text); }
+
+.actions-cell { position: relative; text-align: right; }
+.btn-more {
+  width: 32px; height: 32px; border: none; background: none;
+  border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  color: var(--text-secondary); transition: background .15s;
+}
+.btn-more:hover { background: #f1f5f9; }
+
+.dropdown-menu {
+  position: absolute; right: 16px; top: 100%;
+  background: #fff; border: 1px solid var(--border);
+  border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  display: none; flex-direction: column; min-width: 140px; z-index: 10;
+}
+.dropdown-menu.open { display: flex; }
+.dropdown-item {
+  padding: 8px 12px; font-size: 12.5px; color: var(--text-primary);
+  text-decoration: none; cursor: pointer; display: flex; align-items: center; gap: 8px;
+}
+.dropdown-item:hover { background: #f8fafc; }
+.dropdown-item.text-red { color: #dc2626; }
+.dropdown-item.text-blue { color: #2563eb; }
+
+@media (max-width: 1024px) {
+  .sidebar { transform: translateX(-100%); }
+  .main-wrap { margin-left: 0; }
+}
+</style>
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <span class="sidebar-logo">Industrial Pulse</span>
+  </div>
+  <div class="sidebar-user">
+    <div class="user-avatar">A</div>
+    <div>
+      <div class="user-name" id="user-fullname">Alex Sterling</div>
+      <div class="user-role" id="user-role">İK Müdürü</div>
+    </div>
+  </div>
+  <nav class="sidebar-nav">
+    <a class="nav-item" href="hr.html"><span class="material-icons-round">dashboard</span> Anasayfa</a>
+    <a class="nav-item active" href="personel.html"><span class="material-icons-round">groups</span> Personel (İK)</a>
+    <a class="nav-item" href="bordro.html"><span class="material-icons-round">receipt_long</span> Maaş &amp; Bordro</a>
+    <a class="nav-item" href="egitim.html"><span class="material-icons-round">school</span> Eğitim</a>
+  </nav>
+</aside>
+
+<div class="main-wrap">
+  <div class="topbar">
+    <span class="topbar-title">Personel Bilgi Sistemi</span>
+    <a class="btn-back" href="hr.html"><span class="material-icons-round">arrow_back</span> İK Merkezi</a>
+  </div>
+
+  <div class="content">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Personel Listesi</h1>
+        <p class="page-subtitle">Tüm çalışanların detaylı bilgileri ve durum takibi</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="entry-section">
+        <h3>Yeni Personel Kaydı</h3>
+        <form class="entry-form" id="personnelForm">
+          <div class="field">
+            <label>Ad Soyad</label>
+            <input type="text" id="p_name" required placeholder="Ad Soyad">
+          </div>
+          <div class="field">
+            <label>Doğum Tarihi</label>
+            <input type="date" id="p_birth" required>
+          </div>
+          <div class="field">
+            <label>Departman</label>
+            <select id="p_dept" required>
+              <option value="">Seçin...</option>
+              <option>Ar-Ge</option>
+              <option>Üretim</option>
+              <option>BTBS</option>
+              <option>İnsan Kaynakları</option>
+              <option>Operasyon</option>
+              <option>Pazarlama</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Uzmanlık Alanı</label>
+            <input type="text" id="p_expert" placeholder="Örn: Kıdemli Mühendis">
+          </div>
+          <div class="field">
+            <label>İşe Giriş Tarihi</label>
+            <input type="date" id="p_hire" required>
+          </div>
+          <div class="field">
+            <label>E-posta</label>
+            <input type="email" id="p_email" placeholder="ornek@fabrika.com">
+          </div>
+          <div class="field">
+            <label>Telefon No</label>
+            <input type="tel" id="p_phone" placeholder="05XX XXX XX XX">
+          </div>
+          <div class="field">
+            <label>Çalışma Şekli</label>
+            <select id="p_worktype">
+              <option>Ofis</option>
+              <option>Remote</option>
+              <option>Hibrit</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Medeni Hali</label>
+            <select id="p_marital">
+              <option>Bekar</option>
+              <option>Evli</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Askerlik Durumu</label>
+            <select id="p_military">
+              <option>Muaf</option>
+              <option>Yapıldı</option>
+              <option>Tecilli</option>
+            </select>
+          </div>
+          <div class="field" style="justify-content: flex-end;">
+            <button type="submit" class="btn-submit">
+              <span class="material-icons-round">person_add</span> Personeli Kaydet
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div class="table-controls">
+        <div class="search-box">
+          <span class="material-icons-round">search</span>
+          <input type="text" id="p_search" placeholder="İsim, e-posta veya uzmanlık ara..." oninput="render()">
+        </div>
+        <div class="filter-tabs" id="p_filters">
+          <div class="filter-tab active" data-status="all" onclick="setFilter('all')">Tümü</div>
+          <div class="filter-tab" data-status="active" onclick="setFilter('active')">Aktif</div>
+          <div class="filter-tab" data-status="inactive" onclick="setFilter('inactive')">Çıkış Verilenler</div>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Ad Soyad</th>
+              <th>Departman</th>
+              <th>Uzmanlık</th>
+              <th>İşe Giriş</th>
+              <th>Çalışma Şekli</th>
+              <th>İletişim</th>
+              <th>Durum</th>
+              <th style="text-align:right">İşlemler</th>
+            </tr>
+          </thead>
+          <tbody id="personnelTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const LS_KEY = 'factory_personnel';
+
+function getPersonnel() {
+  const data = localStorage.getItem(LS_KEY);
+  if (!data) {
+    const initial = [
+      { id: 1, name: 'Alex Sterling', birth: '1985-05-12', dept: 'İnsan Kaynakları', expert: 'İK Müdürü', hire: '2020-01-15', email: 'alex@fabrika.com', phone: '0532 111 22 33', worktype: 'Ofis', marital: 'Evli', military: 'Yapıldı', status: 'active' },
+      { id: 2, name: 'Elanur Tuana', birth: '1992-08-24', dept: 'Ar-Ge', expert: 'Yazılım Mimarı', hire: '2021-06-10', email: 'elanur@fabrika.com', phone: '0533 444 55 66', worktype: 'Remote', marital: 'Bekar', military: 'Muaf', status: 'active' },
+      { id: 3, name: 'Mehmet Demir', birth: '1988-02-10', dept: 'Üretim', expert: 'Üretim Sorumlusu', hire: '2019-11-20', email: 'mehmet@fabrika.com', phone: '0535 777 88 99', worktype: 'Ofis', marital: 'Evli', military: 'Yapıldı', status: 'inactive' }
+    ];
+    localStorage.setItem(LS_KEY, JSON.stringify(initial));
+    return initial;
+  }
+  return JSON.parse(data);
+}
+
+function savePersonnel(data) {
+  localStorage.setItem(LS_KEY, JSON.stringify(data));
+}
+
+let currentFilter = 'active'; 
+let activeEditId = null;
+
+function setFilter(status) {
+  currentFilter = status;
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.toggle('active', t.dataset.status === status));
+  render();
+}
+
+function toggleStatus(id) {
+  const list = getPersonnel();
+  const p = list.find(x => x.id === id);
+  if (p) {
+    p.status = p.status === 'active' ? 'inactive' : 'active';
+    savePersonnel(list);
+    render();
+  }
+}
+
+function editPerson(id) {
+  const list = getPersonnel();
+  const p = list.find(x => x.id === id);
+  if (!p) return;
+
+  activeEditId = id;
+  document.getElementById('p_name').value = p.name;
+  document.getElementById('p_birth').value = p.birth;
+  document.getElementById('p_dept').value = p.dept;
+  document.getElementById('p_expert').value = p.expert;
+  document.getElementById('p_hire').value = p.hire;
+  document.getElementById('p_email').value = p.email;
+  document.getElementById('p_phone').value = p.phone;
+  document.getElementById('p_worktype').value = p.worktype;
+  document.getElementById('p_marital').value = p.marital;
+  document.getElementById('p_military').value = p.military;
+
+  document.querySelector('.btn-submit').innerHTML = '<span class="material-icons-round">save</span> Bilgileri Güncelle';
+  document.querySelector('.entry-section').scrollIntoView({ behavior: 'smooth' });
+}
+
+function render() {
+  const tbody = document.getElementById('personnelTableBody');
+  const search = document.getElementById('p_search').value.toLowerCase();
+  const personnel = getPersonnel();
+
+  let filtered = personnel.filter(p => {
+    const matchesSearch = p.name.toLowerCase().includes(search) || p.email.toLowerCase().includes(search) || p.expert.toLowerCase().includes(search);
+    if (currentFilter === 'all') return matchesSearch;
+    return matchesSearch && p.status === currentFilter;
+  });
+
+  tbody.innerHTML = filtered.map(p => `
+    <tr class="${p.status === 'inactive' ? 'status-inactive' : ''}">
+      <td>
+        <div class="user-name">${p.name}</div>
+        <div style="font-size:11px; color:var(--text-muted)">Doğum: ${p.birth}</div>
+      </td>
+      <td style="font-weight:500">${p.dept}</td>
+      <td style="color:var(--text-secondary)">${p.expert}</td>
+      <td style="font-family:'DM Mono'">${p.hire}</td>
+      <td>
+        <span style="font-size:12px; padding:2px 6px; border-radius:4px; background:#f1f5f9">${p.worktype}</span>
+      </td>
+      <td>
+        <div style="font-size:12px">${p.email}</div>
+        <div style="font-size:11px; color:var(--text-muted)">${p.phone}</div>
+      </td>
+      <td>
+        <span class="status-pill ${p.status === 'active' ? 'pill-active' : 'pill-inactive'}">
+          ${p.status === 'active' ? '✓ Aktif' : '✕ Çıkış Verildi'}
+        </span>
+      </td>
+      <td class="actions-cell">
+        <button class="btn-more" onclick="toggleDropdown(${p.id})">
+          <span class="material-icons-round">more_vert</span>
+        </button>
+        <div class="dropdown-menu" id="dropdown-${p.id}">
+          <div class="dropdown-item ${p.status === 'active' ? 'text-red' : 'text-blue'}" onclick="toggleStatus(${p.id})">
+            <span class="material-icons-round" style="font-size:18px">${p.status === 'active' ? 'person_off' : 'person_add'}</span>
+            ${p.status === 'active' ? 'Çıkış Ver' : 'Tekrar Aktifleştir'}
+          </div>
+          <div class="dropdown-item" onclick="editPerson(${p.id})">
+            <span class="material-icons-round" style="font-size:18px">edit</span> Bilgileri Düzenle
+          </div>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function toggleDropdown(id) {
+  document.querySelectorAll('.dropdown-menu').forEach(d => {
+    if (d.id !== 'dropdown-' + id) d.classList.remove('open');
+  });
+  document.getElementById('dropdown-' + id).classList.toggle('open');
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.actions-cell')) {
+    document.querySelectorAll('.dropdown-menu').forEach(d => d.classList.remove('open'));
+  }
+});
+
+document.getElementById('personnelForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const list = getPersonnel();
+  const data = {
+    name: document.getElementById('p_name').value,
+    birth: document.getElementById('p_birth').value,
+    dept: document.getElementById('p_dept').value,
+    expert: document.getElementById('p_expert').value,
+    hire: document.getElementById('p_hire').value,
+    email: document.getElementById('p_email').value,
+    phone: document.getElementById('p_phone').value,
+    worktype: document.getElementById('p_worktype').value,
+    marital: document.getElementById('p_marital').value,
+    military: document.getElementById('p_military').value,
+  };
+
+  if (activeEditId) {
+    const idx = list.findIndex(x => x.id === activeEditId);
+    if (idx !== -1) list[idx] = { ...list[idx], ...data };
+    activeEditId = null;
+    document.querySelector('.btn-submit').innerHTML = '<span class="material-icons-round">person_add</span> Personeli Kaydet';
+  } else {
+    list.push({ id: Date.now(), ...data, status: 'active' });
+  }
+
+  savePersonnel(list);
+  e.target.reset();
+  render();
+});
+
+render();
+</script>
+  <script src="../login_register/userLoader.js"></script>
+</body>
+</html>
+
+
+

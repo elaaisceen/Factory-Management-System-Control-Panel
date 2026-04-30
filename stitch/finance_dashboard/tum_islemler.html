@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Tüm Finansal İşlemler</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #f7f9fc; color: #191c1e; }
+        .font-headline { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body>
+    <main class="px-6 py-10 md:px-10">
+        <div class="max-w-7xl mx-auto space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                    <a href="finance.html" class="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">
+                        <span class="material-symbols-outlined text-base">arrow_back</span>
+                        Finans paneline dön
+                    </a>
+                    <h1 class="font-headline text-3xl font-extrabold mt-2">Tüm Finansal İşlemler</h1>
+                    <p class="text-slate-500 mt-1">Sistemde kayıtlı tüm hareketlerin detay görünümü.</p>
+                </div>
+                <span class="px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-bold">Toplam 10 İşlem</span>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+                <div class="p-4 md:p-6 border-b border-slate-100 bg-slate-50/60">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <div class="relative">
+                            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+                            <input id="searchInput" type="text" placeholder="İşlem, şirket veya kategori ara..." class="w-full rounded-xl border-slate-200 pl-10 pr-3 py-2.5 text-sm focus:ring-2 focus:ring-blue-100"/>
+                        </div>
+                        <select id="departmentFilter" class="w-full rounded-xl border-slate-200 text-sm py-2.5">
+                            <option value="all">Tüm Departmanlar</option>
+                            <option value="Satın Alma">Satın Alma</option>
+                            <option value="Muhasebe">Muhasebe</option>
+                            <option value="Lojistik">Lojistik</option>
+                            <option value="İK">İK</option>
+                            <option value="Bakım">Bakım</option>
+                            <option value="Operasyon">Operasyon</option>
+                        </select>
+                        <select id="statusFilter" class="w-full rounded-xl border-slate-200 text-sm py-2.5">
+                            <option value="all">Tüm Durumlar</option>
+                            <option value="Onaylandı">Onaylandı</option>
+                            <option value="Reddedildi">Reddedildi</option>
+                            <option value="Onay Bekliyor">Onay Bekliyor</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="bg-slate-50">
+                                <th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-slate-500">İşlem ID</th>
+                                <th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-slate-500">Alıcı/Şirket</th>
+                                <th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-slate-500">Kategori</th>
+                                <th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-slate-500">Departman</th>
+                                <th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-slate-500">Tarih</th>
+                                <th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-slate-500">Tutar</th>
+                                <th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-slate-500 text-center">Durum</th>
+                                <th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-slate-500 text-right">İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactionsBody" class="divide-y divide-slate-100 text-sm">
+                            <tr class="hover:bg-slate-50" data-department="Satın Alma" data-status="Onaylandı"><td class="px-6 py-4 font-bold">#TXN-88219</td><td class="px-6 py-4">Steel Dynamics Inc.</td><td class="px-6 py-4">Malzeme Alımı</td><td class="px-6 py-4">Satın Alma</td><td class="px-6 py-4">24 Eki 2023</td><td class="px-6 py-4 font-semibold">-$12,400.00</td><td class="px-6 py-4 text-center"><span class="status-badge px-3 py-1 rounded-full text-[10px] font-bold bg-green-100 text-green-700">Onaylandı</span></td><td class="px-6 py-4 text-right"></td></tr>
+                            <tr class="hover:bg-slate-50" data-department="Muhasebe" data-status="Reddedildi"><td class="px-6 py-4 font-bold">#TXN-88220</td><td class="px-6 py-4">National Grid Co.</td><td class="px-6 py-4">Aylık Faturalar</td><td class="px-6 py-4">Muhasebe</td><td class="px-6 py-4">23 Eki 2023</td><td class="px-6 py-4 font-semibold">-$4,250.00</td><td class="px-6 py-4 text-center"><span class="status-badge px-3 py-1 rounded-full text-[10px] font-bold bg-red-100 text-red-700">Reddedildi</span></td><td class="px-6 py-4 text-right"></td></tr>
+                            <tr class="hover:bg-slate-50" data-department="Lojistik" data-status="Onaylandı"><td class="px-6 py-4 font-bold">#TXN-88221</td><td class="px-6 py-4">Logistics Express</td><td class="px-6 py-4">Kargo/Nakliye</td><td class="px-6 py-4">Lojistik</td><td class="px-6 py-4">22 Eki 2023</td><td class="px-6 py-4 font-semibold">-$890.00</td><td class="px-6 py-4 text-center"><span class="status-badge px-3 py-1 rounded-full text-[10px] font-bold bg-green-100 text-green-700">Onaylandı</span></td><td class="px-6 py-4 text-right"></td></tr>
+                            <tr class="hover:bg-slate-50" data-department="İK" data-status="Onaylandı"><td class="px-6 py-4 font-bold">#TXN-88222</td><td class="px-6 py-4">Internal Payroll</td><td class="px-6 py-4">Personel Maaşı</td><td class="px-6 py-4">İK</td><td class="px-6 py-4">21 Eki 2023</td><td class="px-6 py-4 font-semibold">-$145,000.00</td><td class="px-6 py-4 text-center"><span class="status-badge px-3 py-1 rounded-full text-[10px] font-bold bg-green-100 text-green-700">Onaylandı</span></td><td class="px-6 py-4 text-right"></td></tr>
+                            <tr class="hover:bg-slate-50" data-department="Satın Alma" data-status="Onaylandı"><td class="px-6 py-4 font-bold">#TXN-88223</td><td class="px-6 py-4">Global Spare Parts</td><td class="px-6 py-4">Yedek Parça</td><td class="px-6 py-4">Satın Alma</td><td class="px-6 py-4">20 Eki 2023</td><td class="px-6 py-4 font-semibold">-$7,640.00</td><td class="px-6 py-4 text-center"><span class="status-badge px-3 py-1 rounded-full text-[10px] font-bold bg-green-100 text-green-700">Onaylandı</span></td><td class="px-6 py-4 text-right"></td></tr>
+                            <tr class="hover:bg-slate-50" data-department="Operasyon" data-status="Onay Bekliyor"><td class="px-6 py-4 font-bold">#TXN-88224</td><td class="px-6 py-4">City Energy</td><td class="px-6 py-4">Elektrik</td><td class="px-6 py-4">Operasyon</td><td class="px-6 py-4">19 Eki 2023</td><td class="px-6 py-4 font-semibold">-$3,980.00</td><td class="px-6 py-4 text-center"><span class="status-badge px-3 py-1 rounded-full text-[10px] font-bold bg-yellow-100 text-yellow-700">Onay Bekliyor</span></td><td class="px-6 py-4 text-right relative"><button class="action-trigger text-slate-500 hover:text-slate-800" aria-label="işlem menüsü"><span class="material-symbols-outlined">more_vert</span></button><div class="action-menu hidden absolute right-6 top-12 bg-white border border-slate-200 rounded-xl shadow-xl p-1 z-10"><button class="approve-btn block w-full text-left px-3 py-2 text-sm hover:bg-slate-50 rounded-lg">Onaylandı</button><button class="reject-btn block w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg">Reddedildi</button></div></td></tr>
+                            <tr class="hover:bg-slate-50" data-department="Lojistik" data-status="Onaylandı"><td class="px-6 py-4 font-bold">#TXN-88225</td><td class="px-6 py-4">Anatolia Freight</td><td class="px-6 py-4">Lojistik</td><td class="px-6 py-4">Lojistik</td><td class="px-6 py-4">18 Eki 2023</td><td class="px-6 py-4 font-semibold">-$1,320.00</td><td class="px-6 py-4 text-center"><span class="status-badge px-3 py-1 rounded-full text-[10px] font-bold bg-green-100 text-green-700">Onaylandı</span></td><td class="px-6 py-4 text-right"></td></tr>
+                            <tr class="hover:bg-slate-50" data-department="Bakım" data-status="Onaylandı"><td class="px-6 py-4 font-bold">#TXN-88226</td><td class="px-6 py-4">Tech Maintenance A.Ş.</td><td class="px-6 py-4">Bakım</td><td class="px-6 py-4">Bakım</td><td class="px-6 py-4">17 Eki 2023</td><td class="px-6 py-4 font-semibold">-$5,750.00</td><td class="px-6 py-4 text-center"><span class="status-badge px-3 py-1 rounded-full text-[10px] font-bold bg-green-100 text-green-700">Onaylandı</span></td><td class="px-6 py-4 text-right"></td></tr>
+                            <tr class="hover:bg-slate-50" data-department="Satın Alma" data-status="Reddedildi"><td class="px-6 py-4 font-bold">#TXN-88227</td><td class="px-6 py-4">Delta Chemicals</td><td class="px-6 py-4">Kimyasal Tedarik</td><td class="px-6 py-4">Satın Alma</td><td class="px-6 py-4">16 Eki 2023</td><td class="px-6 py-4 font-semibold">-$2,210.00</td><td class="px-6 py-4 text-center"><span class="status-badge px-3 py-1 rounded-full text-[10px] font-bold bg-red-100 text-red-700">Reddedildi</span></td><td class="px-6 py-4 text-right"></td></tr>
+                            <tr class="hover:bg-slate-50" data-department="Muhasebe" data-status="Onaylandı"><td class="px-6 py-4 font-bold">#TXN-88228</td><td class="px-6 py-4">Office Plus</td><td class="px-6 py-4">Ofis Gideri</td><td class="px-6 py-4">Muhasebe</td><td class="px-6 py-4">15 Eki 2023</td><td class="px-6 py-4 font-semibold">-$640.00</td><td class="px-6 py-4 text-center"><span class="status-badge px-3 py-1 rounded-full text-[10px] font-bold bg-green-100 text-green-700">Onaylandı</span></td><td class="px-6 py-4 text-right"></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        const searchInput = document.getElementById("searchInput");
+        const departmentFilter = document.getElementById("departmentFilter");
+        const statusFilter = document.getElementById("statusFilter");
+        const rows = Array.from(document.querySelectorAll("#transactionsBody tr"));
+
+        function getStatusClasses(status) {
+            if (status === "Onaylandı") return "status-badge px-3 py-1 rounded-full text-[10px] font-bold bg-green-100 text-green-700";
+            if (status === "Reddedildi") return "status-badge px-3 py-1 rounded-full text-[10px] font-bold bg-red-100 text-red-700";
+            return "status-badge px-3 py-1 rounded-full text-[10px] font-bold bg-yellow-100 text-yellow-700";
+        }
+
+        function closeAllMenus() {
+            document.querySelectorAll(".action-menu").forEach((menu) => menu.classList.add("hidden"));
+        }
+
+        function applyFilters() {
+            const q = searchInput.value.trim().toLowerCase();
+            const selectedDepartment = departmentFilter.value;
+            const selectedStatus = statusFilter.value;
+
+            rows.forEach((row) => {
+                const rowText = row.innerText.toLowerCase();
+                const rowDepartment = row.dataset.department;
+                const rowStatus = row.dataset.status;
+                const matchesSearch = rowText.includes(q);
+                const matchesDepartment = selectedDepartment === "all" || rowDepartment === selectedDepartment;
+                const matchesStatus = selectedStatus === "all" || rowStatus === selectedStatus;
+                row.style.display = matchesSearch && matchesDepartment && matchesStatus ? "" : "none";
+            });
+        }
+
+        function updateRowStatus(row, newStatus) {
+            row.dataset.status = newStatus;
+            const badge = row.querySelector(".status-badge");
+            badge.textContent = newStatus;
+            badge.className = getStatusClasses(newStatus);
+
+            const actionCell = row.querySelector("td:last-child");
+            if (newStatus !== "Onay Bekliyor") {
+                actionCell.innerHTML = "";
+            }
+            closeAllMenus();
+            applyFilters();
+        }
+
+        searchInput.addEventListener("input", applyFilters);
+        departmentFilter.addEventListener("change", applyFilters);
+        statusFilter.addEventListener("change", applyFilters);
+
+        document.querySelectorAll(".action-trigger").forEach((trigger) => {
+            trigger.addEventListener("click", (event) => {
+                event.stopPropagation();
+                const menu = trigger.parentElement.querySelector(".action-menu");
+                const isHidden = menu.classList.contains("hidden");
+                closeAllMenus();
+                if (isHidden) menu.classList.remove("hidden");
+            });
+        });
+
+        document.querySelectorAll(".approve-btn").forEach((btn) => {
+            btn.addEventListener("click", (event) => {
+                const row = event.target.closest("tr");
+                updateRowStatus(row, "Onaylandı");
+            });
+        });
+
+        document.querySelectorAll(".reject-btn").forEach((btn) => {
+            btn.addEventListener("click", (event) => {
+                const row = event.target.closest("tr");
+                updateRowStatus(row, "Reddedildi");
+            });
+        });
+
+        document.addEventListener("click", closeAllMenus);
+    </script>
+<script src="../login_register/userLoader.js"></script>
+</body>
+</html>
+
+
+

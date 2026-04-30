@@ -1,0 +1,101 @@
+<!--Powered by Elanur Tuana İŞCEN-->
+<!DOCTYPE html>
+<html class="light" lang="tr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Giriş - Pulse Industrial</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="../assets/material-symbols.css" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "surface": "#f7f9fc","surface-container-lowest": "#ffffff","surface-container": "#eceef1",
+          "surface-container-low": "#f2f4f7","on-surface": "#191c1e","on-surface-variant": "#434653",
+          "primary": "#2b54bf","on-primary": "#ffffff","outline": "#747684","outline-variant": "#c4c6d5",
+          "error": "#ba1a1a","secondary": "#006d37"
+        },
+        fontFamily: { "headline": ["Manrope"], "body": ["Inter"], "label": ["Inter"] },
+        borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+      },
+    },
+  }
+</script>
+<style>
+  body { background-color: #f7f9fc; font-family: 'Inter', sans-serif; min-height: max(884px, 100dvh); }
+  .glass-panel { background: rgba(255,255,255,0.7); backdrop-filter: blur(20px); }
+  .soft-shadow { box-shadow: 0 20px 50px rgba(43,84,191,0.05); }
+  .input-inset { background: #f2f4f7; transition: all 0.2s ease; }
+  .input-inset:focus-within { background: #fff; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); }
+  .icon { width: 22px; height: 22px; flex-shrink: 0; color: #747684; }
+</style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 md:p-8 overflow-x-hidden">
+<div class="fixed inset-0 -z-10 overflow-hidden">
+  <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-500/5 rounded-full blur-3xl"></div>
+  <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-500/5 rounded-full blur-3xl"></div>
+</div>
+<main class="w-full max-w-xl glass-panel rounded-xl soft-shadow overflow-hidden border border-white/20">
+  <section class="p-8 md:p-12 flex flex-col">
+    <div class="mb-10">
+      <div class="flex items-center gap-3 mb-2">
+        <svg class="w-8 h-8 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2 20V8l6-4v4l6-4v16"/><rect x="14" y="10" width="8" height="10"/>
+          <line x1="6" y1="12" x2="10" y2="12"/><line x1="6" y1="16" x2="10" y2="16"/>
+          <line x1="16" y1="14" x2="18" y2="14"/><line x1="16" y1="18" x2="18" y2="18"/>
+        </svg>
+        <span class="font-headline font-black text-2xl tracking-tighter text-blue-600">Pulse Industrial</span>
+      </div>
+      <p class="text-on-surface-variant font-body text-sm">Verimliliği artırın, operasyonları tek bir merkezden yönetin.</p>
+    </div>
+    <h2 class="font-headline font-bold text-2xl text-on-surface mb-6">Giriş Yap</h2>
+    <div id="successBanner" class="hidden mb-4 p-3 bg-green-50 border border-green-200 rounded-lg text-green-800 text-sm font-medium"></div>
+    <form class="space-y-5" id="loginForm" autocomplete="off">
+      <div class="space-y-1.5">
+        <label class="text-xs font-bold uppercase tracking-wider text-outline px-1">E-Posta veya Telefon</label>
+        <div class="input-inset flex items-center px-4 py-3.5 rounded-lg border border-transparent focus-within:border-blue-300">
+          <svg class="icon mr-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+          </svg>
+          <input id="loginInput" class="bg-transparent border-none focus:ring-0 w-full text-on-surface font-medium placeholder:text-outline-variant text-sm"
+            placeholder="ornek@fabrika.com veya 0555 123 45 67" type="text"/>
+        </div>
+        <div id="inputError" class="text-xs text-red-600 px-1 hidden"></div>
+      </div>
+      <div class="space-y-1.5">
+        <div class="flex justify-between items-center px-1">
+          <label class="text-xs font-bold uppercase tracking-wider text-outline">Şifre</label>
+          <a class="text-xs font-semibold text-blue-600 hover:underline" href="#">Şifremi Unuttum</a>
+        </div>
+        <div class="input-inset flex items-center px-4 py-3.5 rounded-lg border border-transparent focus-within:border-blue-300">
+          <svg class="icon mr-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          <input id="passwordInput" class="bg-transparent border-none focus:ring-0 w-full text-on-surface font-medium placeholder:text-outline-variant text-sm"
+            placeholder="••••••••" type="password"/>
+        </div>
+        <div id="passwordError" class="text-xs text-red-600 px-1 hidden"></div>
+      </div>
+      <button id="loginBtn" type="submit"
+        class="w-full bg-blue-600 text-white py-4 rounded-lg font-headline font-bold text-lg shadow-lg shadow-blue-200 hover:bg-blue-700 active:scale-95 transition-all">
+        Giriş Yap
+      </button>
+    </form>
+    <div class="mt-8 pt-6 border-t border-surface-container text-center">
+      <p class="text-sm text-on-surface-variant">Hesabınız yok mu?
+        <a class="text-blue-600 font-bold hover:underline" href="yeni_kayit.html">Yeni Kayıt Oluştur</a>
+      </p>
+    </div>
+  </section>
+</main>
+<script src="login.js"></script>
+<script src="../login_register/userLoader.js"></script>
+</body>
+</html>
+
+
+
