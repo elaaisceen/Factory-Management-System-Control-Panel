@@ -1,0 +1,204 @@
+<!--Powered by Elanur Tuana İŞCEN-->
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhasebe Kayıt Sistemi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Common TR UI fixes -->
+    <link rel="stylesheet" href="/assets/css/ui-tr.css" />
+    <script defer src="/assets/js/ui-tr.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dateSpan = document.getElementById('currentDate');
+            const simdi = new Date();
+            const formatliTarih = simdi.toLocaleDateString('tr-TR', {
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric'
+            });
+            dateSpan.textContent = formatliTarih;
+        });
+
+        // Alt kategori güncelleme fonksiyonu (JS hatası almamak için ekledim)
+        function updateSubCategory() {
+            const mainCat = document.getElementById('mainCategory').value;
+            const subCat = document.getElementById('subCategory');
+            const options = subCat.querySelectorAll('option');
+            
+            options.forEach(opt => {
+                if (opt.value === "" || opt.getAttribute('value') === mainCat) {
+                    opt.style.display = "block";
+                } else {
+                    opt.style.display = "none";
+                }
+            });
+            subCat.value = "";
+        }
+    </script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+</head>
+<body class="bg-slate-50 font-sans">
+
+    <!-- Üst Bar / Navigasyon -->
+    <nav class="bg-white border-b border-slate-200 px-8 py-4 flex justify-between items-center shadow-sm">
+        <div class="flex items-center gap-4">
+            <a href="finance.html" class="text-slate-400 hover:text-primary transition-all">
+                <span class="material-symbols-outlined">arrow_back</span>
+            </a>
+            <h1 class="text-xl font-bold text-slate-800">Muhasebe Kayıt Ekranı</h1>
+        </div>
+
+        <div class="flex items-center gap-2 text-slate-500 text-sm">
+            <span class="material-symbols-outlined text-sm">calendar_month</span>
+            <span id="currentDate"></span>
+        </div>
+    </nav>
+
+    <!-- ANA TAŞIYICI: grid-cols-4 yaparak formu 3, yan paneli 1 birim genişliğe aldık -->
+    <main class="max-w-7xl mx-auto mt-10 p-4 grid grid-cols-1 lg:grid-cols-4 gap-8 items-center">
+        
+        <!-- FORM ALANI: 4 kolondan 3'ünü kaplayarak genişliğini korur -->
+        <div class="lg:col-span-3 bg-white rounded-3xl shadow-sm border border-slate-100 p-8">
+            <div class="flex items-center gap-3 mb-8">
+                <div class="bg-blue-500 p-2 rounded-lg text-white">
+                    <span class="material-symbols-outlined">description</span>
+                </div>
+                <div>
+                    <h2 class="text-lg font-bold text-slate-800">Fatura / İşlem Bilgileri</h2>
+                    <p class="text-xs text-slate-400">Tüm alanların eksiksiz doldurulduğundan emin olun.</p>
+                </div>
+            </div>
+
+            <form id="accountingForm" class="space-y-6">
+                <!-- Satır 1: İşlem Tipi ve Fatura No -->
+                <div class="grid grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-2">İşlem Türü</label>
+                        <select class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-blue-500">
+                            <option value="gelir">Gelir (Satış Faturası)</option>
+                            <option value="gider">Gider (Alış/Masraf)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Fatura / Belge No</label>
+                        <input type="text" placeholder="ABC202600001" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-blue-500">
+                    </div>
+                </div>
+
+                <!-- Satır 2: Cari Hesap ve Kategori -->
+                <div class="grid grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Cari Hesap (Müşteri/Tedarikçi)</label>
+                        <input type="text" placeholder="Firma veya Şahıs Adı" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Harcama Grubu</label>
+                        <div class="grid grid-cols-2 gap-4">
+                            <select id="mainCategory" onchange="updateSubCategory()" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-blue-500">
+                                <option value="">Ana Grup Seçiniz...</option>
+                                <option value="uretim">Üretim</option>
+                                <option value="finans">Finans</option>
+                                <option value="depo">Depo</option>
+                                <option value="satinAlma">Satın Alma</option>
+                                <option value="it">Bilgi İşlem</option>
+                                <option value="hr">İnsan Kaynakları</option>
+                            </select>
+
+                            <select id="subCategory" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-blue-500">
+                                <option value="">Alt Bölüm Seçin</option>
+
+                                <option value="uretim">Tasarım / Planlama</option>
+                                <option value="uretim">Montaj</option>
+                                <option value="uretim">Paketleme</option>
+                                <option value="uretim">Kalite</option>
+
+                                <option value="finans">Muhasebe</option>
+                                <option value="finans">Maaş</option>
+                                <option value="finans">Bütçe</option>
+
+                                <option value="depo">Giriş-Çıkış</option>
+                                <option value="depo">Envanter</option>
+                                <option value="depo">Kontrol</option>
+
+                                <option value="satinAlma">Tedarik</option>
+                                <option value="satinAlma">Malzeme</option>
+
+                                <option value="hr">Eğitim</option>
+                                <option value="hr">Bodro</option>
+                                <option value="hr">İşe Alım</option>
+
+                                <option value="it">Yazılım</option>
+                                <option value="it">Sistem</option>
+                                <option value="it">Veri</option>
+                                <option value="it">Destek-Güvenlik</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Satır 3: Tutar ve KDV -->
+                <div class="grid grid-cols-3 gap-6 bg-blue-50/50 p-6 rounded-2xl">
+                    <div class="col-span-2">
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Matrah (KDV Hariç Tutar)</label>
+                        <input type="number" placeholder="0.00" class="w-full p-4 bg-white border border-blue-100 rounded-xl text-lg font-bold text-blue-600 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-2">KDV Oranı</label>
+                        <select class="w-full p-4 bg-white border border-blue-100 rounded-xl font-bold outline-none">
+                            <option>%20</option>
+                            <option>%10</option>
+                            <option>%1</option>
+                            <option>%0</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Kaydet Butonu -->
+                <div class="pt-4">
+                    <button type="submit" class="w-full py-4 bg-blue-600 text-white font-bold rounded-2xl shadow-lg shadow-blue-200 hover:bg-blue-700 transition-all flex justify-center items-center gap-2">
+                        <span class="material-symbols-outlined">save</span>
+                        MUHASEBE KAYDINI OLUŞTUR
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- SAĞ PANEL: İpucu ve İstatistik (lg:col-span-1 ile kalan alanı kaplar) -->
+        <div class="lg:col-span-1 flex flex-col gap-6">
+            <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100">
+                <h3 class="font-bold text-slate-800 mb-4 italic flex items-center gap-2">
+                    <span class="material-symbols-outlined text-amber-500">lightbulb</span> İpucu
+                </h3>
+                <p class="text-sm text-slate-500 leading-relaxed">
+                    Girdiğiniz veriler anlık olarak <strong>Finansal Sağlık Dashboard</strong>'una yansıyacaktır. Fatura tarihlerini güncel tutmaya özen gösterin.
+                </p>
+            </div>
+
+            <div class="bg-slate-800 rounded-3xl p-6 text-white shadow-xl min-h-[200px] flex flex-col justify-center">
+                <p class="text-xs text-slate-400 uppercase font-bold mb-1 tracking-wider">Günlük Toplam Giriş</p>
+                <h2 class="text-2xl font-bold mb-4">DB'gelen veri eklenecek</h2>
+                <div class="space-y-3">
+                    <div class="flex justify-between text-[11px]">
+                        <span class="text-slate-400">Bugünkü Fatura Sayısı:</span>
+                        <span class="font-bold">Db'den gelen değer eklenecek.</span>
+                    </div>
+                    <div class="w-full bg-slate-700 h-1.5 rounded-full">
+                        <div class="bg-green-400 h-full w-2/3 rounded-full"></div>
+                    </div>
+                    <p class="text-[9px] text-slate-500 text-right italic">Hedefin %66'sı tamamlandı</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+<script>function oturumuAl(){try{return JSON.parse(localStorage.getItem("oturum"))}catch{return null}}document.addEventListener("DOMContentLoaded",function(){const o=oturumuAl();if(o&&o.kullaniciAdi){const e=document.getElementById("oturum-kullanici-adi");e&&(e.textContent=o.kullaniciAdi);const t=document.getElementById("oturum-rol-adi");t&&(t.textContent=o.rolAdi)}})</script>
+<script src="muhabase.js"></script>
+</body>
+</html>
+
+
+
+

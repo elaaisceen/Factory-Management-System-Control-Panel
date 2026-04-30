@@ -1,0 +1,526 @@
+<!--Powered by Elanur Tuana İŞCEN-->
+
+<!DOCTYPE html>
+
+<html class="light" lang="tr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Üretim Paneli - Kontrol Paneli</title>
+    <!-- Fonts -->
+    <link href="/assets/fonts/manrope.css" rel="stylesheet" />
+    <link href="/assets/fonts/inter.css" rel="stylesheet" />
+    <!-- Common TR UI fixes -->
+    <link rel="stylesheet" href="/assets/css/ui-tr.css" />
+    <script defer src="/assets/js/ui-tr.js"></script>
+    <!-- Material Symbols -->
+    <link href="/assets/fonts/material-symbols-outlined.css" rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-error": "#ffffff",
+                        "surface": "#f7f9fc",
+                        "secondary-fixed-dim": "#4ae183",
+                        "surface-variant": "#e0e3e6",
+                        "primary-fixed": "#dbe1ff",
+                        "primary-container": "#496eda",
+                        "surface-dim": "#d8dadd",
+                        "on-tertiary-container": "#fffbff",
+                        "on-background": "#191c1e",
+                        "on-secondary-container": "#00743a",
+                        "surface-container-highest": "#e0e3e6",
+                        "tertiary-fixed": "#f8d8ff",
+                        "surface-container-high": "#e6e8eb",
+                        "secondary-fixed": "#6bfe9c",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#b5c4ff",
+                        "surface-bright": "#f7f9fc",
+                        "outline": "#747684",
+                        "secondary": "#006d37",
+                        "on-primary-container": "#fefcff",
+                        "inverse-on-surface": "#eff1f4",
+                        "secondary-container": "#6bfe9c",
+                        "inverse-surface": "#2d3133",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#ebb2ff",
+                        "on-secondary-fixed": "#00210c",
+                        "outline-variant": "#c4c6d5",
+                        "background": "#f7f9fc",
+                        "surface-container": "#eceef1",
+                        "surface-container-low": "#f2f4f7",
+                        "on-surface": "#191c1e",
+                        "tertiary": "#80409b",
+                        "inverse-primary": "#b5c4ff",
+                        "on-tertiary": "#ffffff",
+                        "on-surface-variant": "#434653",
+                        "on-primary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#9b59b6",
+                        "primary": "#2b54bf",
+                        "surface-tint": "#2e57c2",
+                        "on-tertiary-fixed": "#320047",
+                        "on-secondary-fixed-variant": "#005228",
+                        "on-tertiary-fixed-variant": "#692984",
+                        "on-primary-fixed-variant": "#053da9",
+                        "on-primary-fixed": "#00174d"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    
+    <link rel="stylesheet" href="production.css" />
+</head>
+
+<body class="min-h-screen">
+    <!-- TopAppBar -->
+    <header
+        class="fixed top-0 w-full z-50 bg-slate-50/80 backdrop-blur-xl flex justify-between items-center px-8 h-20 w-full shadow-sm">
+        <div class="flex items-center gap-4">
+            <span class="material-symbols-outlined text-blue-600">menu</span>
+            <span
+                class="text-blue-700 font-black tracking-tighter font-['Manrope'] font-bold text-2xl tracking-tight">Üretim
+                Paneli</span>
+        </div>
+        <div class="flex-1 max-w-md mx-8">
+            <div class="relative flex items-center">
+                <span class="material-symbols-outlined absolute left-4 text-slate-400">search</span>
+                <input
+                    class="w-full bg-surface-container-highest border-none rounded-full py-2.5 pl-12 pr-4 focus:ring-2 focus:ring-primary/20 text-sm"
+                    placeholder="Sistem veya stok ara..." type="text" />
+            </div>
+        </div>
+        <div class="flex items-center gap-4">
+            <div class="hidden md:flex gap-8">
+                <a class="text-blue-700 dark:text-blue-400 font-bold font-label text-sm"
+                    href="../login_register/admin_dashboard/adminDashboard.html">Anasayfa</a>
+                <a class="text-red-500 dark:text-slate-400 hover:text-slate-900 transition-colors font-label text-sm"
+                    href="javascript:void(0)" onclick="handleLogout()">Çıkış Yap</a>
+            </div>
+            <div class="text-right hidden sm:block">
+                <p class="text-xs font-bold text-slate-500 uppercase tracking-widest">Tesis Müdürü</p>
+                <p class="font-bold text-on-surface"><span id="oturum-kullanici-adi">Alex Sterling</span></p>
+            </div>
+            <img alt="User profile"
+                class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm hover:scale-105 transition-transform duration-200"
+                data-alt="Professional portrait of a middle-aged man in a business casual shirt with a confident, neutral expression, clean studio lighting"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZM9ELGeAHiriYgba8yjDpWgGcmRJfLOisbl5RHM3-WpTAteyXchGZ0JSCavEzBmQKzxCi_-ShnmDNcmououv_Ur4KSidSKP6BxMBbrNsWYNp60VszNVl46qLbBReOQdzbqxDPEnK3dyaq_1-5t5wgqwUlj2c1A_rGxYBpmGtYPiHgQkYCd83XzB8-xw0_QXeOHBMiwJiH6Qltrf5jMqPdl8Z90KCSwPA0ty71P3czoDGmoC8RX2CibyCn27B6U0s221-GaQi883pt" />
+        </div>
+    </header>
+    <!-- NavigationDrawer -->
+    <aside
+        class="h-full w-72 fixed left-0 top-0 z-40 bg-slate-50 border-r border-slate-200/10 shadow-2xl shadow-slate-900/5 flex flex-col p-6 space-y-2 pt-24">
+        <!-- Dashboard (Active) -->
+        <a class="flex items-center gap-4 px-4 py-3.5 bg-white text-blue-700 shadow-sm rounded-2xl hover:translate-x-1 transition-all active:scale-[0.98]"
+            href="../login_register/admin_dashboard/adminDashboard.html">
+            <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+            <span class="font-['Inter'] font-medium text-sm">Anasayfa</span>
+        </a>
+        <!-- Operations Group -->
+        <div class="space-y-1">
+            <button
+                onclick="document.getElementById('prodSubMenu').classList.toggle('hidden'); document.getElementById('prodChevron').classList.toggle('-rotate-180')"
+                class="w-full flex items-center justify-between px-4 py-3.5 bg-primary/10 text-primary shadow-sm rounded-2xl transition-all hover:bg-primary/20 cursor-pointer">
+                <div class="flex items-center gap-4">
+                    <span class="material-symbols-outlined transition-transform hover:scale-110"
+                        data-icon="precision_manufacturing">precision_manufacturing</span>
+                    <span class="font-['Inter'] font-semibold text-sm">Üretim Paneli</span>
+                </div>
+                <span id="prodChevron"
+                    class="material-symbols-outlined text-sm transition-transform duration-300">expand_more</span>
+            </button>
+            <!-- Sub Links -->
+            <div id="prodSubMenu" class="pl-12 space-y-1 mt-1 transition-all">
+                <a href="montaj.html"
+                    class="block px-4 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition-colors">Montaj</a>
+                <a href="paketleme.html"
+                    class="block px-4 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition-colors">Paketleme</a>
+                <a href="kalite_kontrol.html"
+                    class="block px-4 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition-colors">Kalite
+                    Kontrol</a>
+                <a href="planlama_tasarim.html"
+                    class="block px-4 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition-colors">Planlama
+                    / Tasarım</a>
+            </div>
+        </div>
+        <!-- Inventory -->
+        <a class="flex items-center gap-4 px-4 py-3.5 text-slate-500 hover:text-slate-900 hover:translate-x-1 transition-all active:scale-[0.98]"
+            href="../stock_dashboard/stock.html">
+            <span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+            <span class="font-['Inter'] font-medium text-sm">Stok Durumu</span>
+        </a>
+        <!-- Maintenance -->
+        <a class="flex items-center gap-4 px-4 py-3.5 text-slate-500 hover:text-slate-900 hover:translate-x-1 transition-all active:scale-[0.98]"
+            href="../maintenance_dashboard/bakim.html">
+            <span class="material-symbols-outlined" data-icon="engineering">engineering</span>
+            <span class="font-['Inter'] font-medium text-sm">Bakım</span>
+        </a>
+        <a class="flex items-center gap-4 px-4 py-3.5 text-slate-500 hover:text-slate-900 hover:translate-x-1 transition-all active:scale-[0.98]"
+            href="../it_dashboard/destek_merkezi.html">
+            <span class="material-symbols-outlined">support_agent</span>
+            <span class="font-['Inter'] font-medium text-sm">BT Destek Merkezi</span>
+        </a>
+        <div class="mt-auto pt-6 border-t border-slate-200/40">
+            <div class="p-4 bg-primary/5 rounded-xl">
+                <p class="text-xs font-bold text-primary mb-1">TESİS DURUMU</p>
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+                    <span class="text-sm font-semibold">Sektör 7G: Optimal</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <!-- Main Canvas -->
+    <main class="pl-72 pt-20">
+        <div class="p-10 space-y-10">
+            <!-- Welcome Header -->
+            <section class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div>
+                    <h1 class="text-4xl font-extrabold tracking-tight text-on-surface">Üretim Alanı Genel Bakış</h1>
+                    <p class="text-slate-500 mt-1 font-medium">Gerçek zamanlı telemetri ve üretim zinciri verileri.</p>
+                </div>
+                <div class="flex gap-4">
+                    <button id="exportReportBtn"
+                        class="px-6 py-3 bg-surface-container-high rounded-full font-bold text-sm hover:shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-sm hidden animate-spin"
+                            id="downloadSpinner">hourglass_empty</span>
+                        <span id="downloadBtnText">Raporları İndir</span>
+                    </button>
+                    <button id="initProtocolBtn"
+                        class="px-6 py-3 bg-gradient-to-br from-primary to-primary-container text-white rounded-full font-bold text-sm shadow-xl shadow-primary/20 hover:scale-105 transition-all active:scale-95 flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-sm hidden animate-spin"
+                            id="protocolSpinner">sync</span>
+                        <span id="protocolBtnText">Protokol Başlat</span>
+                    </button>
+                </div>
+            </section>
+            <!-- Machine Status Grid (Asymmetric Bento) -->
+            <section class="grid grid-cols-1 md:grid-cols-12 gap-8">
+                <!-- Large Status Card -->
+                <div
+                    class="md:col-span-8 bg-surface-container-lowest rounded-xl p-8 shadow-sm relative overflow-hidden group">
+                    <div
+                        class="absolute top-0 right-0 w-64 h-64 bg-secondary/5 rounded-full -mr-20 -mt-20 group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="relative z-10">
+                        <div class="flex justify-between items-start mb-12">
+                            <div>
+                                <h3 class="text-2xl font-bold">Ana Montaj Hattı</h3>
+                                <p class="text-slate-400 font-medium">Ünite-Alfa-01</p>
+                            </div>
+                            <span
+                                class="px-4 py-1.5 bg-secondary-container text-on-secondary-container rounded-full text-xs font-bold tracking-wider uppercase">Aktİf
+                                ÇALIŞIYOR</span>
+                        </div>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                            <div class="space-y-1">
+                                <p class="text-xs font-bold text-slate-400 uppercase">Verİmlİlİk</p>
+                                <p id="dynEfficiency" class="text-3xl font-extrabold text-secondary">94.2%</p>
+                            </div>
+                            <div class="space-y-1">
+                                <p class="text-xs font-bold text-slate-400 uppercase">Yük/Güç</p>
+                                <p class="text-3xl font-extrabold text-on-surface">78<span
+                                        class="text-sm font-medium ml-1">kW</span></p>
+                            </div>
+                            <div class="space-y-1">
+                                <p class="text-xs font-bold text-slate-400 uppercase">Çalışma Süresİ</p>
+                                <p class="text-3xl font-extrabold text-on-surface">182<span
+                                        class="text-sm font-medium ml-1">saat</span></p>
+                            </div>
+                            <div class="space-y-1">
+                                <p class="text-xs font-bold text-slate-400 uppercase">Uyarılar</p>
+                                <p class="text-3xl font-extrabold text-on-surface">0</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Secondary Small Stats -->
+                <div class="md:col-span-4 space-y-8">
+                    <div
+                        class="bg-primary text-white rounded-xl p-8 shadow-xl shadow-primary/10 relative overflow-hidden h-full flex flex-col justify-between">
+                        <div class="absolute bottom-0 right-0 p-4 opacity-20">
+                            <span class="material-symbols-outlined text-8xl"
+                                style="font-variation-settings: 'FILL' 1;">precision_manufacturing</span>
+                        </div>
+                        <h3 class="text-xl font-bold">Aktif Makineler</h3>
+                        <div>
+                            <p class="text-5xl font-black"><span id="dynActiveCount">24</span><span
+                                    class="text-lg font-normal opacity-70 ml-2">/ <span
+                                        id="dynTotalCount">26</span></span></p>
+                            <p id="dynMaintenanceText" class="text-sm mt-2 opacity-80">Şu anda 2 ünite planlı bakımda.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Daily Output Chart & Real-time Metrics -->
+            <section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Daily Output Visualization Placeholder -->
+                <div class="lg:col-span-2 bg-surface-container-lowest rounded-xl p-8 shadow-sm">
+                    <div class="flex justify-between items-center mb-10">
+                        <h3 class="text-xl font-bold">Günlük Üretim Analitiği</h3>
+                        <div class="flex gap-2" id="timeFilters">
+                            <button
+                                class="px-3 py-1 bg-surface-container text-xs font-bold rounded-md transition-all text-on-surface">Haftalık</button>
+                            <button
+                                class="px-3 py-1 text-xs font-medium text-slate-400 rounded-md transition-all hover:bg-slate-100">Aylık</button>
+                        </div>
+                    </div>
+                    <div class="h-64 flex items-end gap-2 group">
+                        <!-- Mockup Line/Bar Chart with Editorial Spacing -->
+                        <div
+                            class="flex-1 bg-slate-100 rounded-t-lg h-3/4 hover:bg-primary/20 transition-colors cursor-pointer relative">
+                            <div
+                                class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-on-surface text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100">
+                                4.2k</div>
+                        </div>
+                        <div
+                            class="flex-1 bg-slate-100 rounded-t-lg h-1/2 hover:bg-primary/20 transition-colors cursor-pointer">
+                        </div>
+                        <div
+                            class="flex-1 bg-slate-100 rounded-t-lg h-5/6 hover:bg-primary/20 transition-colors cursor-pointer">
+                        </div>
+                        <div
+                            class="flex-1 bg-primary/40 rounded-t-lg h-full hover:bg-primary transition-colors cursor-pointer">
+                        </div>
+                        <div
+                            class="flex-1 bg-slate-100 rounded-t-lg h-4/5 hover:bg-primary/20 transition-colors cursor-pointer">
+                        </div>
+                        <div
+                            class="flex-1 bg-slate-100 rounded-t-lg h-3/5 hover:bg-primary/20 transition-colors cursor-pointer">
+                        </div>
+                        <div
+                            class="flex-1 bg-slate-100 rounded-t-lg h-1/2 hover:bg-primary/20 transition-colors cursor-pointer">
+                        </div>
+                        <div
+                            class="flex-1 bg-slate-100 rounded-t-lg h-2/3 hover:bg-primary/20 transition-colors cursor-pointer">
+                        </div>
+                        <div
+                            class="flex-1 bg-slate-100 rounded-t-lg h-4/5 hover:bg-primary/20 transition-colors cursor-pointer">
+                        </div>
+                        <div
+                            class="flex-1 bg-slate-100 rounded-t-lg h-5/6 hover:bg-primary/20 transition-colors cursor-pointer">
+                        </div>
+                        <div
+                            class="flex-1 bg-slate-100 rounded-t-lg h-3/4 hover:bg-primary/20 transition-colors cursor-pointer">
+                        </div>
+                        <div
+                            class="flex-1 bg-slate-100 rounded-t-lg h-4/5 hover:bg-primary/20 transition-colors cursor-pointer">
+                        </div>
+                    </div>
+                    <div
+                        class="flex justify-between mt-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest px-2">
+                        <span>06:00</span>
+                        <span>12:00</span>
+                        <span>18:00</span>
+                        <span>00:00</span>
+                    </div>
+                </div>
+                <!-- Secondary Insight Card (Vertical Bento) -->
+                <div
+                    class="bg-surface-container-low rounded-xl p-8 flex flex-col justify-center items-center text-center space-y-6">
+                    <div class="w-32 h-32 relative flex items-center justify-center">
+                        <svg class="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 128 128">
+                            <circle cx="64" cy="64" fill="none" r="58" stroke="#e2e8f0" stroke-width="12"></circle>
+                            <circle cx="64" cy="64" fill="none" r="58" stroke="#2b54bf" stroke-dasharray="364"
+                                stroke-dashoffset="100" stroke-linecap="round" stroke-width="12"></circle>
+                        </svg>
+                        <div class="text-center relative z-10">
+                            <p class="text-2xl font-black">72%</p>
+                            <p class="text-[10px] font-bold text-slate-500 uppercase">Kota</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg">Parti #829 Durumu</h4>
+                        <p class="text-sm text-slate-500 mt-1 px-4">Tahmini tamamlanma: 14:45 (Programdan önde)</p>
+                    </div>
+                </div>
+            </section>
+            <!-- Inventory Section: Critical Stock Table -->
+            <section class="space-y-6">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-2xl font-bold text-on-surface">Kritik Envanter</h3>
+                    <a class="text-primary font-bold text-sm hover:underline" href="../stock_dashboard/stock.html">Tüm
+                        Depoyu Görüntüle</a>
+                </div>
+                <div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="bg-surface-container-low/50">
+                                <th class="px-8 py-5 text-xs font-bold text-slate-400 uppercase tracking-widest">Kaynak
+                                    Adı</th>
+                                <th class="px-8 py-5 text-xs font-bold text-slate-400 uppercase tracking-widest">Stok
+                                    Kodu</th>
+                                <th class="px-8 py-5 text-xs font-bold text-slate-400 uppercase tracking-widest">Miktar
+                                </th>
+                                <th
+                                    class="px-8 py-5 text-xs font-bold text-slate-400 uppercase tracking-widest text-right">
+                                    Durum</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventoryTableBody" class="divide-y divide-slate-100">
+                            <tr class="hover:bg-slate-50/50 transition-colors">
+                                <td class="px-8 py-6 font-bold text-on-surface">Yüksek Mukavemetli Alüminyum Bobin</td>
+                                <td class="px-8 py-6 font-mono text-sm text-slate-400">ALU-7822-M</td>
+                                <td class="px-8 py-6">
+                                    <span class="text-lg font-black text-error">42</span>
+                                    <span class="text-xs font-medium text-slate-400 ml-1">kg kaldı</span>
+                                </td>
+                                <td class="px-8 py-6 text-right">
+                                    <span
+                                        class="inline-flex items-center gap-2 px-3 py-1 bg-error-container text-on-error-container rounded-full text-[10px] font-black uppercase tracking-tighter">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                                        Kritik Düşük
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-slate-50/50 transition-colors">
+                                <td class="px-8 py-6 font-bold text-on-surface">Endüstriyel Soğutucu Blue-X</td>
+                                <td class="px-8 py-6 font-mono text-sm text-slate-400">CLT-0041-L</td>
+                                <td class="px-8 py-6">
+                                    <span class="text-lg font-black text-on-surface">156</span>
+                                    <span class="text-xs font-medium text-slate-400 ml-1">Litre kaldı</span>
+                                </td>
+                                <td class="px-8 py-6 text-right">
+                                    <span
+                                        class="inline-flex items-center gap-2 px-3 py-1 bg-error-container text-on-error-container/70 rounded-full text-[10px] font-black uppercase tracking-tighter">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-error/40"></span>
+                                        Sipariş Verilmeli
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-slate-50/50 transition-colors">
+                                <td class="px-8 py-6 font-bold text-on-surface">Hassas Çelik Rulman L (12mm)</td>
+                                <td class="px-8 py-6 font-mono text-sm text-slate-400">BRG-9102-S</td>
+                                <td class="px-8 py-6">
+                                    <span class="text-lg font-black text-on-surface">2,400</span>
+                                    <span class="text-xs font-medium text-slate-400 ml-1">adet kaldı</span>
+                                </td>
+                                <td class="px-8 py-6 text-right">
+                                    <span
+                                        class="inline-flex items-center gap-2 px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-[10px] font-black uppercase tracking-tighter">
+                                        Sağlıklı
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+        <!-- Footer Spacer -->
+        <div class="h-10"></div>
+    </main>
+    <!-- Contextual FAB (Hidden on inventory/dashboard focus unless action needed) -->
+    <div class="fixed bottom-10 right-10 z-[60]">
+        <button id="addInventoryFab"
+            class="w-16 h-16 bg-primary text-white rounded-full shadow-2xl shadow-primary/40 flex items-center justify-center hover:scale-110 active:scale-90 transition-all duration-200">
+            <span class="material-symbols-outlined text-3xl" data-icon="add">add</span>
+        </button>
+    </div>
+
+    <!-- Modal -->
+    <div id="addEntryModal" class="hidden fixed inset-0 z-[100] flex justify-center items-center">
+        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" id="modalOverlay"></div>
+        <div
+            class="bg-surface-container-lowest rounded-3xl p-8 shadow-2xl w-full max-w-md relative z-10 transition-all scale-100">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold font-headline text-on-surface">Yeni Veri Girişi</h3>
+                <button type="button" id="modalCloseIcon" class="text-slate-400 hover:text-slate-800 transition-colors">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+
+            <form id="addEntryForm" class="space-y-5">
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1.5">Üretim Hattı
+                        </label>
+                    <input type="text" id="entryName" required
+                        class="w-full rounded-xl border-slate-200 shadow-sm focus:border-primary focus:ring focus:ring-primary/20 text-sm p-3 font-medium text-slate-800 outline-none transition-all">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1.5">İş Kodu / İş Adı
+                        </label>
+                    <input type="text" id="entrySku" required
+                        class="w-full rounded-xl border-slate-200 shadow-sm focus:border-primary focus:ring focus:ring-primary/20 text-sm p-3 font-mono text-slate-800 outline-none uppercase transition-all">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label
+                            class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1.5">Verimlilik</label>
+                        <input type="number" id="entryQty" min="0" required
+                            class="w-full rounded-xl border-slate-200 shadow-sm focus:border-primary focus:ring focus:ring-primary/20 text-sm p-3 font-bold text-slate-800 outline-none transition-all">
+                    </div>
+                    <div>
+                        <label
+                            class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1.5">Birim</label>
+                        <select id="entryUnit"
+                            class="w-full rounded-xl border-slate-200 shadow-sm focus:border-primary focus:ring focus:ring-primary/20 text-sm p-3 font-medium text-slate-800 outline-none transition-all bg-white cursor-pointer select-none">
+                            <option value="montaj">Montaj</option>
+                            <option value="kalite_kontrol">Kalite & Kontrol</option>
+                            <option value="planlama_tasarım">Planlama & Tasarım</option>
+                            <option value="paketleme">Paketleme</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1.5">Durum</label>
+                    <select id="entryStatus"
+                        class="w-full rounded-xl border-slate-200 shadow-sm focus:border-primary focus:ring focus:ring-primary/20 text-sm p-3 font-bold text-slate-800 outline-none transition-all bg-white cursor-pointer select-none">
+                        <option value="aktif">Aktif Çalışıyor</option>
+                        <option value="bakım">Bakımda</option>
+                        <option value="pasif">Pasif / Durduruldu</option>
+                    </select>
+                </div>
+                <div class="flex justify-end gap-3 pt-4 border-t border-slate-100">
+                    <button type="button" id="modalCloseBtn"
+                        class="px-6 py-2.5 rounded-full font-bold text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors">İptal</button>
+                    <button type="submit"
+                        class="px-6 py-2.5 bg-primary text-white font-bold rounded-full shadow-md shadow-primary/20 hover:scale-105 active:scale-95 transition-all">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+
+    <script src="production.js"></script>
+
+<script>
+    // Oturum bilgilerini yükle
+    function oturumuAl() {
+        try { return JSON.parse(localStorage.getItem('oturum')); }
+        catch { return null; }
+    }
+    
+    // Sayfa yüklendiğinde kullanıcı bilgilerini göster
+    document.addEventListener('DOMContentLoaded', function() {
+        const oturum = oturumuAl();
+        console.log('Oturum bilgisi:', oturum);
+        if (oturum && oturum.kullaniciAdi) {
+            const adEtiketi = document.getElementById('oturum-kullanici-adi');
+            if (adEtiketi) adEtiketi.textContent = oturum.kullaniciAdi;
+            const rolEtiketi = document.getElementById('oturum-rol-adi');
+            if (rolEtiketi) rolEtiketi.textContent = oturum.rolAdi;
+        }
+    });
+</script></body>
+
+</html>
+
+
+
+
