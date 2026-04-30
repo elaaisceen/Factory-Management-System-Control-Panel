@@ -76,8 +76,8 @@ src/main/java/com/factory
 ---
 
 ##  Mevcut Durum Notu
-> **Not:** Sistem şu an Dashboard tasarımları ve Java altyapısı üzerinde geliştirilme aşamasındadır. Veritabanı bağlantısı (`DatabaseConnection`) 
-aktif hale getirildiğinde, demo veriler yerini dinamik MySQL verilerine bırakacaktır.
+> **Not:** Desktop application haline getirildi. Veritabanı bağlı ve backendle aktif bir şekilde çalışıyor. 
+Dökümantasyon hazırlık aşamasında, dashboardlardaki css hataları değerlendiriliyor.
 
 ---
 *Bu proje Bartın Üniversitesi Bilgisayar Teknolojileri ve Bilişim Sistemleri Bölümü Nesneye Dayalı Programlama-II dersi için geliştirilmektedir.*
